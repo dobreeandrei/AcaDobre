@@ -1,0 +1,136 @@
+ACADOBRE_QUESTIONS.push({
+  id: 'ip_classes',
+    topic: 'Clase IPv4',
+    questions: [
+      {
+      type: 'matching',
+      text: 'Asociati spatiile urmatoare cu subnetul potrivit:',
+      subQuestions: [
+        { text: 'Clasa A privat', answer: '/8' },
+        { text: 'Clasa A',        answer: '/8' },
+        { text: 'Clasa B privat', answer: '/12' },
+        { text: 'Clasa B',        answer: '/16' },
+        { text: 'Clasa C privat', answer: '/16' },
+        { text: 'Clasa C',        answer: '/24' },
+      ],
+      options: ['/8', '/10', '/12', '/16', '/20', '/24'],
+      },
+      {
+      type: 'multiple-choice-multi',
+      text: 'Selecteaza caracteristicile protocolului IP:',
+      options: ['Reliable', 'Media-Dependent', 'Media-Independent', 'Best-Effort', 'Connectionless', 'Connection-Oriented'],
+      correctIndices: [2, 3, 4], 
+      },
+      {
+      type: 'multiple-choice',
+      text: 'Care dintre urmatoarele este o adresa loopback?',
+      options: ['127.239.3.1', '169.254.0.1', '128.0.0.1', '192.168.0.1', '1.1.1.1'],
+      correctIndex: 0,
+      },
+      {
+      type: 'open-ended',
+      text: 'Cati biti are o adresa IPv4?',
+      acceptedAnswers: ['32'],
+      },
+      {
+      type: 'open-ended',
+      text: 'Care este spatiul de loopback in IPv4?',
+      hint: 'Introduceti raspunsul in forma: x.x.x.x y.y.y.y',
+      acceptedAnswers: ['127.0.0.0 255.0.0.0'],
+      },
+      {
+      type: 'open-ended',
+      text: 'Care este spatiul de adrese APIPA (link-local) in IPv4?',
+      hint: 'Introduceti raspunsul in forma: x.x.x.x/y',
+      acceptedAnswers: ['169.254.0.0/16'],
+      },
+      {
+      type: 'open-ended',
+      text: 'Ce spatiu reprezenta clasa A in IPv4 in retelele classful?',
+      hint: 'Introduceti raspunsul in forma: "a.a.a.a b.b.b.b - x.x.x.x y.y.y.y", sau "(prima adresa)/subnet - (utlima adresa)/subnet"',
+      acceptedAnswers: ['0.0.0.0 255.0.0.0 - 127.0.0.0 255.0.0.0', '0.0.0.0/8 - 127.255.255.255/8'],
+      },
+      {
+      type: 'open-ended',
+      text: 'Ce spatiu reprezenta clasa B in IPv4 in retelele classful?',
+      hint: 'Introduceti raspunsul in forma: "a.a.a.a b.b.b.b - x.x.x.x y.y.y.y", sau "(prima adresa)/subnet - (utlima adresa)/subnet"',
+      acceptedAnswers: ['128.0.0.0 255.255.0.0 - 191.0.0.0 255.255.0.0', '128.0.0.0/16 - 191.255.255.255/16'],
+      },
+      {
+      type: 'open-ended',
+      text: 'Ce spatiu reprezenta clasa C in IPv4 in retelele classful?',
+      hint: 'Introduceti raspunsul in forma: "a.a.a.a b.b.b.b - x.x.x.x y.y.y.y", sau "(prima adresa)/subnet - (utlima adresa)/subnet"',
+      acceptedAnswers: ['192.0.0.0 255.255.255.0 - 223.0.0.0 255.255.255.0', '192.0.0.0/24 - 223.255.255.255/24'],
+      },
+      {
+      type: 'open-ended',
+      text: 'Ce spatiu reprezinta clasa D (multicast) in IPv4?',
+      hint: 'Introduceti raspunsul in forma: "a.a.a.a - x.x.x.x"',
+      acceptedAnswers: ['224.0.0.0 - 239.255.255.255'],
+      },
+      {
+      type: 'open-ended',
+      text: 'Ce spatiu reprezinta clasa E (experimentale) in IPv4?',
+      hint: 'Introduceti raspunsul in forma: "a.a.a.a - x.x.x.x"',
+      acceptedAnswers: ['240.0.0.0 - 255.255.255.255'],
+      },
+      {
+      type: 'open-ended',
+      text: 'Ce spatiu reprezinta adresele private din clasa A in IPv4?',
+      hint: 'Introduceti raspunsul in forma: "a.a.a.a b.b.b.b", sau "(prima adresa)/subnet - (utlima adresa)/subnet"',
+      acceptedAnswers: ['10.0.0.0 255.0.0.0', '10.0.0.0/8 - 10.255.255.255/8'],
+      },
+      {
+      type: 'open-ended',
+      text: 'Ce spatiu reprezinta adresele private din clasa B in IPv4?',
+      hint: 'Introduceti raspunsul in forma: "a.a.a.a b.b.b.b", sau "(prima adresa)/subnet - (utlima adresa)/subnet"',
+      acceptedAnswers: ['172.16.0.0 255.240.0.0', '172.16.0.0/12 - 172.31.255.255/12'],
+      },
+      {
+      type: 'open-ended',
+      text: 'Ce spatiu reprezinta adresele private din clasa C in IPv4?',
+      hint: 'Introduceti raspunsul in forma: "a.a.a.a b.b.b.b", sau "(prima adresa)/subnet - (utlima adresa)/subnet"',
+      acceptedAnswers: ['192.168.0.0 255.255.0.0', '192.168.0.0/16 - 192.168.255.255/16'],
+      },
+      {
+      type: 'open-ended',
+      text: 'Care este adresa unspecified pentru IPv4?',
+      hint: 'Introduceti raspunsul in forma: "a.a.a.a b.b.b.b", sau "(adresa)/subnet"',
+      acceptedAnswers: ['0.0.0.0 0.0.0.0', '0.0.0.0/0'],
+      },
+      {
+      type: 'open-ended',
+      text: 'Cate retele existau in clasa A?',
+      acceptedAnswers: ['128'],
+      },
+      {
+      type: 'open-ended',
+      text: 'Cate adrese erau per fiecare retea din clasa A?',
+      hint: 'Hint: Calculati dupa subnet :). Puteti scrie sub forma 2^x.',
+      acceptedAnswers: ['2^24', '16777216'],
+      },
+      {
+      type: 'open-ended',
+      text: 'Cate retele existau in clasa B?',
+      hint: 'Hint: Calculati dupa spatiu :). Puteti scrie sub forma 2^x.',
+      acceptedAnswers: ['2^14', '16384'],
+      },
+      {
+      type: 'open-ended',
+      text: 'Cate adrese erau per fiecare retea din clasa B?',
+      hint: 'Hint: Calculati dupa subnet :). Puteti scrie sub forma 2^x.',
+      acceptedAnswers: ['2^16', '65536'],
+      },
+      {
+      type: 'open-ended',
+      text: 'Cate retele existau in clasa C?',
+      hint: 'Hint: Calculati dupa spatiu :). Puteti scrie sub forma 2^x.',
+      acceptedAnswers: ['2^21', '2097152'],
+      },
+      {
+      type: 'open-ended',
+      text: 'Cate adrese erau per fiecare retea din clasa C?',
+      acceptedAnswers: ['256'],
+      },
+    ]
+});
