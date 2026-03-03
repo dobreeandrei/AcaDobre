@@ -1,0 +1,183 @@
+ACADOBRE_QUESTIONS.push({
+  id: 'fhrp',
+    topic: 'FHRPs',
+    questions: [
+      {
+      type: 'multiple-choice',
+      text: 'La ce nivel pe stiva OSI functioneaza protocoalele FHRP?',
+      options: ['Fizic', 'Legatura de Date', 'Retea', 'Transport', 'Sesiune', 'Prezentare', 'Aplicatie'],
+      correctIndex: 2,
+      },
+      {
+      type: 'multiple-choice',
+      text: 'Ce functie au protocoalele FHRP?',
+      options: ['Redundanta pentru routere', 'Previn buclele de retea', 'Redundanta pe switchuri', 'Ofera prioritate rourerelor', 'Asigura trimiterea mesajelor'],
+      correctIndex: 0,
+      },
+      {
+      type: 'multiple-choice',
+      text: 'Ce reprezinta daca functia preemption este activa pentru un FHRP?',
+      options: ['Daca se alatura un router cu IP mai mare, va deveni activ', 'Daca se alatura un router cu IP mai mare, nu va deveni activ', 'Opreste routerul din a trimite mesaje hello', 'Reduce timpul la care sunt trimise mesajele hello', 'Creste prioritatea tuturor routerelor'],
+      correctIndex: 0,
+      },
+      {
+      type: 'multiple-choice',
+      text: 'Este adevarat ca toate protocoalele FHRP folosesc adrese IP virtuale?',
+      options: ['Adevarat', 'Fals'],
+      correctIndex: 0,
+      },
+      {
+      type: 'multiple-choice',
+      text: 'Este adevarat ca nu toate protocoalele FHRP folosesc adrese MAC virtuale?',
+      options: ['Adevarat', 'Fals'],
+      correctIndex: 1,
+      },
+      {
+      type: 'multiple-choice',
+      text: 'Care protocol FHRP este configurabil in Packet Tracer?',
+      options: ['VRRP', 'GLBP', 'HSRP', 'STP', 'VRF'],
+      correctIndex: 2,
+      },
+      {
+      type: 'multiple-choice',
+      text: 'Care protocol FHRP are preemption activat by default?',
+      options: ['VRRP', 'GLBP', 'HSRP', 'STP', 'VRF'],
+      correctIndex: 0,
+      },
+      {
+      type: 'multiple-choice-multi',
+      text: 'Care protocoale FHRP au prioritatea default 100?',
+      options: ['VRRP', 'GLBP', 'HSRP', 'STP', 'VRF'],
+      correctIndices: [0, 1, 2],
+      },
+      {
+      type: 'multiple-choice-multi',
+      text: 'Care protocoale FHRP sunt proprietare Cisco?',
+      options: ['VRRP', 'GLBP', 'HSRP', 'STP', 'VRF'],
+      correctIndices: [1, 2],
+      },
+      {
+      type: 'multiple-choice-multi',
+      text: 'Care dintre urmatoarele sunt criterii pentru alegerea routerului activ?',
+      options: ['Cea mai mare prioritate', 'Cel mai mare IP', 'Cel mai mic IP', 'Cea mai mica prioritate', 'Cea mai mare Adresa MAC', 'Cea mai mica adresa MAC'],
+      correctIndices: [0, 1],
+      },
+      {
+        type: 'open-ended',
+        text: 'Care este portul si protocolul de nivel 4 pentru HSRP?',
+        acceptedAnswers: ['1985 UDP'],
+        hint: 'Exemplu de raspuns: "12 DBR".',
+      },
+      {
+        type: 'open-ended',
+        text: 'Care este portul si protocolul de nivel 4 pentru GLBP?',
+        acceptedAnswers: ['3222 UDP'],
+        hint: 'Exemplu de raspuns: "12 DBR".',
+      },
+      {
+      type: 'open-ended',
+      text: 'Care este prioritatea default pentru HSRP?',
+      acceptedAnswers: ['100'],
+      },
+      {
+      type: 'open-ended',
+      text: 'Care este prioritatea default pentru GLBP?',
+      acceptedAnswers: ['100'],
+      },
+      {
+      type: 'open-ended',
+      text: 'Care este prioritatea default pentru VRRP?',
+      acceptedAnswers: ['100'],
+      },
+      {
+        type: 'open-ended',
+        text: 'Care este adresa IPv4 Multicast pentru toate routerele VRRP?',
+        acceptedAnswers: ['224.0.0.18'],
+      },
+      {
+        type: 'open-ended',
+        text: 'Care este adresa IPv4 Multicast pentru toate routerele HSRPv2/GLBP?',
+        acceptedAnswers: ['224.0.0.102'],
+      },
+      {
+        type: 'open-ended',
+        text: 'Care este adresa IPv4 Multicast pentru toate routerele HSRPv1?',
+        acceptedAnswers: ['224.0.0.2'],
+      },
+      {
+        type: 'open-ended',
+        text: 'Care este timpul default pentru trimiterea mesajelor hello in HSRP? (secunde)',
+        acceptedAnswers: ['3'],
+      },
+      {
+        type: 'open-ended',
+        text: 'Care este timpul default pentru trimiterea mesajelor hello in GLBP? (secunde)',
+        acceptedAnswers: ['3'],
+      },
+      {
+        type: 'open-ended',
+        text: 'Care este timpul default pentru trimiterea mesajelor hello in VRRP? (secunde)',
+        acceptedAnswers: ['1'],
+      },
+      {
+        type: 'open-ended',
+        text: 'Care este timpul default pentru pastrarea mesajelor hello in HSRP? (secunde)',
+        acceptedAnswers: ['10'],
+      },
+      {
+      type: 'label-order',
+      text: 'Puneti stadiile HSRP in ordine:',
+      labels: ['Initial', 'Learning', 'Listening', 'Speak', 'Standby', 'Active'],
+      correctOrder: [0, 1, 2, 3, 4, 5],
+      },
+      {
+      type: 'matching',
+      text: 'Asociati numele de routere cu protocolul FHRP folosit:',
+      subQuestions: [
+        { text: 'AVF', answer: 'GLBP' },
+        { text: 'AVG', answer: 'GLBP' },
+        { text: 'Master', answer: 'VRRP' },
+        { text: 'Backup', answer: 'VRRP' },
+        { text: 'Active', answer: 'HSRP' },
+        { text: 'Standby', answer: 'HSRP' },
+      ],
+      options: ['GLBP', 'VRRP', 'HSRP', 'STP'],
+      },
+      {
+      type: 'multiple-choice',
+      text: 'Ce caracterizeaza starea "Initial" in HSRP?',
+      options: ['HSRP nu este activ inca pe interfata', 'Routerul este gateway activ', 'Routerul asculta mesaje Hello', 'Routerul trimite mesaje Hello', 'Routerul este gata sa preia rolul activ'],
+      correctIndex: 0,
+      },  
+      {
+      type: 'multiple-choice',
+      text: 'Care este rolul starii "Learn" in HSRP?',
+      options: ['Routerul nu cunoaste inca VIP-ul', 'Routerul este deja activ', 'Routerul trimite mesaje Hello periodice', 'Routerul este standby pregatit de preluare', 'Routerul redirectioneaza trafic pentru hosturi'],
+      correctIndex: 0,
+      },
+      {
+      type: 'multiple-choice',
+      text: 'Ce face routerul in starea "Listen" in HSRP?',
+      options: ['Asculta mesaje Hello fara a fi activ sau standby', 'Trimite mesaje Hello pentru alegere', 'Preia rolul activ automat', 'Nu cunoaste adresa virtuala', 'Forwardeaza trafic pentru hosturi'],
+      correctIndex: 0,
+      },
+      {
+      type: 'multiple-choice',
+      text: 'Ce functie are starea "Speak" in HSRP?',
+      options: ['Participa la procesul de alegere trimitand mesaje Hello', 'Forwardeaza trafic ca gateway', 'Este pregatit sa preia rolul activ fara sa trimita mesaje', 'Ignora mesajele Hello', 'Dezactiveaza interfata virtuala'],
+      correctIndex: 0,
+      },
+      {
+      type: 'multiple-choice',
+      text: 'Ce caracterizeaza starea "Standby" in HSRP?',
+      options: ['Este pregatit sa devina activ daca acesta cade', 'Forwardeaza deja trafic pentru hosturi', 'Nu cunoaste VIP-ul', 'Trimite mesaje pentru alegerea initiala', 'Are HSRP dezactivat'],
+      correctIndex: 0,
+      },
+      {
+      type: 'multiple-choice',
+      text: 'Ce rol are starea "Active" in HSRP?',
+      options: ['Forwardeaza trafic si actioneaza ca gateway virtual', 'Asculta doar mesaje Hello', 'Este pregatit sa preia rolul activ', 'Nu participa la alegere', 'Nu cunoaste adresa virtuala'],
+      correctIndex: 0,
+      },
+    ]
+});
