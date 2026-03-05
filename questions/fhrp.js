@@ -28,9 +28,21 @@ ACADOBRE_QUESTIONS.push({
       },
       {
       type: 'multiple-choice',
+      text: 'Este adevarat ca un grup GLBP poate avea un singur AVG?',
+      options: ['Adevarat', 'Fals'],
+      correctIndex: 0,
+      },
+      {
+      type: 'multiple-choice',
       text: 'Este adevarat ca nu toate protocoalele FHRP folosesc adrese MAC virtuale?',
       options: ['Adevarat', 'Fals'],
       correctIndex: 1,
+      },
+      {
+      type: 'multiple-choice',
+      text: 'Este adevarat ca intr-un grup GLBP AVG poate fi si AVF?',
+      options: ['Adevarat', 'Fals'],
+      correctIndex: 0,
       },
       {
       type: 'multiple-choice',
@@ -42,6 +54,24 @@ ACADOBRE_QUESTIONS.push({
       type: 'multiple-choice',
       text: 'Care protocol FHRP are preemption activat by default?',
       options: ['VRRP', 'GLBP', 'HSRP', 'STP', 'VRF'],
+      correctIndex: 0,
+      },
+      {
+      type: 'multiple-choice',
+      text: 'Dintr-un grup GLBP, care router raspunde la mesajele ARP Request?',
+      options: ['Doar AVG', 'Doar AVF', 'Cand AVF, cand AVG', '90% AVG', 'Routerul activ'],
+      correctIndex: 0,
+      },
+      {
+      type: 'multiple-choice',
+      text: 'Cate routere AVF pot fi intr-un grup GLBP?',
+      options: ['4', '0', '10', '12', '5', '2'],
+      correctIndex: 0,
+      },
+      {
+      type: 'multiple-choice',
+      text: 'Cum afla dispozitivele adresa MAC virtuala a unui grup HSRP?',
+      options: ['Gratuitous ARP Reply', 'ARP Request', 'ARP Reply', 'ARP Relay', 'Configurare manuala', 'OSPF'],
       correctIndex: 0,
       },
       {
@@ -65,13 +95,13 @@ ACADOBRE_QUESTIONS.push({
       {
         type: 'open-ended',
         text: 'Care este portul si protocolul de nivel 4 pentru HSRP?',
-        acceptedAnswers: ['1985 UDP'],
+        acceptedAnswers: ['1985 UDP', '1985 udp'],
         hint: 'Exemplu de raspuns: "12 DBR".',
       },
       {
         type: 'open-ended',
         text: 'Care este portul si protocolul de nivel 4 pentru GLBP?',
-        acceptedAnswers: ['3222 UDP'],
+        acceptedAnswers: ['3222 UDP', '3222 udp'],
         hint: 'Exemplu de raspuns: "12 DBR".',
       },
       {
@@ -123,6 +153,11 @@ ACADOBRE_QUESTIONS.push({
         type: 'open-ended',
         text: 'Care este timpul default pentru pastrarea mesajelor hello in HSRP? (secunde)',
         acceptedAnswers: ['10'],
+      },
+      {
+        type: 'open-ended',
+        text: 'Care este numarul default de grup HSRP?',
+        acceptedAnswers: ['0'],
       },
       {
       type: 'label-order',
