@@ -43,7 +43,7 @@ window.ACADOBRE_ALT_QUESTIONS.push({
     correctIndex: 2,
   },
   {
-    type: 'multiple-choice-multi',
+    type: 'multiple-choice',
     text: 'Care dintre următoarele variante este corectă?',
     options: [
       'SSH nu realizează conexiunea la distanță',
@@ -53,7 +53,7 @@ window.ACADOBRE_ALT_QUESTIONS.push({
       'Distanța față de cel mai îndepărtat server se numește stratum',
       'SSH realizează conexiunea necriptată la distanță'
     ],
-    correctIndices: [3, 4],
+    correctIndex: 3,
   },
   {
     type: 'multiple-choice',
@@ -158,7 +158,7 @@ window.ACADOBRE_ALT_QUESTIONS.push({
       '1-Root, 2-Designated, 3-Blocked',
       '1-Designated, 2-Designated, 3-Designated'
     ],
-    correctIndex: 0,
+    correctIndex: 4,
   },
   {
     type: 'multiple-choice',
@@ -184,11 +184,11 @@ window.ACADOBRE_ALT_QUESTIONS.push({
       '1E:EE:23:45:EF:76',
       '1E:BE:23:45:EF:67',
     ],
-    correctIndex: 1,
+    correctIndex: 3,
   },
   {
     type: 'multiple-choice-multi',
-    text: 'Care din următoarele afirmații sunt adevărate cu privire la adresele IPv4?',
+    text: 'Care din următoarele afirmații sunt adevărate cu privire la adresele IPv4? (alegeți 4 variante de răspuns)',
     options: [
       'masca de rețea indică numărul maxim de subrețele în care poate fi împărțită o rețea',
       '172.16.42.100 este o adresă privată',
@@ -223,7 +223,7 @@ window.ACADOBRE_ALT_QUESTIONS.push({
       'Flag-ul O este setat pe 1 și M este setat pe 0',
       'Gateway nu va fi niciodată adresa link-local a interfeței din aceeaşi rețea'
     ],
-    correctIndex: 4,
+    correctIndex: 3,
   },
   {
     type: 'multiple-choice-multi',
@@ -340,7 +340,7 @@ window.ACADOBRE_ALT_QUESTIONS.push({
       '25.64.192.0',
       '25.64.128.2'
     ],
-    correctIndex: 0,
+    correctIndex: 2,
   },
   {
     type: 'multiple-choice',
@@ -379,7 +379,7 @@ window.ACADOBRE_ALT_QUESTIONS.push({
       'copy running-config startup config',
       'write now'
     ],
-    correctIndices: [0, 3],
+    correctIndices: [2, 3],
   },
   {
     type: 'multiple-choice',
@@ -418,7 +418,7 @@ window.ACADOBRE_ALT_QUESTIONS.push({
       'adresa de broadcast',
       'adresa default gateway, adresa de broadcast'
     ],
-    correctIndex: 1,
+    correctIndex: 2,
   },
   {
     type: 'multiple-choice',
@@ -496,18 +496,18 @@ window.ACADOBRE_ALT_QUESTIONS.push({
       'A și B vor răspunde separat la acestea, în mod egal',
       'A la majoritatea, B la restul'
     ],
-    correctIndex: 2,
+    correctIndex: 3,
   },
   {
     type: 'multiple-choice',
     text: 'Care dintre următoarele seturi de comenzi salvează configurațiile active pe un dispozitiv Cisco?',
     options: [
-      'enable configure terminal line console 0 copy startup-config running-config',
-      'enable copy running-config startup-config',
-      'enable copy startup-config running-config',
-      'enable configure terminal interface vlan 1 copy running-config startup-config',
-      'enable configure terminal copy running-config startup-config',
-      'enable configure terminal copy startup-config running-config'
+      'enable\nconfigure terminal\nline console 0\ncopy startup-config running-config',
+      'enable\ncopy running-config startup-config',
+      'enable\ncopy startup-config running-config',
+      'enable\nconfigure terminal\ninterface vlan 1\ncopy running-config startup-config',
+      'enable\nconfigure terminal\ncopy running-config startup-config',
+      'enable\nconfigure terminal\ncopy startup-config running-config'
     ],
     correctIndex: 1,
   },
@@ -606,11 +606,11 @@ window.ACADOBRE_ALT_QUESTIONS.push({
     text: 'Cum se poate prescurta corect adresa 2001:0db8:0000:0000:acad:0000:0000:0010?',
     options: [
       'nu se poate prescurta',
-      '2001:0db8::acad:0:0:10',
-      '2001:0db8::acad::10',
-      '2001:0db8::acad:0000:0010',
-      '2001:0db8:0:0:acad::0010',
-      '2001:0db8::acad:10'
+      '2001:db8::acad:0:0:10',
+      '2001:db8::acad::10',
+      '2001:db8::acad:0000:10',
+      '2001:db8:0:0:acad::10',
+      '2001:db8::acad:10'
     ],
     correctIndices: [1, 4],
   },
