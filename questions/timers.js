@@ -97,5 +97,18 @@ ACADOBRE_QUESTIONS.push({
       text: 'Cat timp dureaza ca un switch sa ajunga in stadiul Forwarding daca foloseste RSTP? (secunde)',
       acceptedAnswers: ['6'],
     },
+    {
+      type: 'multiple-choice',
+      text: 'La cat timp se trimit automat mesajele RA in retea?',
+      options: [
+        '200 secunde',
+        '4 ore',
+        'RA se trimite doar la inceputul configurarii',
+        '100 secunde',
+        '50 secunde',
+        '60 secunde'
+      ],
+      correctIndex: 0,
+    },
     ]
 });
