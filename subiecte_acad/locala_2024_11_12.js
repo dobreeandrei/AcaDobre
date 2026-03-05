@@ -9,10 +9,10 @@ window.ACADOBRE_ALT_QUESTIONS.push({
     correctIndex: 1
   },
   {
-    type: 'multiple-choice',
+    type: 'multiple-choice-multi',
     text: 'Care din următoarele NU este o informație prezentă în antetul unui cadru (header, data, trailer) la nivelul legatură de date?',
     options: ['informații despre QoS', 'elemente de detecție a erorilor de transmisie', 'începutul cadrului', 'identificator pentru protocolul de nivel 3 prezent în fieldul "data"', 'niciuna din variantele de mai sus', 'noduri de adresare pentru sursă si destinație'],
-    correctIndex: 0
+    correctIndices: [0,3]
   },
   {
     type: 'multiple-choice',
@@ -84,7 +84,7 @@ window.ACADOBRE_ALT_QUESTIONS.push({
   },
   {
     type: 'multiple-choice-multi',
-    text: 'Care dintre următoarele răspunsuri sunt posibile atacuri într-o rețea locală explicit la nivelul switch-ului?',
+    text: 'Care dintre următoarele răspunsuri sunt posibile atacuri într-o rețea locală explicit la nivelul switch-ului?(alegeți 3 variante de răspuns)',
     options: ['ARP Poisoning', 'DHCP Spoofing', 'MAC Address Flooding', 'ARP Spoofing', 'STP manipulation', 'VLAN Double-tagging'],
     correctIndices: [2, 4, 5]
   },
@@ -108,7 +108,7 @@ window.ACADOBRE_ALT_QUESTIONS.push({
   },
   {
     type: 'multiple-choice',
-    text: 'Care este parametrul luat in considerare în momentul alegerii DR-ului și a BDR-ului, pe niciun router?',
+    text: 'Care este parametrul luat in considerare în momentul alegerii DR-ului și a BDR-ului, în momentul în care nu este configurat Router-ID sau vreo interfață LoopBack pe niciun router?',
     options: ['Cea mai mică Adresă MAC', 'Cea mai mare Adresă IPv4 configurată pe vreo interfață activă', 'BridgeID-ul echipamentului', 'Cea mai mare valoarea a ID-ului unei interfețe active', 'Cea mai mare Adresă MAC', 'Cel mai mare ID al procesului de OSPF care rulează pe echipamente'],
     correctIndex: 1
   },
@@ -154,7 +154,7 @@ window.ACADOBRE_ALT_QUESTIONS.push({
     text: 'Pentru a configura Router-on-a-Stick, în topologia de mai jos, ce configurație este cea corectă?',
     image: 'subiecte_acad/images/locala_2024_1112/q25.png',
     options: ['R2(config)#subinterface gigabitEthernet 0/0/0.10\nR2(config-subif)#ip address 10.0.0.1 255.0.0.0\nR2(config)#subinterface gigabitEthernet 0/0/0.20\nR2(config-subif)#ip address 20.0.0.1 255.0.0.0\nR2(config)#subinterface gigabitEthernet 0/0/0.30\nR2(config-subif)#ip address 30.0.0.1 255.0.0.0', 'R2(config)#interface gigabitEthernet 0/0/0-10\nR2(config-subif)#ip address 10.0.0.1 255.0.0.0\nR2(config)#interface gigabitEthernet 0/0/0-20\nR2(config-subif)#ip address 20.0.0.1 255.0.0.0\nR2(config)#interface gigabitEthernet 0/0/0-30\nR2(config-subif)#ip address 30.0.0.1 255.0.0.0', 'Toate variantele de mai sus', 'Nicio variantă de mai sus', 'R2(config)#interface gigabitEthernet 0/0/0.10\nR2(config-subif)#encapsulation dot1Q 10\nR2(config-subif)#ip address 10.0.0.1 255.0.0.0\nR2(config)#interface gigabitEthernet 0/0/0.20\nR2(config-subif)#encapsulation dot1Q 20\nR2(config-subif)#ip address 20.0.0.1 255.0.0.0\nR2(config)#interface gigabitEthernet 0/0/0.30\nR2(config-subif)#encapsulation dot1Q 30\nR2(config-subif)#ip address 30.0.0.1 255.0.0.0', 'R2(config)#interface gigabitEthernet 0/0/0.10\nR2(config-subif)#encapsulation dot1Q 10\nR2(config-subif)#ip address 10.0.0.1 255.0.0.0\nR2(config)#interface gigabitEthernet 0/0/0.20\nR2(config-subif)#encapsulation dot2Q 20\nR2(config-subif)#ip address 20.0.0.1 255.0.0.0\nR2(config)#interface gigabitEthernet 0/0/0.30\nR2(config-subif)#encapsulation dot3Q 30\nR2(config-subif)#ip address 30.0.0.1 255.0.0.0'],
-    correctIndex: 4
+    correctIndex: 3
   },
   {
     type: 'multiple-choice',
@@ -211,16 +211,16 @@ window.ACADOBRE_ALT_QUESTIONS.push({
     correctIndex: 2
   },
   {
-    type: 'multiple-choice',
+    type: 'multiple-choice-multi',
     text: 'Ce afirmație este adevarată în privința EtherChannel-ului?',
     options: ['EtherChannel are costuri mari (necesită porturi suplimentare).', 'EtherChannel închide anumite porturi pentru a prevenii buclele.', 'EtherChannel permite configurarea individuală pentru fiecare interfață fizică.', 'EtherChannel permite configurarea individuală pentru o singură interfață logică.', 'Numărul de interfețe logice EtherChannel depinde de platformă.', 'EtherChannel permite configurarea individuală pentru fiecare interfață logică și pentru fiecare interfață fizică.'],
-    correctIndex: 4
+    correctIndices: [3, 4]
   },
   {
-    type: 'multiple-choice',
-    text: 'EtherChannel depinde de platformă. Care dintre următoarele adrese IPv4, vor fi filtrate de un ACL, care are următorul criteriu de matching: 172.16.34.5 0.0.0.254 ?',
+    type: 'multiple-choice-multi',
+    text: 'Care dintre următoarele adrese IPv4, vor fi filtrate de un ACL, care are următorul criteriu de matching: 172.16.34.5 0.0.0.254 ?',
     options: ['80.84.105.14', '192.168.0.1', '172.16.34.2', '172.16.34.1', '172.16.34.253', '172.16.34.128'],
-    correctIndex: 3
+    correctIndices: [3, 4]
   },
   {
     type: 'multiple-choice',
