@@ -5,6 +5,7 @@ ACADOBRE_QUESTIONS.push({
       {
         type: 'header-fill',
         text: 'Identifica campurile antetului si trailerului Ethernet in ordine:',
+        hint: 'Pentru campul cu dimensiune variabla, introduceti valoarea minima si maxima in bytes, in forma "<nume> x y"',
          images: [
                    'questions/images/ethernet_frame/ethernet_blank.png',
                    'questions/images/ethernet_frame/ethernet_01.png',
@@ -12,15 +13,17 @@ ACADOBRE_QUESTIONS.push({
                    'questions/images/ethernet_frame/ethernet_03.png',
                    'questions/images/ethernet_frame/ethernet_04.png',
                    'questions/images/ethernet_frame/ethernet_05.png',
+                   'questions/images/ethernet_frame/ethernet_06.png',
                    'questions/images/ethernet_frame/ethernet_complete.png',
                 ],
 
         fields: [
                   { name: 'Preamble',                                                        bits: 56 },
                   { names: ['Start Frame Delimiter','SFD'],                                  bits: 8  },
-                  { names: ['Destination MAC','Dest MAC'],                                   bits: 32 },
-                  { names: ['Source MAC', 'Src MAC'],                                        bits: 32 },
+                  { names: ['Destination MAC','Dest MAC'],                                   bits: 48 },
+                  { names: ['Source MAC', 'Src MAC'],                                        bits: 48 },
                   { names: ['EtherType','Length', 'Type', 'Len'],                            bits: 16 },
+                  { name: 'Data 46',                                                         bits: 1500 },
                   { names: ['Frame Check Sequence','CRC', 'Cyclic Redundancy Check', 'FCS'], bits: 32 },
                 ],
       },
@@ -51,7 +54,7 @@ ACADOBRE_QUESTIONS.push({
       {
       type: 'multiple-choice',
       text: 'Ce se poate insera optional intre campul de adrese si campul Type/Length?',
-      options: ['Eticheta VLAN 802.1Q', 'CRC-ul cadruului', 'Preambulul', 'SFD-ul', 'Padding-ul datelor'],
+      options: ['Eticheta VLAN 802.1Q', 'CRC-ul cadrului', 'Preambulul', 'SFD-ul', 'Padding-ul datelor'],
       correctIndex: 0,
       },
       {
