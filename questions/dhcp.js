@@ -3,16 +3,16 @@ ACADOBRE_QUESTIONS.push({
     topic: 'DHCPv4',
     questions: [
     {
-        type: 'open-ended',
-        text: 'Care este portul si protocolul de nivel 4 pentru DHCPv4 Server?',
-        acceptedAnswers: ['67 UDP'],
-        hint: 'Exemplu de raspuns: "12 DBR".',
+      type: 'open-ended',
+      text: 'Care este portul si protocolul de nivel 4 pentru DHCPv4 Server?',
+      acceptedAnswers: ['67 UDP', '67 udp'],
+      hint: 'Exemplu de raspuns: "12 DBR".',
     },
     {
-        type: 'open-ended',
-        text: 'Care este portul si protocolul de nivel 4 pentru DHCPv4 Client?',
-        acceptedAnswers: ['68 UDP'],
-        hint: 'Exemplu de raspuns: "12 DBR".',
+      type: 'open-ended',
+      text: 'Care este portul si protocolul de nivel 4 pentru DHCPv4 Client?',
+      acceptedAnswers: ['68 UDP', '68 udp'],
+      hint: 'Exemplu de raspuns: "12 DBR".',
     },
     {
       type: 'multiple-choice',
@@ -125,7 +125,7 @@ ACADOBRE_QUESTIONS.push({
       type: 'multiple-choice-multi',
       text: 'Care dintre mesajele DHCPv4 pot fi trimise ca unicast?',
       options: ['Discover', 'Offer', 'Request', 'Acknowledgement', 'NAK', 'Release', 'Decline', 'Accept'],
-      correctIndices: [1, 3, 5]
+      correctIndices: [1, 3, 4, 5, 6]
     },
     {
       type: 'multiple-choice-multi',
@@ -149,13 +149,13 @@ ACADOBRE_QUESTIONS.push({
       type: 'matching',
       text: 'Asociati fiecare mesaj DHCP cu tipul de mesaj in functie de destinatari:',
       subQuestions: [
-        { text: 'Discover', answer: 'Broadcast' },
-        { text: 'Offer', answer: 'Unicast/Broadcast' },
-        { text: 'Request', answer: 'Broadcast' },
+        { text: 'Discover',        answer: 'Broadcast' },
+        { text: 'Offer',           answer: 'Unicast/Broadcast' },
+        { text: 'Request',         answer: 'Broadcast' },
         { text: 'Acknowledgement', answer: 'Unicast/Broadcast' },
-        { text: 'Release', answer: 'Unicast' },
-        { text: 'Decline', answer: 'Broadcast' },
-        { text: 'NAK', answer: 'Broadcast' },
+        { text: 'Release',         answer: 'Unicast' },
+        { text: 'Decline',         answer: 'Unicast' },
+        { text: 'NAK',             answer: 'Unicast/Broadcast' },
       ],
       options: ['Unicast', 'Broadcast', 'Unicast/Broadcast', 'Multicast', 'Vasicast'],
     },
