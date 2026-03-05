@@ -1215,3 +1215,16 @@ body {
   color: var(--accent);
   background: var(--accent-faint);
 }
+
+/* ── Version tag ─────────────────────────────────────────────── */
+.version-tag {
+  position: fixed;
+  bottom: .85rem;
+  right: 1rem;
+  font-size: .7rem;
+  font-weight: 600;
+  letter-spacing: .08em;
+  color: var(--text-dim);
+  pointer-events: none;
+  z-index: 50;
+}
