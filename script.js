@@ -699,15 +699,15 @@ const UIController = (() => {
 
   // ── Question render (dispatches to type-specific builders)
   function renderQuestion(question, saved, onAnswer, onClear, onEnterNavigate) {
-    questionText.textContent = question.text;
+    questionText.innerHTML = _esc(question.text);
     prevBtn.disabled = false;
     nextBtn.disabled = false;
 
     if (question.hint) {
-      questionHint.textContent = question.hint;
+      questionHint.innerHTML = _esc(question.hint);
       questionHint.classList.remove('hidden');
     } else {
-      questionHint.textContent = '';
+      questionHint.innerHTML = '';
       questionHint.classList.add('hidden');
     }
 
@@ -863,7 +863,7 @@ const UIController = (() => {
 
       const label = document.createElement('span');
       label.className = 'matching-label';
-      label.textContent = sub.text;
+      label.innerHTML = _esc(sub.text);
 
       const select = document.createElement('select');
       select.className = 'matching-select';
@@ -1501,7 +1501,7 @@ const UIController = (() => {
         ${detailHTML || `
         <div class="review-answer-row">
           <span class="review-your">Ai raspuns: <strong>${_esc(String(g.userDisplay))}</strong></span>
-          ${!g.correct && !g.skipped ? `<span class="review-correct-ans">✓ ${_esc(String(g.correctLabel))}</span>` : ''}
+          ${!g.correct ? `<span class="review-correct-ans">✓ ${_esc(String(g.correctLabel))}</span>` : ''}
         </div>`}
         ${g.question.explanation ? `<div class="review-explanation">${_esc(g.question.explanation)}</div>` : ''}
       `;
@@ -1548,7 +1548,8 @@ const UIController = (() => {
   function _esc(str) {
     return String(str)
       .replace(/&/g, '&amp;').replace(/</g, '&lt;')
-      .replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+      .replace(/>/g, '&gt;').replace(/"/g, '&quot;')
+      .replace(/\n/g, '<br>');
   }
 
   return {
@@ -1624,7 +1625,7 @@ const App = (() => {
         () => { QuizSession.stop(); UIController.showScreen('setup'); },
         null,
         'Inapoi la meniu?',
-        'Da, inapoi la meniu'
+        'Da, inapoi'
       );
     });
 
