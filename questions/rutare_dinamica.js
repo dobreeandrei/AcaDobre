@@ -74,7 +74,13 @@ ACADOBRE_QUESTIONS.push({
       type: 'multiple-choice',
       text: 'Care protocol de rutare dinamica folosesc algoritm de tip Path Vector?',
       options: ['IS-IS', 'BGP', 'OSPF', 'RIP', 'EIGRP'],
-      correctIndices: 1, 
+      correctIndex: 1, 
+    },
+    {
+      type: 'multiple-choice',
+      text: 'Cum se numesc interfetele pe care ruterele nu mai trimit doar mesaje specifice de rutare?',
+      options: ['Interfete pasive', 'Interfete auto', 'Interfete down', 'Interfete trunk', 'Interfete acces'],
+      correctIndex: 0, 
     },
     {
       type: 'open-ended',
@@ -109,13 +115,12 @@ ACADOBRE_QUESTIONS.push({
         { text: 'Ce cod are in tabela de rutare o ruta BGP?', answer: 'B' },
       ],
       options: ['B', 'C', '*', 'R', 'i', 'S', 'L', 'D', 'O'],
-      explanation: 'RIP masoara doar prin cate routere traverseaza measjele. OSPF calculeaza 10^8/bandwithul interfetei. IS-IS are un cost de 10 pentru toate interfetele.'
     },
     {
       type: 'label-order',
       text: 'Ordonati de la stanga la dreapta ordinea adreselor dupa care se alege router-idul',
-      labels: ['Manually Configured RID', 'Highest Physical Interface IP', 'Highest Loopback Interface IP'],
-      correctOrder: [0, 2, 1],
+      labels: ['Cel mai mare RID configurat manual', 'Cea mai mare adresa IP de pe o interfata Loopback', 'Cea mai mare adresa IP de pe o interfata fizica'],
+      correctOrder: [0, 1, 2],
     },
   ]
 });
