@@ -1,7 +1,7 @@
 {
   "name": "AcaDobre",
   "short_name": "AcaDobre",
-  "description": "Quiz de retele pentru pustiule.",
+  "description": "Quiz de retele pentru acadnet.",
   "start_url": "./index.html",
   "display": "standalone",
   "background_color": "#0d0d12",
