@@ -266,14 +266,14 @@ ACADOBRE_QUESTIONS.push({
     {
       type: 'multiple-choice',
       text: 'Cum se numesc rutele in cadrul acleasi arii?',
-      options: ['Inter-area route', 'Internal route', 'Intra-area route', 'External Route', 'Default Route', 'Floating Route'],
-      correctIndex: 0,
+      options: ['Inter-area route', 'Static Route', 'Intra-area route', 'External Route', 'Default Route', 'Floating Route'],
+      correctIndex: 2,
     },
     {
       type: 'multiple-choice',
       text: 'Cum se numesc rutele intre doua arii?',
       options: ['Inter-area route', 'Internal route', 'Intra-area route', 'External Route', 'Default Route', 'Floating Route'],
-      correctIndex: 2,
+      correctIndex: 0,
     },
     {
       type: 'multiple-choice',
