@@ -49,6 +49,11 @@ ACADOBRE_QUESTIONS.push({
     },
     {
       type: 'open-ended',
+      text: 'Pentru cat timp sunt mentinute intrarile in tabela CAM? (secunde)',
+      acceptedAnswers: ['300'],
+    },
+    {
+      type: 'open-ended',
       text: 'Cat de des sunt trimise mesajele de hello prin OSPF? (secunde)',
       acceptedAnswers: ['10'],
     },
