@@ -96,9 +96,46 @@ ACADOBRE_QUESTIONS.push({
       },
       {
       type: 'multiple-choice',
-      text: 'Care este numarul maxim de biti ai campului Options din campul TCP?',
+      text: 'Care este numarul maxim de biti ai campului Options din headerul TCP?',
       options: ['320', '32', '240', '160', '40'],
       correctIndex: 0,
+      },
+      {
+      type: 'multiple-choice',
+      text: 'Ce reprezintă o confirmare de tip "ACK X" trimisă de către un destnatar?',
+      options: [
+        'Receptorul a primit segmentul cu numărul de secvență X și confirmă doar acest segment.',
+        'Receptorul a primit toate datele până la octetul X-1 și se așteaptă să primească octetul X.',
+        'Receptorul semnalează o eroare de sumă de control (checksum) la octetul X.',
+        'Receptorul solicită ca fereastra de recepție (window size) să fie setată la valoarea X.',
+        'Protocolul TCP forțează închiderea conexiunii începând cu octetul X.'
+      ],
+      correctIndex: 1
+    },
+    {
+      type: 'multiple-choice',
+      text: 'Ce indică un mesaj de tip "SACK X-Y" trimis de un host în cadrul unei sesiuni TCP?',
+      
+      options: [
+        'Toate datele între X și Y au fost pierdute și trebuie retransmise imediat.',
+        'Transmițătorul trebuie să ajusteze rata de transfer (throughput) în intervalul de biți X-Y.',
+        'Receptorul a primit un bloc specific de date cuprins între numerele de secvență X și Y.',
+        'Mesajul reprezintă o cerere de stabilire a unei conexiuni noi cu un port în intervalul X-Y.',
+        'Confirmă primirea cumulativă a tuturor datelor până la valoarea Y, ignorând orice date primite la X.'
+      ],
+      correctIndex: 2
+    },
+      {
+      type: 'label-order',
+      text: 'PCA vrea sa initieze o conexiune TCP cu PCB.\nPuneti mesajele initierii acestei conexiuni in ordine:',
+      labels: ['PCA:SYN', 'PCB:SYN,ACK', 'PCA:SYN'],
+      correctOrder: [0, 1, 2],
+      },
+      {
+      type: 'label-order',
+      text: 'PCA vrea sa opreasca o conexiune TCP cu PCB.\nPuneti mesajele opririi acestei conexiuni in ordine:',
+      labels: ['PCA:FIN', 'PCB:FIN', 'PCB:ACK', 'PCA:ACK'],
+      correctOrder: [0, 1, 2, 3],
       },
     ]
 });
