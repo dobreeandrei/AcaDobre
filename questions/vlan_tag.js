@@ -13,10 +13,10 @@ ACADOBRE_QUESTIONS.push({
                    'questions/images/vlan_tag/vlan_tag_complete.png'
                 ],
         fields: [
-                  { names: ['Tag Protocol ID', 'TPID', 'Type'],           bits: 16 },
-                  { names: ['Priority', 'Prio'],                          bits: 3 },
-                  { names: ['Canonical Format Identifier', 'Flag', 'CFI'] bits: 1 },
-                  { names: ['Vlan ID', 'VID'],                            bits: 12 },
+                  { names: ['Tag Protocol ID', 'TPID', 'Type'],            bits: 16 },
+                  { names: ['Priority', 'Prio'],                           bits: 3 },
+                  { names: ['Canonical Format Identifier', 'Flag', 'CFI'], bits: 1 },
+                  { names: ['Vlan ID', 'VID'],                             bits: 12 },
                 ],
       },
       {
@@ -44,4 +44,5 @@ ACADOBRE_QUESTIONS.push({
       correctIndex: 4,
       },
     ]
+
 });
