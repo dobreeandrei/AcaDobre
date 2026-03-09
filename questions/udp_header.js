@@ -1,4 +1,4 @@
-ACADOBRE_QUESTIONS.push({
+AACADOBRE_QUESTIONS.push({
   id: 'udp_header',
     topic: 'Headerul UDP',
     questions: [
@@ -41,7 +41,19 @@ ACADOBRE_QUESTIONS.push({
       type: 'multiple-choice',
       text: 'Ce functie are campul "Checksum" din headerul UDP?',
       options: ['Valoare pentru criptarea datelor', 'Valoare pentru verificarea erorilor', 'Valoare pentru identificarea datagramei', 'Valoare pentru a identifica sursa mesajului', 'Valoare pentru retransmisie'],
-      correctIndex: 0,
+      correctIndex: 1,
       },
+      {
+      type: 'multiple-choice',
+      text: 'Care este rolul principal al funcției de "Relay Agent"?',
+      options: [
+        'Să stocheze local o copie a bazei de date UDP în cazul în care serverul principal devine indisponibil',
+        'Să permită transmiterea cererilor UDP de tip broadcast de la clienți către un server situat într-o subrețea diferită',
+        'Să blocheze mesajele UDP venite de pe porturi nesigure pentru a preveni atacurile de tip rogue server',
+        'Să aloce automat adrese IP de tip APIPA atunci când serverul DHCP nu răspunde',
+        'Să modifice adresa MAC a clientului pentru a ascunde identitatea acestuia față de serverul UDP'
+      ],
+      correctIndex: 1
+      }
     ]
 });
