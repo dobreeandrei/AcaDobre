@@ -9,7 +9,7 @@ ACADOBRE_QUESTIONS.push({
       },
       {
       type: 'open-ended',
-      text: 'Care este codul pentru standardul IEEE RADIUS/TACACS+?',
+      text: 'Care este codul pentru standardul IEEE pentru autentificare?',
       acceptedAnswers: ['802.1X', '802.1x'],
       },
       {
