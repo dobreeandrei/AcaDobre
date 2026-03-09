@@ -4,20 +4,8 @@ ACADOBRE_QUESTIONS.push({
     questions: [
       {
       type: 'open-ended',
-      text: 'Care este codul pentru standardul IEEE RADIUS/TACACS+?',
+      text: 'Care este codul pentru standardul IEEE pentru autentificare?',
       acceptedAnswers: ['802.1X', '802.1x'],
-      },
-      {
-      type: 'open-ended',
-      text: 'Care sunt range-urile pentru ACL-uri standard?',
-      hint: 'Scrieti in formatul "a-b c-d". Nu conteaza ordinea.',
-      acceptedAnswers: ['1-99 1300-1999', '1300-1999 1-99'],
-      },
-      {
-      type: 'open-ended',
-      text: 'Care sunt range-urile pentru ACL-uri extended?',
-      hint: 'Scrieti in formatul "a-b c-d". Nu conteaza ordinea.',
-      acceptedAnswers: ['100-199 2000-2699', '2000-2699 100-199'],
       },
       {
       type: 'multiple-choice',
@@ -43,7 +31,7 @@ ACADOBRE_QUESTIONS.push({
       },
       {
       type: 'multiple-choice',
-      text: 'Ce reprezinta o metoda simpla de securizare la nivel fizic?',
+      text: 'Care dintre urmatoarele reprezinta o metoda simpla de securizare la nivel fizic?',
       options: ['Oprirea porturilor nefolosite',
                 'Activarea unui ngFirewall',
                 'Folosirea unei adrese MAC unice',
@@ -54,7 +42,7 @@ ACADOBRE_QUESTIONS.push({
       },
       {
       type: 'multiple-choice',
-      text: 'Ce aparat este folosit pentru securizarea e-mailurilor cu contiunut malitios?',
+      text: 'Ce aparat este folosit pentru securizarea e-mailurilor cu continut malitios?',
       options: ['ESA',
                 'Firewall',
                 'WSA',
@@ -67,7 +55,7 @@ ACADOBRE_QUESTIONS.push({
       },
       {
       type: 'multiple-choice',
-      text: 'Ce aparat este folosit pentru securizarea paginilor web cu contiunut malitios?',
+      text: 'Ce aparat este folosit pentru securizarea paginilor web cu continut malitios?',
       options: ['ESA',
                 'Firewall',
                 'WSA',
@@ -106,7 +94,7 @@ ACADOBRE_QUESTIONS.push({
       },
       {
       type: 'multiple-choice',
-      text: 'Ce aparat este creeaza o retea virtuala pentru a cripta traficul?',
+      text: 'Ce aparat creeaza o retea virtuala pentru a cripta traficul?',
       options: ['ESA',
                 'Firewall',
                 'WSA',
@@ -149,7 +137,7 @@ ACADOBRE_QUESTIONS.push({
       type: 'multiple-choice',
       text: 'Care este diferenta dintre encriptie si hashing?',
       options: ['Encriptia este reversibila, dar hashingul nu',
-                'Hashingul este reversibila, dar encriptia nu',
+                'Hashingul este reversibil, dar encriptia nu',
                 'Hashingul este mai rapid decat encriptia',
                 'Encriptia permite chei doar pana la 64 biti',
                 'Hashingul permite chei doar pana la 32 biti'
@@ -176,13 +164,13 @@ ACADOBRE_QUESTIONS.push({
       },
       {
       type: 'multiple-choice',
-      text: 'Care dintre urmatoarele reprezinta un atac prin care se trimite un program javascript malitios pe un site web vulnerabil si este pastrat pe server?',
+      text: 'Care dintre urmatoarele reprezinta un atac prin care se trimite un program javascript malitios pe un site web vulnerabil, iar programul este pastrat pe server?',
       options: ['Stored XSS', 'Reflected XSS', 'DOM XSS', 'SQL Injection', 'DoS', 'DDoS', 'Man-in-the-middle', 'Phishing' ],
       correctIndex: 0, 
       },
       {
       type: 'multiple-choice',
-      text: 'Care dintre urmatoarele reprezinta un atac prin care se trimite un program javascript malitios pe un site web vulnerabil si primeste un raspuns imediat?',
+      text: 'Care dintre urmatoarele reprezinta un atac prin care se trimite un program javascript malitios pe un site web vulnerabil si se primeste un raspuns imediat?',
       options: ['Stored XSS', 'Reflected XSS', 'DOM XSS', 'SQL Injection', 'DoS', 'DDoS', 'Man-in-the-middle', 'Phishing' ],
       correctIndex: 1, 
       },
@@ -329,15 +317,15 @@ ACADOBRE_QUESTIONS.push({
       correctIndices: [0, 1, 2], 
       },
       {
-      type: 'multiple-choice-multi',
-      text: 'Care dintre urmatoarele tipuri de server sunt folosite in 802.1X?',
-      options: ['Radius', 'TACACS', 'DHCP', 'TFTP', 'DNS', 'FTP', 'CDP', 'LLDP', 'SNMP'],
-      correctIndices: [0, 1], 
+      type: 'multiple-choice',
+      text: 'Care dintre urmatoarele tipuri de server este folosit in 802.1X?',
+      options: ['Radius', 'TACACS+', 'DHCP', 'TFTP', 'DNS', 'FTP', 'CDP', 'LLDP', 'SNMP'],
+      correctIndex: 0,  
       },
       {
       type: 'multiple-choice-multi',
       text: 'Ce protocoale ar putea fi folosite intr-un atac de tip Reconnaisance?',
-      options: ['Radius', 'TACACS', 'DHCP', 'TFTP', 'DNS', 'FTP', 'CDP', 'LLDP', 'SNMP'],
+      options: ['Radius', 'TACACS+', 'DHCP', 'TFTP', 'DNS', 'FTP', 'CDP', 'LLDP', 'SNMP'],
       correctIndices: [6, 7], 
       },
       {
@@ -402,7 +390,7 @@ ACADOBRE_QUESTIONS.push({
       },
       {
       type: 'matching',
-      text: 'Asociati descrierea atacurilor cu categoria in care se incadreaza:',
+      text: 'Asociati descrierea atacurilor cu categoria in care se incadreaza cel mai bine:',
       subQuestions: [
         { text: 'DHCP Posioning', answer: 'Spoofing' },
         { text: 'DHCP Starvation', answer: 'DoS' },
