@@ -26,7 +26,7 @@ window.ACADOBRE_ALT_QUESTIONS.push({
       'Adresele IP private nu sunt accesibile din internet',
       'Utilizarea NAT nu respectă principiul adresării end-to-end'
     ],
-    correctIndex: 0,
+    correctIndex: 2,
   },
   {
     type: 'multiple-choice',
