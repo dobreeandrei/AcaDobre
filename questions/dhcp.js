@@ -125,7 +125,7 @@ ACADOBRE_QUESTIONS.push({
       type: 'multiple-choice-multi',
       text: 'Care dintre mesajele DHCPv4 pot fi trimise ca unicast?',
       options: ['Discover', 'Offer', 'Request', 'Acknowledgement', 'NAK', 'Release', 'Decline', 'Accept'],
-      correctIndices: [1, 3, 4, 5, 6]
+      correctIndices: [1, 3, 4, 5]
     },
     {
       type: 'multiple-choice-multi',
@@ -154,7 +154,7 @@ ACADOBRE_QUESTIONS.push({
         { text: 'Request',         answer: 'Broadcast' },
         { text: 'Acknowledgement', answer: 'Unicast/Broadcast' },
         { text: 'Release',         answer: 'Unicast' },
-        { text: 'Decline',         answer: 'Unicast' },
+        { text: 'Decline',         answer: 'Broadcast' },
         { text: 'NAK',             answer: 'Unicast/Broadcast' },
       ],
       options: ['Unicast', 'Broadcast', 'Unicast/Broadcast', 'Multicast', 'Vasicast'],
