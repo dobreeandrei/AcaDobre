@@ -122,7 +122,7 @@ ACADOBRE_QUESTIONS.push({
                 'Cat mai departe de un firewall',
                 'Cat mai departe de end-device-uri'
                ],
-      correctIndex: 0,
+      correctIndex: 1,
       },
       {
       type: 'multiple-choice',
@@ -133,7 +133,7 @@ ACADOBRE_QUESTIONS.push({
                 'Cat mai departe de un firewall',
                 'Cat mai departe de end-device-uri'
                ],
-      correctIndex: 1,
+      correctIndex: 0,
       },
       {
       type: 'multiple-choice-multi',
@@ -248,4 +248,5 @@ ACADOBRE_QUESTIONS.push({
       correctIndex: 0,
       }
     ]
+
 });
