@@ -34,6 +34,12 @@ ACADOBRE_QUESTIONS.push({
       },
       {
       type: 'multiple-choice',
+      text: 'La ce nivel OSI opereaza ACL-urile?',
+      options: ['Aplicatie', 'Fizic', 'Legatura de Date', 'Prezentare', 'Transport', 'Retea', 'Sesiune'],
+      correctIndex: 5,
+    },
+      {
+      type: 'multiple-choice',
       text: 'Ce wildcard este inlocuit cuvantul "host"?',
       options: ['0.0.0.0',
                 '255.255.255.255',
@@ -248,5 +254,4 @@ ACADOBRE_QUESTIONS.push({
       correctIndex: 0,
       }
     ]
-
 });
