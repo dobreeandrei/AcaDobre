@@ -75,9 +75,15 @@ ACADOBRE_QUESTIONS.push({
       },
       {
       type: 'multiple-choice',
-      text: 'Unde se stocheaza configuratia de VLAN?',
+      text: 'Unde se stocheaza configuratia de VLAN-uri normale?',
       options: ['ROM', 'NVRAM', 'RAM', 'Flash', 'CAM'],
       correctIndex: 3,
+      },
+      {
+      type: 'multiple-choice',
+      text: 'Unde se stocheaza configuratia de VLAN-uri extended?',
+      options: ['ROM', 'NVRAM', 'RAM', 'Flash', 'CAM'],
+      correctIndex: 2,
       },
       {
       type: 'multiple-choice',
