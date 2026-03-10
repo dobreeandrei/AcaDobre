@@ -71,7 +71,7 @@ ACADOBRE_QUESTIONS.push({
                 'Inside Intern',
                 'Outside Extern'
               ],
-      correctIndex: 2,
+      correctIndex: 3,
     },
     {
       type: 'multiple-choice',
@@ -83,7 +83,7 @@ ACADOBRE_QUESTIONS.push({
                 'Inside Intern',
                 'Outside Extern'
               ],
-      correctIndex: 3,
+      correctIndex: 2,
     },
     {
       type: 'multiple-choice',
@@ -229,7 +229,7 @@ ACADOBRE_QUESTIONS.push({
                 'Adaugarea a inca unui octet adreselor IPv4',
                 'Folosirea IPv5'
               ],
-      correctIndices: [2, 3]
+      correctIndices: [0, 1, 2, 3]
     },
     {
       type: 'matching',
@@ -245,4 +245,5 @@ ACADOBRE_QUESTIONS.push({
       options: ['/8', '/10', '/12', '/16', '/20', '/24'],
     },
     ]
+
 });
