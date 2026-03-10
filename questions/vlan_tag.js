@@ -39,10 +39,11 @@ ACADOBRE_QUESTIONS.push({
       },
       {
       type: 'multiple-choice',
-      text: 'Ce reprezinta campul "TPID" dintr-un tag VLAN?',
+      text: 'Ce reprezinta campul "VID" dintr-un tag VLAN?',
       options: ['Identifica eticheta ca folosind Dot1Q', 'Indica prioritatea QoS', 'Este folosit pentru Checksum', 'Indica formatul canonical', 'Identifica numarul de VLAN'],
       correctIndex: 4,
       },
     ]
 
 });
+
