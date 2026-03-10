@@ -28,6 +28,12 @@ ACADOBRE_QUESTIONS.push({
     },
     {
       type: 'multiple-choice',
+      text: 'La ce nivel OSI opereaza NAT?',
+      options: ['Aplicatie', 'Fizic', 'Legatura de Date', 'Prezentare', 'Transport', 'Retea', 'Sesiune'],
+      correctIndex: 5,
+    },
+    {
+      type: 'multiple-choice',
       text: 'De la ce vine prescurtarea NAT?',
       options: ['Network Address Translation',
                 'Network Address Transit',
@@ -245,5 +251,4 @@ ACADOBRE_QUESTIONS.push({
       options: ['/8', '/10', '/12', '/16', '/20', '/24'],
     },
     ]
-
 });
