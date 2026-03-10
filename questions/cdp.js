@@ -1,0 +1,90 @@
+ACADOBRE_QUESTIONS.push({
+  id: 'cdp',
+    topic: 'CDP',
+    questions: [
+      {
+      type: 'open-ended',
+      text: 'Care este codul pentru standardul IEEE LLDP?',
+      acceptedAnswers: ['802.1AB', '802.1ab'],
+      },
+      {
+        type: 'open-ended',
+        text: 'Care este adresa MAC Multicast pentru CDP?',
+        hint: 'Exemplu de raspuns: AA11.Bxxx.xxxx',
+        acceptedAnswers: ['0100.0CCC.CCCC', '0100.0ccc.cccc'],
+      },
+      {
+        type: 'open-ended',
+        text: 'Care este adresa MAC Multicast pentru LLDP?',
+        hint: 'Exemplu de raspuns: AA11.Bxxx.xxxx',
+        acceptedAnswers: ['0180.C200.000E', '0180.c200.000e'],
+      },
+      {
+      type: 'open-ended',
+      text: 'Cat de des sunt trimise mesajele de vecini CDP? (secunde)',
+      acceptedAnswers: ['60'],
+      },
+      {
+      type: 'open-ended',
+      text: 'Cat de des sunt trimise mesajele de vecini LLDP? (secunde)',
+      acceptedAnswers: ['30'],
+      },
+      {
+      type: 'open-ended',
+      text: 'Pentru cat timp sunt mentinute intrarile in tabela CDP? (secunde)',
+      acceptedAnswers: ['180'],
+      },
+      {
+      type: 'open-ended',
+      text: 'Pentru cat timp sunt mentinute intrarile in tabela LLDP? (secunde)',
+      acceptedAnswers: ['120'],
+      },
+      {
+      type: 'multiple-choice',
+      text: 'La ce nivel OSI opereaza CDP/LLDP?',
+      options: ['Aplicatie', 'Fizic', 'Legatura de Date', 'Prezentare', 'Transport', 'Retea', 'Sesiune'],
+      correctIndex: 2,
+      },
+      {
+      type: 'multiple-choice-multi',
+      text: 'Ce protocoale ar putea fi folosite intr-un atac de tip Reconnaisance?',
+      options: ['Radius', 'TACACS+', 'DHCP', 'TFTP', 'DNS', 'FTP', 'CDP', 'LLDP', 'SNMP'],
+      correctIndices: [6, 7], 
+      },
+      {
+      type: 'multiple-choice',
+      text: 'Ce informatii va primi un dispozitiv cu CDP/LLDP pornit?',
+      options: ['Informatiile dispozitivelor din intreaga retea',
+                'Informatiile dispozitivelor direct conectate',
+                'Informatiile dispozitivelor direct conectate cu CDP/LLDP pornit',
+                'Informatiile unui singur vecin CDP/LLDP',
+                'Informatiile dispozitivelor din intreaga retea cu CDP/LLDP pornit',
+               ],
+      correctIndex: 2,
+      },
+      {
+      type: 'multiple-choice',
+      text: 'Este adevarat ca CDP/LLDP pot fi activate atat per interfata, cat si global?',
+      options: ['Fals',
+                'Adevarat',
+               ],
+      correctIndex: 1,
+      },
+      {
+      type: 'multiple-choice-multi',
+      text: 'Ce infomratii pot schimba doi vecini CDP/LLDP?',
+      options: ['Hostname',
+                'Adresa IP',
+                'Nivelul OSI la care opereaza',
+                'Tipul de dispozitiv',
+                'Versiune IOS',
+                'Numarul de interfata prin care este conectat dispozitivului vecin',
+                'Adresa MAC',
+                'Informatie VLAN',
+                'Status de trunking',
+                'Port Layer 4'
+               ],
+      correctIndices: [0, 1, 2, 3, 4, 5],
+      },
+    ]
+});
