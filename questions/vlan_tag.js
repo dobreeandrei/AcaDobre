@@ -8,7 +8,7 @@ ACADOBRE_QUESTIONS.push({
          images: [
                    'questions/images/vlan_tag/vlan_tag_blank.png',   
                    'questions/images/vlan_tag/vlan_tag_01.png',     
-                   'questions/images/vlan_tag/vlan_tagp_02.png',      
+                   'questions/images/vlan_tag/vlan_tag_02.png',      
                    'questions/images/vlan_tag/vlan_tag_03.png',      
                    'questions/images/vlan_tag/vlan_tag_complete.png'
                 ],
@@ -46,4 +46,5 @@ ACADOBRE_QUESTIONS.push({
     ]
 
 });
+
 
