@@ -1,0 +1,76 @@
+window.ACADOBRE_ALT_QUESTIONS.push({
+  id: 'judeteana_2023_2_9_10',
+  topic: 'Judeteana (2) 9-10 2023',
+  questions: [
+  {
+    type: 'multiple-choice',
+    text: 'Dacă VLAN-urile 10, 30 și 50 există pe toate switch-urile din topologie, iar PC0 trimite un pachet către PC2 cu succes, ce identificator dot1q va avea acesta între Switch0 și Switch1?',
+    image: 'subiecte_acad/images/judeteana_2023_2_910/q1.png',
+    options: [
+      'Va avea identificator dot1q 30.',
+      'Va avea identificator dot1q 50.',
+      'Va avea identificator dot1q 10.',
+      'Între Switch0 și Switch1 nu va avea identificator dot1q.',
+      'Nu există informații suficiente.',
+      'Cadrul nu se poate trimite, deoarece nu există un router configurat cu router on a stick în topologie.',
+    ],
+    correctIndex: 3,
+  },
+  {
+    type: 'multiple-choice',
+    text: 'Laptop1 poate trimite pachete către PC0, însă PC0 nu îi poate răspunde. Ce rută statică trebuie adăugată pe Router1 pentru a rezolva această problemă?\nLaptop1 face parte din rețeaua locală 192.168.100.0/25',
+    image: 'subiecte_acad/images/judeteana_2023_2_910/q2.png',
+    options: [
+      'ip route 192.168.100.0 255.255.255.255 172.168.100.1',
+      'ip route 192.168.100.0 255.255.255.0 172.168.100.2',
+      'ip route 192.168.100.2 255.255.255.255 172.168.100.1',
+      'ip route 0.0.0.0 0.0.0.0 172.168.100.2',
+      'ip route 192.168.200.0 255.255.255.128 172.168.100.1',
+      'ip route 192.168.200.2 255.255.255.255 172.168.100.1',
+    ],
+    correctIndex: 2,
+  },
+  {
+    type: 'multiple-choice',
+    text: 'Din ce gamă de adrese ip putem alege daca dorim să mai legăm la Switch2 un PC care să aparțină vlan 10?\nCum trebuie să configurăm portul de pe switch ca PC-ul sa aibă acces la vlan 10?',
+    image: 'subiecte_acad/images/judeteana_2023_2_910/q3.png',
+    options: [
+      '10.10.10.1 - 10.10.10.2,\nswitchport mode access\nswitchport access vlan 10',
+      '10.10.10.1 - 10.10.10.255,\nswitchport mode trunk\nswitchport access vlan 10',
+      '10.10.10.1 - 10.10.10.255,\nswitchport mode access\nswitchport access vlan 10',
+      '10.10.10.1 - 10.10.10.255,\nswitchport mode access\nswitchport trunk allowed access vlan 10',
+      'Nu se poate adăuga un nou PC',
+      '10.10.10.1 - 10.10.10.255,\nswitchport mode trunk\nswitchport trunk allowed vlan 10,20,30',
+    ],
+    correctIndex: 4,
+  },
+  {
+    type: 'multiple-choice',
+    text: 'Care este motivul pentru care PC3 nu poate trimite pachete ICMPv6 cu adresa IP sursă FE80::2E0:8FFF:FE94:8565/10 și adresa IP destinație a lui PC2 2001:DB8:0:3:20B:BEFF:FE6A:AE0E/64 ?',
+    image: 'subiecte_acad/images/judeteana_2023_2_910/q4.png',
+    options: [
+      'PC3 poate comunica doar cu Router1 folosindu-se de adresa IPv6 de tip GUA setată pe acesta.',
+      'Pachetul ajunge la ruter, moment în care acesta este aruncat, deoarece adresa sursă este de tip Link-local.',
+      'PC2 are setată pe interfață o adresă IPv4, nu o adresă IPv6.',
+      'Adresa sursă nu conține 128 de biți, nefiind o adresă IPv6 completă.',
+      'Switch3 este un echipament de nivel 2, acesta nefiind compatibil cu protocoale de nivel 3, precum IP, pachetului ICMPv6 fiind aruncat atunci când ajunge la switch.',
+      'Switch4 conține un Firewall care filtrează pachetele cu adresa sursă a lui PC3.',
+    ],
+    correctIndex: 1,
+  },
+  {
+    type: 'multiple-choice',
+    text: 'PC4 trimite un pachet către PC5, însă acesta nu ajunge la destinație. Alegeți ruta statică care ar trebui setată pe Router1 pentru a face posibilă transmisia pachetelor strict de la PC4 către PC5.',
+    image: 'subiecte_acad/images/judeteana_2023_2_910/q5.png',
+    options: [
+      'ip route 30.30.30.4 255.255.255.255 192.168.0.3',
+      'ip route 30.30.30.0 255.255.255.0 192.168.0.2',
+      'ip route 30.30.30.4 255.0.0.0 172.168.1.2',
+      'ip route 30.30.30.0 0.0.0.255 172.168.1.2',
+      'ip route 20.20.20.0 255.255.255.0 172.168.1.2',
+      'ip route 30.30.30.4 255.255.255.255 172.168.1.2',
+    ],
+    correctIndex: 5,
+  },
+]
+});
