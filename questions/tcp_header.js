@@ -128,7 +128,7 @@ ACADOBRE_QUESTIONS.push({
       {
       type: 'label-order',
       text: 'PCA vrea sa initieze o conexiune TCP cu PCB.\nPuneti mesajele initierii acestei conexiuni in ordine:',
-      labels: ['PCA:SYN', 'PCB:SYN,ACK', 'PCA:SYN'],
+      labels: ['PCA:SYN', 'PCB:SYN,ACK', 'PCA:ACK'],
       correctOrder: [0, 1, 2],
       },
       {
@@ -139,3 +139,4 @@ ACADOBRE_QUESTIONS.push({
       },
     ]
 });
+
