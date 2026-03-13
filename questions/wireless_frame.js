@@ -4,7 +4,7 @@ ACADOBRE_QUESTIONS.push({
     questions: [
       {
         type: 'header-fill',
-        text: 'Identifica campurile tagului VLAN in ordine:',
+        text: 'Identifica campurile frame-ului wireless in ordine:',
          images: [
                    'questions/images/wireless_frame/wireless_frame_blank.png',   
                    'questions/images/wireless_frame/wireless_frame_01.png',
