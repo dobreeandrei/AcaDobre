@@ -183,7 +183,7 @@ window.ACADOBRE_ALT_QUESTIONS.push({
   },
   {
     type: 'multiple-choice-multi',
-    text: 'Care dintre cele de mai jos reprezintă comenzile pentru verificarea functionalităţii unui sever DHCPv4? (Alegeţi 2 variante)',
+    text: 'Care dintre cele de mai jos reprezintă comenzile pentru verificarea functionalităţii unui server DHCPv4? (Alegeţi 2 variante)',
     options: [
       'show ip dhcp configurations',
       'show ip dhcp server statistics',
@@ -493,4 +493,5 @@ window.ACADOBRE_ALT_QUESTIONS.push({
     correctIndices: [1, 4],
   },
 ]
+
 });
