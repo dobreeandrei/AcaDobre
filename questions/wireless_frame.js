@@ -1,0 +1,105 @@
+ACADOBRE_QUESTIONS.push({
+  id: 'wireless_frame',
+    topic: 'Wireless Frame',
+    questions: [
+      {
+        type: 'header-fill',
+        text: 'Identifica campurile tagului VLAN in ordine:',
+         images: [
+                   'questions/images/wireless_frame/wireless_frame_blank.png',   
+                   'questions/images/wireless_frame/wireless_frame_01.png',
+                   'questions/images/wireless_frame/wireless_frame_02.png',
+                   'questions/images/wireless_frame/wireless_frame_03.png',
+                   'questions/images/wireless_frame/wireless_frame_04.png',
+                   'questions/images/wireless_frame/wireless_frame_05.png',
+                   'questions/images/wireless_frame/wireless_frame_06.png',
+                   'questions/images/wireless_frame/wireless_frame_07.png',
+                   'questions/images/wireless_frame/wireless_frame_08.png',
+                   'questions/images/wireless_frame/wireless_frame_09.png',   
+                   'questions/images/wireless_frame/wireless_frame_complete.png'
+                ],
+        fields: [
+                  { names: ['Frame Control', 'frame con'],    bits: 16 },
+                  { names: ['Duration/ID', 'Duration', 'ID'],       bits: 16 },
+                  { names: ['Address 1', 'Addr 1'],            bits: 48 },
+                  { names: ['Address 2', 'Addr 2'],            bits: 48 },
+                  { names: ['Address 3', 'Addr 3'],            bits: 48 },
+                  { names: ['Sequence Control', 'Seq Con'],   bits: 16 },
+                  { names: ['Address 4', 'Addr 4'],            bits: 48 },
+                  { names: ['QoS Control', 'QoS Con'],        bits: 16 },
+                  { names: ['HT Control', 'HT Con'],          bits: 16 },
+                  { names: ['Frame Check Sequence', 'FCS'],   bits: 32 },
+                ],
+    },
+    {
+      type: 'multiple-choice-multi',
+      text: 'Care campuri din frame-ul wireless sunt optionale?',
+      options: ['Address 4',
+                'QoS Control',
+                'HT Control',
+                'Frame Control',
+                'Duration/ID',
+                'Address 1',
+                'Address 2',
+                'Address 3',
+                'Sequence Control',
+                'FCS'
+               ],
+      correctIndices: [0, 1, 2],
+      },
+    {
+    type: 'multiple-choice',
+    text: 'Care este dimensiunea totală a antetului + trailerului unui cadru wireless 802.11 prezentat?',
+    options: ['30 bytes', '24 bytes', '34 bytes', '28 bytes', '32 bytes'],
+    correctIndex: 2,
+    },
+    {
+    type: 'multiple-choice',
+    text: 'Ce rol are câmpul "Frame Control" (2 bytes) la începutul cadrului wireless?',
+    options: ['Conține informații despre versiunea protocolului si tipul cadrului', 'Identifică adresa MAC a punctului de acces', 'Stabilește durata necesară pentru ocuparea mediului de transmisie', 'Sincronizează ceasul receptorului cu cel al emițătorului', 'Verifică dacă pachetul a ajuns fără erori de bit'],
+    correctIndex: 0,
+    },
+    {
+    type: 'multiple-choice',
+    text: 'În ce situație este utilizat câmpul "Address 4" (6 bytes) într-un cadru 802.11?',
+    options: ['Doar în configurații Wireless Distribution System (WDS/Bridge)', 'Pentru a identifica adresa multicast a grupului', 'Când cadrul trece printr-un router Layer 3', 'Pentru a specifica adresa serverului DNS', 'Este prezent în toate cadrele de tip Control'],
+    correctIndex: 0,
+   },
+   {
+    type: 'multiple-choice',
+    text: 'Ce reprezintă valoarea stocată în câmpul "Duration/ID"?',
+    options: ['Valoarea Network Allocation Vector pentru rezervarea mediului', 'Timpul exact de propagare a semnalului în microsecunde', 'Identificatorul unic al rețelei SSID', 'Numărul de secvență al fragmentului curent', 'Viteza de transmisie suportată de stație'],
+    correctIndex: 0,
+   },
+   {
+    type: 'multiple-choice',
+    text: 'Care este funcția câmpul "Sequence Control" în cadrul Wi-Fi?',
+    options: ['Gestionarea fragmentării și eliminarea cadrelor duplicate', 'Controlul puterii de transmisie a antenei', 'Ordonarea pachetelor în funcție de prioritatea QoS', 'Identificarea versiunii de standard HT (High Throughput)', 'Determinarea rutei optime către destinație'],
+    correctIndex: 0,
+    },
+    {
+    type: 'multiple-choice',
+    text: 'Câmpul "QoS Control" (2 bytes) este prezent în:',
+    options: ['Doar în cadrele de date de tip QoS', 'Toate cadrele de management (Beacon, Probe Request)', 'Cadrele care nu suportă standardul 802.11e', 'Exclusiv în cadrele de tip Acknowledgement', 'Cadrele transmise doar pe frecvența de 2.4 GHz'],
+    correctIndex: 0,
+   },
+    {
+    type: 'multiple-choice',
+    text: 'Ce algoritm este utilizat în câmpul "FCS" (4 bytes) pentru verificarea integrității cadrului?',
+    options: ['CRC-32', 'MD5 Hash', 'Checksum pe 16 biți', 'Paritate pară', 'SHA-256'],
+    correctIndex: 0,
+    },
+    {
+    type: 'multiple-choice',
+    text: 'Câmpul "HT Control" (4 bytes) a fost introdus pentru a suporta funcționalitățile cărui standard?',
+    options: ['802.11n (High Throughput)', '802.11b (Direct Sequence)', '802.11a (OFDM)', '802.11g (ERP)', '802.11p (WAVE)'],
+    correctIndex: 0,
+    },
+    {
+    type: 'multiple-choice',
+    text: 'Dacă un cadru este trimis de la o stație (STA) către un Access Point (AP), ce reprezintă de regulă "Address 1"?',
+    options: ['Receiver Address (BSSID-ul punctului de acces)', 'Source Address (Adresa stației care emite)', 'Destination Address (Destinația finală din LAN)', 'Transmitter Address (Adresa stației radio)', 'Adresa gateway-ului implicit'],
+    correctIndex: 0,
+    }
+    ]
+});
