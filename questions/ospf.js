@@ -74,7 +74,7 @@ ACADOBRE_QUESTIONS.push({
     },
     {
       type: 'open-ended',
-      text: 'Ce tip de LSA este generat de DR/BDR?',
+      text: 'Ce tip de LSA este generat de ASBR?',
       acceptedAnswers: ['5'],
     },
     {
