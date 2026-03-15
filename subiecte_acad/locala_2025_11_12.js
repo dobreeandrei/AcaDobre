@@ -25,7 +25,7 @@ window.ACADOBRE_ALT_QUESTIONS.push({
     text: 'Dacă PC0 trimite un ping către PC5, câte intrari în tabela CAM va avea Router0?',
     image: 'subiecte_acad/images/locala_2025_1112/q4.png',
     options: ['0', '2', '5', '4', '3', '1'],
-    correctIndex: 5,
+    correctIndex: 0,
   },
   {
     type: 'open-ended',
