@@ -335,7 +335,7 @@ window.ACADOBRE_ALT_QUESTIONS.push({
     type: 'multiple-choice-multi',
     text: 'Selectați toți parametrii comenzii "ip route". (Alegeți 3 variante)',
     options: ['Metrică', 'Port de ingress', 'Distanța administrativă', 'Adresă de rețea IPv6', 'Adresă de rețea IPv4', 'Mască de rețea'],
-    correctIndices: [0, 4, 5],
+    correctIndices: [2, 4, 5],
   },
   {
     type: 'multiple-choice',
