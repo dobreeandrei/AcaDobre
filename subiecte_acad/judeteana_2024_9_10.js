@@ -188,7 +188,7 @@ window.ACADOBRE_ALT_QUESTIONS.push({
   },
   {
     type: 'multiple-choice-multi',
-    text: 'Care din următoarele afirmații sunt adevărate cu privire la adresele IPv4? (alegeți 4 variante de răspuns)',
+    text: 'Care din următoarele afirmații sunt adevărate cu privire la adresele IPv4? (alegeți 3 variante de răspuns)',
     options: [
       'masca de rețea indică numărul maxim de subrețele în care poate fi împărțită o rețea',
       '172.16.42.100 este o adresă privată',
