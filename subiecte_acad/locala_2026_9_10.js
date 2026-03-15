@@ -26,7 +26,7 @@ window.ACADOBRE_ALT_QUESTIONS.push({
       { text: '5.', answer: 'Host-ul răspunde serverului DHCPv6' },
       { text: '6.', answer: 'Serverul DHCPv6 trimite un mesaj REPLY' },
     ],
-    options: ['Host-ul trimite un mesaj DHCPv6 SOLICIT', 'Host-ul răspunde serverului DHCPv6', 'Serverul DHCPv6 trimite un mesaj ADVERTISE', 'Serverul DHCPv6 trimite un mesaj REPLY', 'Router-ul trimite cu un mesaj RA', 'Host-ul trimite un mesaj RA'],
+    options: ['Host-ul trimite un mesaj DHCPv6 SOLICIT', 'Host-ul răspunde serverului DHCPv6', 'Serverul DHCPv6 trimite un mesaj ADVERTISE', 'Serverul DHCPv6 trimite un mesaj REPLY', 'Router-ul trimite cu un mesaj RA', 'Host-ul trimite un mesaj RS'],
   },
   {
     type: 'label-order',
