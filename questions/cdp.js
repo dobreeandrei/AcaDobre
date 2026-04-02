@@ -47,7 +47,7 @@ ACADOBRE_QUESTIONS.push({
       },
       {
       type: 'multiple-choice-multi',
-      text: 'Ce protocoale ar putea fi folosite intr-un atac de tip Reconnaisance?',
+      text: 'Ce protocoale ar putea fi folosite intr-un atac de tip Reconnaisance?\nAlegeti 2 variante.',
       options: ['Radius', 'TACACS+', 'DHCP', 'TFTP', 'DNS', 'FTP', 'CDP', 'LLDP', 'SNMP'],
       correctIndices: [6, 7], 
       },
@@ -72,7 +72,7 @@ ACADOBRE_QUESTIONS.push({
       },
       {
       type: 'multiple-choice-multi',
-      text: 'Ce infomratii pot schimba doi vecini CDP/LLDP?',
+      text: 'Ce informatii pot schimba doi vecini CDP/LLDP?\nAlegeti 6 variante.',
       options: ['Hostname',
                 'Adresa IP',
                 'Nivelul OSI la care opereaza',
