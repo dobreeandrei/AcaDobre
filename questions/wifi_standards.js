@@ -42,7 +42,7 @@ ACADOBRE_QUESTIONS.push({
       },
       {
       type: 'multiple-choice-multi',
-      text: 'Care standarde Wi-Fi suporta frecventa de 2.4 GHz?',
+      text: 'Care standarde Wi-Fi suporta frecventa de 2.4 GHz?\nAlegeti 5 variante.',
       options: ['802.11',
                 '802.11b',
                 '802.11a',
@@ -55,7 +55,7 @@ ACADOBRE_QUESTIONS.push({
       },
       {
       type: 'multiple-choice-multi',
-      text: 'Care standarde Wi-Fi suporta frecventa de 5 GHz?',
+      text: 'Care standarde Wi-Fi suporta frecventa de 5 GHz?\nAlegeti 4 variante.',
       options: ['802.11',
                 '802.11b',
                 '802.11a',
@@ -68,7 +68,7 @@ ACADOBRE_QUESTIONS.push({
       },
       {
       type: 'multiple-choice-multi',
-      text: 'Care standarde Wi-Fi suporta doar frecventa de 2.4 GHz?',
+      text: 'Care standarde Wi-Fi suporta doar frecventa de 2.4 GHz?\nAlegeti 3 variante.',
       options: ['802.11',
                 '802.11b',
                 '802.11a',
@@ -81,7 +81,7 @@ ACADOBRE_QUESTIONS.push({
       },
       {
       type: 'multiple-choice-multi',
-      text: 'Care standarde Wi-Fi suporta doar frecventa de 5 GHz?',
+      text: 'Care standarde Wi-Fi suporta doar frecventa de 5 GHz?\nAlegeti 2 variante.',
       options: ['802.11',
                 '802.11b',
                 '802.11a',
@@ -100,17 +100,17 @@ ACADOBRE_QUESTIONS.push({
       },
       {
       type: 'matching',
-      text: 'Asociati fiecare standard wireless cu viteza teoretica la care poate ajunge',
+      text: 'Asociati fiecare standard wireless cu viteza teoretica la care poate ajunge:',
       subQuestions: [
         { text: '802.11', answer: '2 Mbps' },
         { text: '802.11b', answer: '11 Mbps' },
         { text: '802.11a', answer: '54 Mbps' },
         { text: '802.11g', answer: '54 Mbps' },
         { text: '802.11n', answer: '600 Mbps' },
-        { text: '802.11ac', answer: '6.9 Mbps' },
-        { text: '802.11ax', answer: '9.6 Mbps' },
+        { text: '802.11ac', answer: '6.9 Gbps' },
+        { text: '802.11ax', answer: '9.6 Gbps' },
       ],
-      options: ['2 Mbps','11 Mbps', '54 Mbps', '600 Mbps', '6.93 Mbps', '9.6 Mbps'],
+      options: ['2 Mbps','11 Mbps', '54 Mbps', '600 Mbps', '6.9 Gbps', '9.6 Gbps'],
       },
     ]
 });
