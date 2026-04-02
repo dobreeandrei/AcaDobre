@@ -256,7 +256,7 @@ window.ACADOBRE_ALT_QUESTIONS.push({
     text: 'Ce interfețe vor fi în modul blocking după ce se finalizează STP (Spanning Tree Protocol)?',
     image: 'subiecte_acad/images/nationala_2025_1112/q27.png',
     options: ['Switch1 : Fa0/1', 'Switch0 : Fa0/1', 'Switch2 : Fa0/1', 'Switch3 : Fa0/2', 'Switch2 : Fa0/2', 'Switch0 : Gig0/2', 'Switch3 : Fa0/1'],
-    correctIndex: 6,
+    correctIndex: 2,
   },
   {
     type: 'multiple-choice-multi',
