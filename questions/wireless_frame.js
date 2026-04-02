@@ -33,7 +33,7 @@ ACADOBRE_QUESTIONS.push({
     },
     {
       type: 'multiple-choice-multi',
-      text: 'Care campuri din frame-ul wireless sunt optionale?',
+      text: 'Care campuri din frame-ul wireless sunt optionale?\nAlegeti 3 variante.',
       options: ['Address 4',
                 'QoS Control',
                 'HT Control',
