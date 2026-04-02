@@ -46,7 +46,7 @@ ACADOBRE_QUESTIONS.push({
       },
       {
         type: 'open-ended',
-        text: 'Care este adresa MAC Multicast pentru VRRP?',
+        text: 'Care este adresa MAC Multicast pentru GLBP?',
         hint: 'Exemplu de raspuns: AA11.Bxxx.xxyy',
         acceptedAnswers: ['0007.B400.xxyy', '0007.b400.xxyy'],
       },
