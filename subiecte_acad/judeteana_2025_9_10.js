@@ -1,6 +1,6 @@
 window.ACADOBRE_ALT_QUESTIONS.push({
   id: 'judeteana_2025_9_10',
-  topic: 'Județeană 9-10 2025',
+  topic: 'Judeteana 9-10 2025',
   questions: [
   {
     type: 'multiple-choice',
@@ -186,7 +186,7 @@ window.ACADOBRE_ALT_QUESTIONS.push({
     text: 'Care dintre cele de mai jos reprezintă comenzile pentru verificarea functionalităţii unui server DHCPv4? (Alegeţi 2 variante)',
     options: [
       'show ip dhcp configurations',
-      'show ip dhcp server statistics',
+      'show ip dhcp pool',
       'show dhcp configurations',
       'show ip dhcp',
       'show dhcp statistics',
@@ -493,5 +493,4 @@ window.ACADOBRE_ALT_QUESTIONS.push({
     correctIndices: [1, 4],
   },
 ]
-
 });
