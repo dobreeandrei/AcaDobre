@@ -121,7 +121,7 @@ window.ACADOBRE_ALT_QUESTIONS.push({
         'OSPF poate deveni instabil și poate rezulta în rutare suboptimală dacă nu sunt respectate practicile de proiectare corecte.',
         'OSPF nu suportă conceptul de link-uri virtuale, ceea ce poate îngreuna conectarea ariilor non-backbone.'
       ],
-      correctIndex: 2
+      correctIndex: 0
     },
     {
       type: 'multiple-choice',
