@@ -175,10 +175,10 @@ ACADOBRE_QUESTIONS.push({
         'Adresa GUA a routerului',
         'ff02::1',
         'ff02::2',
-        'ff02::2:1',
+        'ff02::1:2',
         '::1'
       ],
-      correctIndex: 3,
+      correctIndex: 4,
     },
     {
       type: 'multiple-choice',
@@ -188,43 +188,43 @@ ACADOBRE_QUESTIONS.push({
     },
     {
       type: 'multiple-choice-multi',
-      text: 'Ce combinatie de flaguri este folosita pentru Stateful DHCPv6?',
+      text: 'Ce combinatie de flaguri este folosita pentru Stateful DHCPv6?\nAlegeti 2 variante.',
       options: ['A=0 O=0 M=1', 'A=0 O=1 M=1', 'A=1 O=0 M=1', 'A=1 O=0 M=1', 'A=1 O=0 M=0', 'A=0 O=1 M=0', 'A=1 O=1 M=0'],
       correctIndices: [0, 1]
     },
     {
       type: 'multiple-choice-multi',
-      text: 'Cu ce mesaje incepe procesul DHCPv6?',
+      text: 'Cu ce mesaje incepe procesul DHCPv6?\nAlegeti 2 variante.',
       options: ['ARP Router Advertisement', 'ARP Router Solicit', 'ND Router Advertisement', 'ND Router Solicit', 'SLAAC', 'Stateful'],
       correctIndices: [2, 3]
     },
     {
       type: 'multiple-choice-multi',
-      text: 'Ce informatii poate primi un client de la server folosind Stateless?',
+      text: 'Ce informatii poate primi un client de la server folosind Stateless?\nAlegeti 4 variante.',
       options: ['Prefix IPv6', 'Adresa unui server DNS', 'MTU', 'Default Gateway', 'Adresa IPv6', 'Adresa MAC', 'Nume de domeniu', 'Pool de IP'],
       correctIndices: [0, 1, 2, 6]
     },
     {
       type: 'multiple-choice-multi',
-      text: 'Ce informatii poate primi un client de la server folosind Stateful?',
+      text: 'Ce informatii poate primi un client de la server folosind Stateful?\nAlegeti 4 variante.',
       options: ['Prefix IPv6', 'Adresa unui server DNS', 'MTU', 'Default Gateway', 'Adresa IPv6', 'Adresa MAC', 'Nume de domeniu', 'Pool de IP'],
       correctIndices: [1, 2, 4, 6]
     },
     {
       type: 'multiple-choice-multi',
-      text: 'Cum isi poate obtine un host partea de interface ID intr-o retea de lungime /64?',
+      text: 'Cum isi poate obtine un host partea de interface ID intr-o retea de lungime /64?\nAlegeti 2 variante.',
       options: ['EUI-64', 'Creata random', 'SOLICIT la router', 'Atribuita de administrator', 'DISCOVER la router', 'Stateless'],
       correctIndices: [0, 1]
     },
     {
       type: 'multiple-choice-multi',
-      text: 'Care dintre urmatoarele sunt modurile de functionare DHCPv6?',
+      text: 'Care dintre urmatoarele sunt modurile de functionare DHCPv6?\nAlegeti 3 variante.',
       options: ['SLAAC', 'Stateless', 'Stateful', 'Spoofing', 'EUI-64', 'Managed'],
       correctIndices: [0, 1, 2]
     },
     {
       type: 'multiple-choice-multi',
-      text: 'Care dintre mesajele urmatoare sunt trimise de catre client?',
+      text: 'Care dintre mesajele urmatoare sunt trimise de catre client?\nAlegeti 4 variante.',
       options: ['Solicit', 'Advertise', 'Request', 'Information-Request', 'Reply', 'RS', 'RA'],
       correctIndices: [0, 2, 3, 5]
     },
