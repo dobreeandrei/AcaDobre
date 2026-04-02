@@ -83,7 +83,7 @@ ACADOBRE_QUESTIONS.push({
                 'Nu se va intampla nimic',
                 'Va transforma toate switch-urile din transparent in Client',
                 'Va reseta numarul de revizie',
-                'Configuratia VLAN de pe celelalte switchuri va fi adaugata pe acel switchuri',
+                'Configuratia VLAN de pe celelalte switchuri va fi adaugata pe acel switch',
                ],
       correctIndex: 0,
       },
@@ -113,7 +113,7 @@ ACADOBRE_QUESTIONS.push({
       },
       {
       type: 'multiple-choice-multi',
-      text: 'De ce este nevoie pe mai multe switchuri pentru ca acestea sa participe in acelasi domeniu VTP?',
+      text: 'De ce este nevoie pe mai multe switchuri pentru ca acestea sa participe in acelasi domeniu VTP?\nAlegeti 3 variante.',
       options: ['Nume de domeniu',
                 'Parola de domeniu',
                 'Verisune VTP',
@@ -125,7 +125,7 @@ ACADOBRE_QUESTIONS.push({
       },
       {
       type: 'multiple-choice-multi',
-      text: 'Care sunt modurile in care poate functiona un switch in VTP?',
+      text: 'Care sunt modurile in care poate functiona un switch in VTP?\nAlegeti 4 variante.',
       options: ['Server',
                 'Client',
                 'Transparent',
@@ -139,7 +139,7 @@ ACADOBRE_QUESTIONS.push({
       },
       {
       type: 'multiple-choice-multi',
-      text: 'Care dintre urmatoarele modificari va reseta numarul de revizie VTP?',
+      text: 'Care dintre urmatoarele modificari va reseta numarul de revizie VTP?\nAlegeti 2 variante.',
       options: ['Trecerea la modul Transparent',
                 'Trecerea la modul Client',
                 'Trecerea la modul Server',
