@@ -5,12 +5,12 @@ ACADOBRE_QUESTIONS.push({
       {
         type: 'open-ended',
         text: 'Cum se numeste o retea wireless de acoperire geografica mai mica?',
-        acceptedAnswers: ['WLAN'],
+        acceptedAnswers: ['WLAN','wlan'],
       },
       {
         type: 'open-ended',
         text: 'Cum se numeste o retea wireless de acoperire geografica mai mare?',
-        acceptedAnswers: ['WWAN'],
+        acceptedAnswers: ['WWAN','wwan'],
       },
       {
       type: 'open-ended',
@@ -70,7 +70,7 @@ ACADOBRE_QUESTIONS.push({
       },
       {
       type: 'multiple-choice-multi',
-      text: 'Care dispozitive sunt dedicate pentru conectivitate wireless?',
+      text: 'Care dispozitive sunt dedicate pentru conectivitate wireless?\nAlegeti 2 variante.',
       options: ['Switch', 'Router', 'Hub', 'MultiLayer Switch', 'Access Point', 'Wireless Router', 'Firewall'],
       correctIndices: [4, 5], 
       },
@@ -224,7 +224,7 @@ ACADOBRE_QUESTIONS.push({
       },
       {
       type: 'multiple-choice-multi',
-      text: 'Care variante NU reprezinta caracteristici ale mediului Wireless?',
+      text: 'Care variante NU reprezinta caracteristici ale mediului Wireless?\nAlegeti 3 variante.',
       options: ['Imunitate la interferente',
                 'Pret ridicat',
                 'Distanta redusa',
@@ -258,19 +258,6 @@ ACADOBRE_QUESTIONS.push({
                 'Free',
                 'Unlocked',
                 'Wide-use',
-              ],
-      correctIndex: 0,
-      },
-      {
-      type: 'multiple-choice',
-      text: 'Care mod de autentificare in wireless presupune ca sursa si destinatia sa aibe aceeasi cheie inainte de a se asocia?',
-      options: ['Wired Equivalent Privacy',
-                'Wi-Fi Equivalent Privacy',
-                'Wi-Fi Protected Access',
-                'Wired Protected Access',
-                'Lightweight EAP',
-                'Extensible Authentication Protocol',
-                'WPA Personal Mode',
               ],
       correctIndex: 0,
       },
@@ -315,7 +302,7 @@ ACADOBRE_QUESTIONS.push({
       },
       {
       type: 'multiple-choice-multi',
-      text: 'Ce tipuri de WPA folosesc criptare AES?',
+      text: 'Ce tipuri de WPA folosesc criptare AES?\nAlegeti 2 variante.',
       options: ['WPA Enterprise Mode',
                 'WPA',
                 'WPA2(CCMP)',
