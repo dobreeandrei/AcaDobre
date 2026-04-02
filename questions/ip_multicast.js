@@ -54,7 +54,7 @@ ACADOBRE_QUESTIONS.push({
       },
       {
         type: 'open-ended',
-        text: 'Care este adresa IPv6 Multicast pentru toate servele DHCPv6?',
+        text: 'Care este adresa IPv6 Multicast pentru toate serverele DHCPv6?',
         acceptedAnswers: ['ff02::1:2'],
       },
       {
@@ -86,6 +86,16 @@ ACADOBRE_QUESTIONS.push({
         type: 'open-ended',
         text: 'Care este adresa IPv6 Multicast pentru toate routerele HSRP/GLBP?',
         acceptedAnswers: ['ff02::66'],
+      },
+      {
+        type: 'open-ended',
+        text: 'Care este range-ul link-local IPv6?',
+        acceptedAnswers: ['fe80::/10'],
+      },
+      {
+        type: 'open-ended',
+        text: 'Care este range-ul unique local IPv6?',
+        acceptedAnswers: ['fd00::/8'],
       },
       {
       type: 'open-ended',
