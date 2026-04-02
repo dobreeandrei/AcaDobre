@@ -4,25 +4,25 @@ ACADOBRE_QUESTIONS.push({
   questions: [
     {
       type: 'multiple-choice-multi',
-      text: 'Care dintre urmatoarele nivele OSI reprezinta nivelul Aplicatie in TCP/IP?',
+      text: 'Care dintre urmatoarele nivele OSI reprezinta nivelul Aplicatie in TCP/IP?\nAlegeti 3 variante.',
       options: ['Aplicatie', 'Fizic', 'Legatura de Date', 'Prezentare', 'Transport', 'Retea', 'Sesiune'],
       correctIndices: [0, 3, 6], 
     },
     {
       type: 'multiple-choice-multi',
-      text: 'Care dintre urmatoarele nivele OSI reprezinta nivelul Acces la retea in TCP/IP?',
+      text: 'Care dintre urmatoarele nivele OSI reprezinta nivelul Acces la retea in TCP/IP?\nAlegeti 2 variante.',
       options: ['Aplicatie', 'Fizic', 'Legatura de Date', 'Prezentare', 'Transport', 'Retea', 'Sesiune'],
       correctIndices: [1, 2], 
     },
     {
       type: 'multiple-choice',
-      text: 'Care nivel TCP/IP reprezinta in nivelul Retea pentru OSI?',
+      text: 'Care nivel TCP/IP reprezinta nivelul Retea pentru OSI?',
       options: ['Aplicatie', 'Acces la retea', 'Transport', 'Internet'],
       correctIndex: 3,
     },
     {
       type: 'multiple-choice-multi',
-      text: 'Care dintre urmatoarele reprezinta sublayerele nivelului Legatura de Date in OSI?',
+      text: 'Care dintre urmatoarele reprezinta sublayerele nivelului Legatura de Date in OSI?\nAlegeti 2 variante.',
       options: ['Media Access Control', 'Magical Address Control', 'Logical Link Control', 'Media Address Control', 'Logical Address Control'],
       correctIndices: [0, 2], 
     },
@@ -46,21 +46,21 @@ ACADOBRE_QUESTIONS.push({
     },
     {
       type: 'multiple-choice-multi',
-      text: 'Care dintre urmatoarele nivele OSI adauga un header mesajelor primite?',
+      text: 'Care dintre urmatoarele nivele OSI adauga un header mesajelor primite?\nAlegeti 6 variante.',
       options: ['Aplicatie', 'Fizic', 'Legatura de Date', 'Prezentare', 'Transport', 'Retea', 'Sesiune'],
       correctIndices: [0, 2, 3, 4, 5, 6], 
     },
     {
       type: 'multiple-choice-multi',
-      text: 'Care dintre urmatoarele pot fi considerate dispozitive de nivel 2?',
+      text: 'Care dintre urmatoarele pot fi considerate dispozitive de nivel 2?\nAlegeti 2 variante.',
       options: ['Switch', 'Router', 'Hub', 'MultiLayer Switch', 'Access Point', 'Wireless Router', 'Firewall'],
       correctIndices: [0, 3], 
     },
     {
-      type: 'multiple-choice-multi',
-      text: 'Care dintre urmatoarele pot fi considerate dispozitive de nivel 1?',
+      type: 'multiple-choice',
+      text: 'Care dintre urmatoarele poate fi considerat dispozitiv de nivel 1?',
       options: ['Switch', 'Router', 'Hub', 'MultiLayer Switch', 'Access Point', 'Wireless Router', 'Firewall'],
-      correctIndices: [2, 4], 
+      correctIndex: 2, 
     },
     {
       type: 'matching',
@@ -68,17 +68,17 @@ ACADOBRE_QUESTIONS.push({
       subQuestions: [
         { text: 'Switch', answer: 'Layer 2' },
         { text: 'Router', answer: 'Layer 3' },
-        { text: 'Access Point', answer: 'Layer 1' },
+        { text: 'Access Point', answer: 'Layer 2' },
         { text: 'Hub', answer: 'Layer 1' },
         { text: 'Firewall', answer: 'Layer 3' },
       ],
-      options: ['Layer 1', 'Layer 2', 'Layer 3', 'Layer 4'],
+      options: ['Layer 1', 'Layer 2', 'Layer 3'],
       },
     {
       type: 'multiple-choice-multi',
-      text: 'Care dintre urmatoarele pot fi considerate dispozitive de nivel 3?',
+      text: 'Care dintre urmatoarele pot fi considerate dispozitive de nivel 3?\nAlegeti 4 variante.',
       options: ['Switch', 'Router', 'Hub', 'MultiLayer Switch', 'Access Point', 'Wireless Router', 'Firewall'],
-      correctIndices: [1, 3, 6], 
+      correctIndices: [1, 3, 4, 6], 
     },
     {
       type: 'matching',
