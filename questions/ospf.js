@@ -206,24 +206,18 @@ ACADOBRE_QUESTIONS.push({
     {
       type: 'multiple-choice',
       text: 'In ce structura de date isi mentine OSPF informatiile despre toti vecinii?',
-      options: ['Neighbor Table', 'LSDB', 'Topology Table', 'Routing Table', 'OSPF Table', 'ARP Table'],
-      correctIndex: 0,
-    },
-    {
-      type: 'multiple-choice',
-      text: 'In ce structura de date se mentin vecinii cu care se ajunge in stadiul FULL in OSPF?',
-      options: ['Adjacency Table', 'LSDB', 'Topology Table', 'Routing Table', 'OSPF Table', 'ARP Table'],
+      options: ['Adjacency Database', 'LSDB', 'Topology Table', 'Routing Table', 'OSPF Table', 'ARP Table'],
       correctIndex: 0,
     },
     {
       type: 'multiple-choice',
       text: 'In ce structura de date isi mentine OSPF informatiile despre LSA-uri?',
-      options: ['Neighbor Table', 'LSDB', 'Adjacency Table', 'Routing Table', 'OSPF Table', 'ARP Table'],
+      options: ['Neighbor Table', 'LSDB', 'Adjacency Database', 'Routing Table', 'OSPF Table', 'ARP Table'],
       correctIndex: 1,
     },
     {
       type: 'multiple-choice',
-      text: 'Cum se mai numeste LSBD in OSPF?',
+      text: 'Cum se mai numeste LSDB in OSPF?',
       options: ['Adjacency Table', 'Neighbor Table', 'Topology Table', 'Routing Table', 'OSPF Table', 'ARP Table'],
       correctIndex: 2,
     },
@@ -373,13 +367,13 @@ ACADOBRE_QUESTIONS.push({
     },
     {
       type: 'multiple-choice-multi',
-      text: 'Care sunt numele ruterelor asociate cu o alegere dintr-o retea OSPF?',
+      text: 'Care sunt numele ruterelor asociate cu o alegere dintr-o retea OSPF?\nAlegeti 3 variante.',
       options: ['Designated Router (DR)', 'Backup Designated Router (BDR)', 'DROther', 'Autonomous System Boundary Router (ASBR)', 'Area Border Router (ABR)', 'Master Router'],
       correctIndices: [0, 1, 2]
     },
     {
       type: 'multiple-choice-multi',
-      text: 'Care dintre urmatoarele reprezinta tipuri de retele OSPF?',
+      text: 'Care dintre urmatoarele reprezinta tipuri de retele OSPF?\nAlegeti 3 variante.',
       options: ['Broadcast', 'Point-to-Point', 'Point-to-Multipoint', 'Autonomous System', 'Backbone', 'Ethernet', 'WirelessLAN'],
       correctIndices: [0, 1, 2]
     },
