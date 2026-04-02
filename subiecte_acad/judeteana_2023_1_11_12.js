@@ -1,6 +1,6 @@
 window.ACADOBRE_ALT_QUESTIONS.push({
   id: 'judeteana_2023_1_11_12',
-  topic: 'Judeteana 2023 (1) 11-12',
+  topic: 'Judeteana (1) 11-12 2023',
   questions: [
     {
       type: 'multiple-choice',
@@ -662,7 +662,7 @@ window.ACADOBRE_ALT_QUESTIONS.push({
         'Toate routerele se află în aria backbone.',
         'Toate routerele au aceeași tabelă de vecini.'
       ],
-      correctIndices: [1, 4]
+      correctIndices: [0, 4]
     }
   ]
 });
