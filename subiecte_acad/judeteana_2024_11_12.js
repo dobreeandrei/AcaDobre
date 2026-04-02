@@ -532,18 +532,18 @@ window.ACADOBRE_ALT_QUESTIONS.push({
     correctIndex: 5,
   },
   {
-    type: 'multiple-choice',
-    text: 'Autentificarea pe tunele de VPN tip IPsec se realizează folosind Pre-shared Key sau Certificat Digital. GRE are nevoie de IPsec pentru a fi securizat. IPsec se folosește de AH, ESP și IKE pentru a functiona.',
-    options: [
-      'Fals, Adevărat, Adevărat',
-      'Fals, Adevărat, Fals',
-      'Adevărat, adevărat, adevărat',
-      'Adevărat, Fals, Adevărat',
-      'Fals, Fals, Adevărat',
-      'Fals, fals, fals'
-    ],
-    correctIndex: 2,
-  },
+      type: 'multiple-choice',
+      text: 'Autentificarea pe tunele de VPN tip IPsec se realizează folosind Pre-shared Key sau Certificat Digital.\nGRE are nevoie de IPsec pentru a fi securizat.\nIPsec se folosește de AH, ESP și IKE pentru a functiona.',
+      options: [
+        'Fals, Adevărat, Adevărat',
+        'Fals, Adevărat, Fals',
+        'Adevărat, adevărat, adevărat',
+        'Adevărat, Fals, Adevărat',
+        'Fals, Fals, Adevărat',
+        'Fals, fals, fals'
+      ],
+      correctIndex: 2,
+      },
   {
     type: 'multiple-choice',
     text: 'Care este scopul serviciului HSRP?',
