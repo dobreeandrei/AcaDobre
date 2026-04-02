@@ -27,7 +27,7 @@ ACADOBRE_QUESTIONS.push({
       type: 'multiple-choice',
       text: 'Este adevarat ca pentru a putea folosi Port-security trebuie mai intai sa il activam global?',
       options: ['Adevarat', 'Fals'],
-      correctIndex: 0,
+      correctIndex: 1,
       },
       {
       type: 'multiple-choice',
@@ -72,25 +72,25 @@ ACADOBRE_QUESTIONS.push({
       },
       {
       type: 'multiple-choice-multi',
-      text: 'Ce actiuni vor avea loc daca modul Shutdown detecteaza un MAC neautorizat?',
+      text: 'Ce actiuni vor avea loc daca modul Shutdown detecteaza un MAC neautorizat?\nAlegeti 4 variante.',
       options: ['Se va inchide portul', 'Se va trimite mesaj Syslog', 'Va creste numarul de incalcari', 'Se va bloca traficul neautorizat in continuare', 'Va permite traficul in continuare', 'Nu se va intampla nimic'],
       correctIndices: [0, 1, 2, 3], 
       },
       {
       type: 'multiple-choice-multi',
-      text: 'Ce actiuni vor avea loc daca modul Restrict detecteaza un MAC neautorizat?',
+      text: 'Ce actiuni vor avea loc daca modul Restrict detecteaza un MAC neautorizat?\nAlegeti 3 variante.',
       options: ['Se va inchide portul', 'Se va trimite mesaj Syslog', 'Va creste numarul de incalcari', 'Se va bloca traficul neautorizat in continuare', 'Va permite traficul in continuare', 'Nu se va intampla nimic'],
       correctIndices: [1, 2, 3], 
       },
       {
       type: 'multiple-choice-multi',
-      text: 'Care sunt modurile de violation pentru Port-security?',
+      text: 'Care sunt modurile de violation pentru Port-security?\nAlegeti 3 variante.',
       options: ['Shutdown', 'Restrict', 'Protect', 'Secure', 'Implicit', 'Default'],
       correctIndices: [0, 1, 2], 
       },
       {
       type: 'multiple-choice-multi',
-      text: 'Ce tipuri de atac poate preveni Port-security?',
+      text: 'Ce tipuri de atac poate preveni Port-security?\nAlegeti 2 variante.',
       options: ['MAC Flooding', 'MAC Spoofing', 'IP Spoofing', 'DHCP Starvation', 'Phishing', 'ARP Poisoning'],
       correctIndices: [0, 1], 
       },
@@ -149,19 +149,19 @@ ACADOBRE_QUESTIONS.push({
       },
       {
       type: 'multiple-choice-multi',
-      text: 'Ce tipuri de atac poate preveni DHCP Snooping?',
+      text: 'Ce tipuri de atac poate preveni DHCP Snooping?\nAlegeti 2 variante.',
       options: ['MAC Flooding', 'DHCP Poisoning', 'IP Spoofing', 'DHCP Starvation', 'DHCP Phishing', 'ARP Poisoning'],
       correctIndices: [1, 3], 
       },
       {
       type: 'multiple-choice-multi',
-      text: 'Care dintre mesajele DHCPv4 sunt blocate implicit de porturile cu dhcp snooping activat?',
+      text: 'Care dintre mesajele DHCPv4 sunt blocate implicit de porturile cu dhcp snooping activat?\nAlegeti 3 variante.',
       options: ['Discover', 'Offer', 'Request', 'Acknowledgement', 'NAK', 'Release', 'Decline', 'Accept'],
       correctIndices: [1, 3, 4]
       },
       {
       type: 'multiple-choice-multi',
-      text: 'Care dintre mesajele DHCPv4 sunt verificate de porturile cu dhcp snooping activat?',
+      text: 'Care dintre mesajele DHCPv4 sunt verificate de porturile cu dhcp snooping activat?\nAlegeti 4 variante.',
       options: ['Discover', 'Offer', 'Request', 'Acknowledgement', 'NAK', 'Release', 'Decline', 'Accept'],
       correctIndices: [0, 2, 5, 6]
       },
@@ -179,7 +179,7 @@ ACADOBRE_QUESTIONS.push({
       },
       {
       type: 'multiple-choice',
-      text: 'Care este motivul principal pentru care un switch cu DHCP Snooping activat va arunca unui mesaj DHCP care a trecut deja print-un switch cu Snooping activat?',
+      text: 'Care este motivul principal pentru care un switch cu DHCP Snooping activat va arunca un mesaj DHCP care a trecut deja print-un switch cu Snooping activat?',
       options: [
         'Mesajul nu conține nicio informație despre opțiunea 82',
         'Mesajul are deja opțiunea 82 activată',
@@ -194,7 +194,7 @@ ACADOBRE_QUESTIONS.push({
       type: 'multiple-choice',
       text: 'Este adevarat ca pentru a putea folosi Dynamic ARP Inspection trebuie mai intai sa il activam global?',
       options: ['Adevarat', 'Fals'],
-      correctIndex: 1,
+      correctIndex: 0,
       },
       {
       type: 'multiple-choice',
