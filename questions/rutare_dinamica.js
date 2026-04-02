@@ -54,19 +54,19 @@ ACADOBRE_QUESTIONS.push({
     },
     {
       type: 'multiple-choice-multi',
-      text: 'Care dintre urmatoarele protocoale de rutare dinamica folosesc algoritm de tip Link-State?',
+      text: 'Care dintre urmatoarele protocoale de rutare dinamica folosesc algoritm de tip Link-State?\nAlegeti 2 variante.',
       options: ['IS-IS', 'BGP', 'OSPF', 'RIP', 'EIGRP'],
       correctIndices: [0, 2], 
     },
     {
       type: 'multiple-choice-multi',
-      text: 'Care dintre urmatoarele protocoale de rutare dinamica folosesc algoritm de tip Distance Vector?',
+      text: 'Care dintre urmatoarele protocoale de rutare dinamica folosesc algoritm de tip Distance Vector?\nAlegeti 2 variante.',
       options: ['IS-IS', 'BGP', 'OSPF', 'RIP', 'EIGRP'],
       correctIndices: [3, 4], 
     },
     {
       type: 'multiple-choice-multi',
-      text: 'Care sunt componentele unui protocol de rutare dinamica?',
+      text: 'Care sunt componentele unui protocol de rutare dinamica?\nAlegeti 3 variante.',
       options: ['Mesaje de rutare', 'Structuri de date', 'Algoritmi de calculare a rutelor', 'Metrica', 'Distanta administrativa'],
       correctIndices: [0, 1, 2], 
     },
@@ -85,8 +85,8 @@ ACADOBRE_QUESTIONS.push({
     {
       type: 'open-ended',
       text: 'Ce comanda putem folosi pentru a trimite o ruta default intr-un protocol de rutare dinamica?',
-      hint: 'Introdu modul de configurare si comanda in full (Exemplu: (config)#hostname <nume>)',
-      acceptedAnswers: ['(config-router)#default-information originate'],
+      hint: 'Introdu comanda in full (Exemplu: hostname <nume>)',
+      acceptedAnswers: ['default-information originate'],
     },
     {
       type: 'matching',
