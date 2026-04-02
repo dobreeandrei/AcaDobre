@@ -68,7 +68,7 @@ ACADOBRE_QUESTIONS.push({
       type: 'multiple-choice',
       text: 'Este adevarat ca pentru a forma un Etherchannel nu trebuie ca numarul de channel-group sa fie acelasi pe ambele switchuri?',
       options: ['Adevarat', 'Fals'],
-      correctIndex: 1,
+      correctIndex: 0,
     },
     {
       type: 'multiple-choice',
@@ -108,13 +108,13 @@ ACADOBRE_QUESTIONS.push({
     },
     {
       type: 'multiple-choice-multi',
-      text: 'Daca la un capat de Etherchannel avem configurat modul desirable, ce mod poate fi cofigurat pe celalalt capat pentru un Etherchannel functional?',
+      text: 'Daca la un capat de Etherchannel avem configurat modul desirable, ce mod poate fi cofigurat pe celalalt capat pentru un Etherchannel functional?\nAlegeti 2 variante.',
       options: ['Desirable', 'Pasive', 'Auto', 'Active', 'On', 'Off'],
       correctIndices: [0, 2]
     },
     {
       type: 'multiple-choice-multi',
-      text: 'Daca la un capat de Etherchannel avem configurat modul activ, ce mod poate fi cofigurat pe celalalt capat pentru un Etherchannel functional?',
+      text: 'Daca la un capat de Etherchannel avem configurat modul activ, ce mod poate fi cofigurat pe celalalt capat pentru un Etherchannel functional?\nAlegeti 2 variante.',
       options: ['Desirable', 'Pasive', 'Auto', 'Active', 'On', 'Off'],
       correctIndices: [1, 3]
     },
