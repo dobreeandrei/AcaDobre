@@ -44,7 +44,4 @@ ACADOBRE_QUESTIONS.push({
       correctIndex: 4,
       },
     ]
-
 });
-
-
