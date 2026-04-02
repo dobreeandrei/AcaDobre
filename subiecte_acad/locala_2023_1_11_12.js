@@ -74,7 +74,7 @@ window.ACADOBRE_ALT_QUESTIONS.push({
     },
     {
       type: 'multiple-choice-multi',
-      text: 'Administratorul rețelei a decis că nu mai dorește să folosescă configurația RouterOnAStick de pe interfața gigabitEthernet 0/0 a lui Router1, așa că a mai adăugat un cablu între Switch0 și acesta.\nCe configurații trebuie făcute pentru a facilita rutarea legacy între VLAN 10 și VLAN 20? Alegeți 4 răspunsuri.\nLui VLAN 10 i se atribuie rețeaua 10.10.10.0/24, iar lui VLAN 20 rețeaua 20.20.20.0/24.',
+      text: 'Administratorul rețelei a decis că nu mai dorește să folosescă configurația RouterOnAStick de pe interfața gigabitEthernet 0/0 a lui Router1, așa că a mai adăugat un cablu între Switch0 și acesta.\nCe configurații trebuie făcute pentru a facilita rutarea legacy între VLAN 10 și VLAN 20? Alegeți 2 răspunsuri.\nLui VLAN 10 i se atribuie rețeaua 10.10.10.0/24, iar lui VLAN 20 rețeaua 20.20.20.0/24.',
       image: 'subiecte_acad/images/locala_2023_1_1112/q6.png',
       options: [
         'Nu este posibilă routarea între vlan-uri, deoarece este nevoie de 2 routere.',
@@ -84,7 +84,7 @@ window.ACADOBRE_ALT_QUESTIONS.push({
         'Trebuie ștearsă configurația de pe interfața gigabitEthernet 0/0.',
         'Se activeaza intervlan routing.'
       ],
-      correctIndices: [1, 2, 3, 4]
+      correctIndices: [2, 3]
     },
     {
       type: 'multiple-choice',
