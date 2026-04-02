@@ -76,19 +76,19 @@ ACADOBRE_QUESTIONS.push({
       },
       {
       type: 'multiple-choice-multi',
-      text: 'Care protocoale FHRP au prioritatea default 100?',
+      text: 'Care protocoale FHRP au prioritatea default 100?\nAlegeti 3 variante.',
       options: ['VRRP', 'GLBP', 'HSRP', 'STP', 'VRF'],
       correctIndices: [0, 1, 2],
       },
       {
       type: 'multiple-choice-multi',
-      text: 'Care protocoale FHRP sunt proprietare Cisco?',
+      text: 'Care protocoale FHRP sunt proprietare Cisco?\nAlegeti 2 variante.',
       options: ['VRRP', 'GLBP', 'HSRP', 'STP', 'VRF'],
       correctIndices: [1, 2],
       },
       {
       type: 'multiple-choice-multi',
-      text: 'Care dintre urmatoarele sunt criterii pentru alegerea routerului activ?',
+      text: 'Care dintre urmatoarele sunt criterii pentru alegerea routerului activ?\nAlegeti 2 variante.',
       options: ['Cea mai mare prioritate', 'Cel mai mare IP', 'Cel mai mic IP', 'Cea mai mica prioritate', 'Cea mai mare Adresa MAC', 'Cea mai mica adresa MAC'],
       correctIndices: [0, 1],
       },
@@ -133,6 +133,30 @@ ACADOBRE_QUESTIONS.push({
         type: 'open-ended',
         text: 'Care este adresa IPv4 Multicast pentru toate routerele HSRPv1?',
         acceptedAnswers: ['224.0.0.2'],
+      },
+      {
+        type: 'open-ended',
+        text: 'Care este adresa MAC Multicast pentru HSRPv1?',
+        hint: 'Exemplu de raspuns: AA11.Bxxx.xxxx',
+        acceptedAnswers: ['0000.0C07.ACxx', '0000.0c07.acxx'],
+      },
+      {
+        type: 'open-ended',
+        text: 'Care este adresa MAC Multicast pentru HSRPv2?',
+        hint: 'Exemplu de raspuns: AA11.Bxxx.xxxx',
+        acceptedAnswers: ['0000.0C8F.Fxxx', '0000.0c8f.fxxx'],
+      },
+      {
+        type: 'open-ended',
+        text: 'Care este adresa MAC Multicast pentru VRRP?',
+        hint: 'Exemplu de raspuns: AA11.Bxxx.xxxx',
+        acceptedAnswers: ['0000.5E00.01xx', '0000.5e00.01xx'],
+      },
+      {
+        type: 'open-ended',
+        text: 'Care este adresa MAC Multicast pentru GLBP?',
+        hint: 'Exemplu de raspuns: AA11.Bxxx.xxyy',
+        acceptedAnswers: ['0007.B400.xxyy', '0007.b400.xxyy'],
       },
       {
         type: 'open-ended',
