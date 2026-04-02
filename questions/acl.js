@@ -143,7 +143,7 @@ ACADOBRE_QUESTIONS.push({
       },
       {
       type: 'multiple-choice-multi',
-      text: 'Cum pot fi aplicate ACL-urile pe o interfata?',
+      text: 'Cum pot fi aplicate ACL-urile pe o interfata?\nAlegeti 2 variante.',
       options: ['Inbound',
                 'Outbound',
                 'Inside',
@@ -154,7 +154,7 @@ ACADOBRE_QUESTIONS.push({
       },
       {
       type: 'multiple-choice-multi',
-      text: 'Care pot reprezenta parametrii pentru ACL-uri extended?',
+      text: 'Care pot reprezenta parametrii pentru ACL-uri extended?\nAlegeti 3 variante.',
       options: ['Protocol',
                 'Source/Destination IP',
                 'Source/Destination Port',
@@ -165,7 +165,7 @@ ACADOBRE_QUESTIONS.push({
       },
       {
       type: 'multiple-choice-multi',
-      text: 'Care dintre urmatoarele reprezinta tipuri de ACL deosebite prin modul de filtrare?',
+      text: 'Care dintre urmatoarele reprezinta tipuri de ACL deosebite prin modul de filtrare?\nAlegeti 2 variante.',
       options: ['Standard',
                 'Extended',
                 'Named',
@@ -190,7 +190,7 @@ ACADOBRE_QUESTIONS.push({
       type: 'open-ended',
       text: 'Scrieti definitia completa, fara prescurtari, din modul de configurare globala, a unei intrari a ACL-ului 167 care sa blocheze traficul SSH din reteaua Calimanesti catre reteaua RM_Valcea:',
       image: 'questions/images/acls/test_network.png',
-      acceptedAnswers: ['access-list 167 deny tcp 172.34.48.0 0.0.3.255 172.34.0.0 0.0.31.255 eq 22'],
+      acceptedAnswers: ['access-list 167 deny tcp 172.34.48.0 0.0.3.255 172.34.0.0 0.0.63.255 eq 22'],
       },
       {
       type: 'multiple-choice',
