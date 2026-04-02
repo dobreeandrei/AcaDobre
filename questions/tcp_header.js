@@ -98,7 +98,7 @@ ACADOBRE_QUESTIONS.push({
       type: 'multiple-choice',
       text: 'Care este numarul maxim de biti ai campului Options din headerul TCP?',
       options: ['320', '32', '240', '160', '40'],
-      correctIndex: 0,
+      correctIndex: 1,
       },
       {
       type: 'multiple-choice',
@@ -134,9 +134,8 @@ ACADOBRE_QUESTIONS.push({
       {
       type: 'label-order',
       text: 'PCA vrea sa opreasca o conexiune TCP cu PCB.\nPuneti mesajele opririi acestei conexiuni in ordine:',
-      labels: ['PCA:FIN', 'PCB:FIN', 'PCB:ACK', 'PCA:ACK'],
+      labels: ['PCA:FIN', 'PCB:ACK', 'PCB:FIN', 'PCA:ACK'],
       correctOrder: [0, 1, 2, 3],
       },
     ]
 });
-
