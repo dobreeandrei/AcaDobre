@@ -195,7 +195,7 @@ ACADOBRE_QUESTIONS.push({
       },
       {
       type: 'multiple-choice-multi',
-      text: 'Ce tip de mesaje SNMP sunt trimise de NMS pentru a obtine informatii de la clientii SNMP?',
+      text: 'Ce tip de mesaje SNMP sunt trimise de NMS pentru a obtine informatii de la clientii SNMP?\nAlegeti 3 variante.',
       options: ['Get',
                 'GetNext',
                 'GetBulk',
