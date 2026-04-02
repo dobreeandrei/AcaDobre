@@ -5,7 +5,7 @@ ACADOBRE_QUESTIONS.push({
     {
         type: 'open-ended',
         text: 'Care este range-ul de porturi folosite de Dynamic PAT?',
-        acceptedAnswers: ['49152-65535'],
+        acceptedAnswers: ['1024-65535'],
         hint: 'Exemplu de raspuns: "x-y".',
     },
     {
@@ -215,7 +215,7 @@ ACADOBRE_QUESTIONS.push({
     },
     {
       type: 'multiple-choice-multi',
-      text: 'Folosind strict source NAT, care adrese ne putem astepta sa fie mereu la fel?',
+      text: 'Folosind strict source NAT, care adrese ne putem astepta sa fie mereu la fel?\nAlegeti 2 variante.',
       options: ['Inside Local',
                 'Inside Global',
                 'Outside Local',
@@ -227,7 +227,7 @@ ACADOBRE_QUESTIONS.push({
     },
     {
       type: 'multiple-choice-multi',
-      text: 'Care dintre urmatoarele reprezinta metode de a incetini epuizarea adreselor IPv4 publice?',
+      text: 'Care dintre urmatoarele reprezinta metode de a incetini epuizarea adreselor IPv4 publice?\nAlegeti 4 variante.',
       options: ['NAT',
                 'Dual-Stacking',
                 'Tunneling',
