@@ -154,13 +154,13 @@ ACADOBRE_QUESTIONS.push({
       },
       {
         type: 'multiple-choice-multi',
-        text: 'Care dintre urmatoarele reprezinta caracteristicile protocolului TCP?',
+        text: 'Care dintre urmatoarele reprezinta caracteristicile protocolului TCP?\nAlegeti 3 variante.',
         options: ['Connection-oriented', 'Flow control', 'Reliability', 'Best-Effort Delievery', 'Congestion control', 'Three-way Handshake'],
       correctIndices: [0, 1, 2],
       },
       {
         type: 'multiple-choice-multi',
-        text: 'Care dintre urmatoarele reprezinta caracteristicile protocolului UDP?',
+        text: 'Care dintre urmatoarele reprezinta caracteristicile protocolului UDP?\nAlegeti 2 variante.',
         options: ['Connectionless', 'Best-Effort', 'Congestion control', 'Stateless Communication'],
       correctIndices: [0, 1],
       },
