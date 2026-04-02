@@ -104,7 +104,7 @@ ACADOBRE_QUESTIONS.push({
       },
       {
       type: 'multiple-choice-multi',
-      text: 'Unde pot fi trimise mesajele Syslog?',
+      text: 'Unde pot fi trimise mesajele Syslog?\nAlegeti 4 variante.',
       options: ['Consola',
                 'Buffer in RAM',
                 'Server Syslog',
