@@ -265,8 +265,7 @@ window.ACADOBRE_ALT_QUESTIONS.push({
     },
     {
       type: 'multiple-choice',
-      text: 'Care din următoarele moduri de încălcare a securității pentru SW1 forwardează traficul?',
-      image: 'subiecte_acad/images/locala_2023_1_910/q20.png',
+      text: 'Care din următoarele moduri de încălcare a securității pentru SW1 forwardează traficul necunoscut?',
       options: [
         'shutdown și restrict',
         'shutdown și protect',
