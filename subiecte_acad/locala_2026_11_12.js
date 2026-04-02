@@ -463,7 +463,7 @@ window.ACADOBRE_ALT_QUESTIONS.push({
   },
   {
     type: 'multiple-choice',
-    text: 'Alegeți dacă afirmația următoare este adevărată sau falsă:\nLayer-ul fizic din modelul OSI transformă cadrele primite de la layer-ul de legătură de date în semnale electrice sau optice care pot fi transmise prin mediul fizic',
+    text: 'Alegeți dacă afirmația următoare este adevărată sau falsă:\nLayer-ul fizic din modelul OSI transformă cadrele primite de la layer-ul de legătură de date în semnale electrice, optice sau unde radio care pot fi transmise prin mediul fizic',
     options: ['True', 'False'],
     correctIndex: 0,
   },
