@@ -125,7 +125,7 @@ ACADOBRE_QUESTIONS.push({
       },
       {
       type: 'multiple-choice-multi',
-      text: 'Care dintre urmatoarele reprezinta mesajele folosite de ICMP?',
+      text: 'Care dintre urmatoarele reprezinta mesajele folosite de ICMP?\nAlegeti 2 variante.',
       options: ['Echo Reply', 'Traceroute', 'Ping', 'Echo Request', 'Established'],
       correctIndices: [0, 3],
     },
