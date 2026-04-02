@@ -94,8 +94,8 @@ window.ACADOBRE_ALT_QUESTIONS.push({
       text: 'O companie trebuie să extindă rețeaua LAN la șase clădiri separate. Pentru a limita atenuarea semnalului pe mediul LAN, ce tip de mediu ar fi cel mai bun de utilizat între clădiri?',
       options: [
         'cablu coaxial',
-        'pereche torsadată neecranată (UTP)',
-        'pereche torsadată ecranată (STP)',
+        'pereche torsadata neecranata (UTP)',
+        'pereche torsadata ecranata (STP)',
         'fibră optică',
         'aer (wireless)'
       ],
@@ -222,7 +222,7 @@ window.ACADOBRE_ALT_QUESTIONS.push({
       text: 'Care este un avantaj al definirii comunicării în rețea prin cele șapte niveluri ale modelului OSI?',
       options: [
         'Reduce nevoia de testare a conectivității rețelei.',
-        'Crește débitul rețelei.',
+        'Crește throughputul rețelei.',
         'Face rețelistica mai ușor de înțeles și studiat.',
         'Elimină multe restricții de protocol.',
         'Crește lățimea de bandă a rețelei.'
@@ -379,11 +379,11 @@ window.ACADOBRE_ALT_QUESTIONS.push({
         'Switch_1(config-if)# switchport access vlan 10',
         'Switch_1(config)# switchport interface fastethernet 0/10'
       ],
-      correctIndices: [1, 2, 4]
+      correctIndices: [1, 2, 5]
     },
     {
       type: 'multiple-choice-multi',
-      text: 'Un administrator de rețea măsoară transferul de biți prin backbone-ul companiei pentru o aplicație financiară critică. Administratorul observă că débitul rețelei pare mai mic decât lățimea de bandă așteptată. Care trei factori ar putea influența diferențele de throughput? (Alegeți 3)',
+      text: 'Un administrator de rețea măsoară transferul de biți prin backbone-ul companiei pentru o aplicație financiară critică. Administratorul observă că throughputul rețelei pare mai mic decât lățimea de bandă așteptată. Care trei factori ar putea influența diferențele de throughput? (Alegeți 3)',
       options: [
         'latența creată de numărul de dispozitive de rețea prin care trec datele',
         'tipul de trafic care traversează rețeaua',
