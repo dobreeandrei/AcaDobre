@@ -466,8 +466,8 @@ window.ACADOBRE_ALT_QUESTIONS.push({
       correctIndex: 1
     },
     {
-      type: 'multiple-choice',
-      text: 'Care metodă este folosită pentru a preveni atacurile VLAN Hopping pe un switch Cisco?',
+      type: 'multiple-choice-multi',
+      text: 'Care metode sunt folosite pentru a preveni atacurile VLAN Hopping pe un switch Cisco?',
       options: [
         'Configurarea switchport mode trunk pe toate porturile',
         'Schimbarea VLAN-ului nativ pe un VLAN neutilizat',
@@ -476,7 +476,7 @@ window.ACADOBRE_ALT_QUESTIONS.push({
         'Folosirea HSRP pe VLAN-ul nativ',
         'Activarea Dynamic ARP Inspection'
       ],
-      correctIndex: 1
+      correctIndices: [1,2]
     },
     {
       type: 'multiple-choice',
