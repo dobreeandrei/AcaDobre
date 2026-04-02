@@ -132,7 +132,7 @@ window.ACADOBRE_ALT_QUESTIONS.push({
       type: 'multiple-choice',
       text: 'Care dintre următoarele topologii de rețea conectează fiecare nod la un punct central?',
       options: ['Hybrid', 'Tree', 'Star', 'Ring', 'Mesh', 'Bus', 'Niciuna din variante'],
-      correctIndex: 0
+      correctIndex: 2
     },
     {
       type: 'multiple-choice',
