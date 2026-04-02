@@ -1,6 +1,6 @@
 window.ACADOBRE_ALT_QUESTIONS.push({
   id: 'nationala_2025_9_10',
-  topic: 'Naționala 9-10 2025',
+  topic: 'Nationala 9-10 2025',
   questions: [
   {
     type: 'open-ended',
@@ -233,7 +233,7 @@ window.ACADOBRE_ALT_QUESTIONS.push({
       'Switch0 : Fa0/1',
       'Switch3 : Fa0/1'
     ],
-    correctIndex: 6,
+    correctIndex: 0,
   },
   {
     type: 'multiple-choice',
