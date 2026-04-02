@@ -111,31 +111,31 @@ ACADOBRE_QUESTIONS.push({
     },
     {
       type: 'multiple-choice-multi',
-      text: 'Ce informatii sunt necesare pentru ca DHCP sa poata oferi IP-uri dintr-o retea?',
+      text: 'Ce informatii sunt necesare pentru ca DHCP sa poata oferi IP-uri dintr-o retea?\nAlegeti 2 variante.',
       options: ['Adresa retelei pool de IP', 'Default Gateway', 'Adresa unui server DNS', 'MTU', 'Adresa IPv6', 'Adresa MAC', 'Nume de domeniu'],
       correctIndices: [0, 1]
     },
     {
       type: 'multiple-choice-multi',
-      text: 'Ce informatii poate primi un client folosind serviciul DHCPv4?',
+      text: 'Ce informatii poate primi un client folosind serviciul DHCPv4?\nAlegeti 4 variante.',
       options: ['Adresa IPv4', 'Adresa unui server DNS', 'MTU', 'Default Gateway', 'Adresa IPv6', 'Adresa MAC', 'Chei asimetrice', 'Pool de IP'],
       correctIndices: [0, 1, 2, 3]
     },
     {
       type: 'multiple-choice-multi',
-      text: 'Care dintre mesajele DHCPv4 pot fi trimise ca unicast?',
+      text: 'Care dintre mesajele DHCPv4 pot fi trimise ca unicast?\nAlegeti 4 variante.',
       options: ['Discover', 'Offer', 'Request', 'Acknowledgement', 'NAK', 'Release', 'Decline', 'Accept'],
       correctIndices: [1, 3, 4, 5]
     },
     {
       type: 'multiple-choice-multi',
-      text: 'Care dintre mesajele DHCPv4 sunt trimise de catre client?',
+      text: 'Care dintre mesajele DHCPv4 sunt trimise de catre client?\nAlegeti 4 variante.',
       options: ['Discover', 'Offer', 'Request', 'Acknowledgement', 'NAK', 'Release', 'Decline', 'Accept'],
       correctIndices: [0, 2, 5, 6]
     },
     {
       type: 'multiple-choice-multi',
-      text: 'Care dintre mesajele DHCPv4 sunt blocate automat de porturile cu dhcp snooping activat?',
+      text: 'Care dintre mesajele DHCPv4 sunt blocate automat de porturile cu dhcp snooping in modul untrusted?\nAlegeti 3 variante.',
       options: ['Discover', 'Offer', 'Request', 'Acknowledgement', 'NAK', 'Release', 'Decline', 'Accept'],
       correctIndices: [1, 3, 4]
     },
