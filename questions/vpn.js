@@ -202,7 +202,7 @@ ACADOBRE_QUESTIONS.push({
         'Adevarat',
         'Fals',
       ],
-      correctIndex: 1,
+      correctIndex: 0,
       },
       {
       type: 'multiple-choice',
