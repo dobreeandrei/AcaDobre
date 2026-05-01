@@ -3,6 +3,153 @@ ACADOBRE_QUESTIONS.push({
     topic: 'OSPF',
     questions: [
     {
+        type: 'header-fill',
+        text: 'Identifica campurile antetului mesajelor OSPF in ordine:',
+         images: [
+                   'questions/images/ospf_header/ospf_header_blank.png',
+                   'questions/images/ospf_header/ospf_header_01.png',
+                   'questions/images/ospf_header/ospf_header_02.png',
+                   'questions/images/ospf_header/ospf_header_03.png',
+                   'questions/images/ospf_header/ospf_header_04.png',
+                   'questions/images/ospf_header/ospf_header_05.png',
+                   'questions/images/ospf_header/ospf_header_06.png',
+                   'questions/images/ospf_header/ospf_header_07.png',
+                   'questions/images/ospf_header/ospf_header_complete.png',
+                ],
+
+        fields: [
+                  { names: ['Version','Ver'],          bits: 8  },
+                  { names: ['Type'],                   bits: 8  },
+                  { names: ['Packet Length', 'Len'],   bits: 16  },
+                  { names: ['Router ID', 'RID'],       bits: 32  },
+                  { names: ['Area ID'],                bits: 32  },
+                  { names: ['Checksum'],               bits: 16 },
+                  { names: ['AuType'],                 bits: 16 },
+                  { names: ['Authentication', 'Auth'], bits: 64 },
+                ],
+    },
+    {
+        type: 'header-fill',
+        text: 'Identifica campurile mesajului hello OSPF in ordine:',
+         images: [
+                   'questions/images/ospf_hello/ospf_hello_blank.png',
+                   'questions/images/ospf_hello/ospf_hello_01.png',
+                   'questions/images/ospf_hello/ospf_hello_02.png',
+                   'questions/images/ospf_hello/ospf_hello_03.png',
+                   'questions/images/ospf_hello/ospf_hello_04.png',
+                   'questions/images/ospf_hello/ospf_hello_05.png',
+                   'questions/images/ospf_hello/ospf_hello_06.png',
+                   'questions/images/ospf_hello/ospf_hello_07.png',
+                   'questions/images/ospf_hello/ospf_hello_complete.png',
+                ],
+
+        fields: [
+                  { names: ['Network Mask', 'Mask', 'Subnet'],  bits: 32  },
+                  { names: ['Hello Interval', 'Hellotime'],     bits: 16  },
+                  { names: ['Option'],                          bits: 8  },
+                  { names: ['Router Priority', 'Pri'],          bits: 8  },
+                  { names: ['Dead Interval', 'Deadtime'],       bits: 32  },
+                  { names: ['Designated Router', 'DR'],         bits: 32 },
+                  { names: ['Backup Designated Router', 'BDR'], bits: 32 },
+                  { names: ['List of Neighbors', 'Neighbors'],  bits: 32 },
+                ],
+    },
+    {
+        type: 'multiple-choice',
+        text: 'Ce tip de arie reprezinta comportamentul normal de a primi toate tipruile de LSA in OSPF?',
+        options: [
+          'Backbone area',
+          'Standard area',
+          'Stub area',
+          'Totally Stubby area',
+          'Not-so-stubby area (NSSA)',
+          'Totally Not-so-stubby area (TNSSA)'
+        ],
+        correctIndex: 1
+    },
+    {
+        type: 'multiple-choice',
+        text: 'Ce tip de arie blocheaza LSA-urile de tip 4 si 5 in OSPF?',
+        options: [
+          'Backbone area',
+          'Standard area',
+          'Stub area',
+          'Totally Stubby area',
+          'Not-so-stubby area (NSSA)',
+          'Totally Not-so-stubby area (TNSSA)'
+        ],
+        correctIndex: 2
+    },
+    {
+        type: 'multiple-choice',
+        text: 'Ce tip de arie blocheaza LSA-urile de tip 3, 4 si 5 in OSPF?',
+        options: [
+          'Backbone area',
+          'Standard area',
+          'Stub area',
+          'Totally Stubby area',
+          'Not-so-stubby area (NSSA)',
+          'Totally Not-so-stubby area (TNSSA)'
+        ],
+        correctIndex: 3
+    },
+    {
+        type: 'multiple-choice',
+        text: 'Ce tip de arie blocheaza LSA-urile de tip 5, dar permite de tipul 7 in OSPF?',
+        options: [
+          'Backbone area',
+          'Standard area',
+          'Stub area',
+          'Totally Stubby area',
+          'Not-so-stubby area (NSSA)',
+          'Totally Not-so-stubby area (TNSSA)'
+        ],
+        correctIndex: 4
+    },
+    {
+        type: 'multiple-choice',
+        text: 'Ce tip de arie blocheaza LSA-urile de tip 3 si, 5 dar permite de tipul 7 in OSPF?',
+        options: [
+          'Backbone area',
+          'Standard area',
+          'Stub area',
+          'Totally Stubby area',
+          'Not-so-stubby area (NSSA)',
+          'Totally Not-so-stubby area (TNSSA)'
+        ],
+        correctIndex: 5
+    },
+    {
+      type: 'matching',
+      text: 'Asociati tipul de mesaj OSPF cu numele corespunzator:',
+      subQuestions: [
+        { text: 'Type 1', answer: 'Hello' },
+        { text: 'Type 2', answer: 'Database Description (DBD)' },
+        { text: 'Type 3', answer: 'Link-State Request (LSR)' },
+        { text: 'Type 4', answer: 'Link-State Update (LSU)' },
+        { text: 'Type 5', answer: 'Link-State Acknowledgement (LSAck)' },
+      ],
+      options: ['Hello', 'Database Description (DBD)', 'Link-State Request (LSR)', 'Link-State Update (LSU)', 'Link-State Acknowledgement (LSAck)'],
+    },
+    {
+      type: 'matching',
+      text: 'Asociati tipul de LSA cu numele corespunzator:',
+      subQuestions: [
+        { text: 'Type 1', answer: 'Router LSA' },
+        { text: 'Type 2', answer: 'Network LSA' },
+        { text: 'Type 3', answer: 'Summary LSA' },
+        { text: 'Type 4', answer: 'ASBR Summary LSA' },
+        { text: 'Type 5', answer: 'External LSA' },
+        { text: 'Type 6', answer: 'Multicast LSA' },
+        { text: 'Type 7', answer: 'NSSA LSA' },
+        { text: 'Type 8', answer: 'External attribute for BGP LSA' },
+        { text: 'Type 9', answer: 'Opaque LSA' },
+        { text: 'Type 10', answer: 'Opaque LSA' },
+        { text: 'Type 11', answer: 'Opaque LSA' },
+      ],
+      options: ['Router LSA', 'Network LSA', 'Summary LSA', 'ASBR Summary LSA', 'External LSA', 'Multicast LSA', 'NSSA LSA', 'External attribute for BGP LSA', 'Opaque LSA'],
+    },
+    {
       type: 'open-ended',
       text: 'Cat de des sunt trimise rutele (LSAdvertisements) prin OSPF? (minute)',
       acceptedAnswers: ['30'],
@@ -74,8 +221,23 @@ ACADOBRE_QUESTIONS.push({
     },
     {
       type: 'open-ended',
+      text: 'Ce tip de LSA este generat de ABR si trimis catre alte arii?',
+      acceptedAnswers: ['3'],
+    },
+    {
+      type: 'open-ended',
+      text: 'Ce tip de LSA este generat de ABR atunci cand primeste un LSA de type 1 de la ASBR?',
+      acceptedAnswers: ['4'],
+    },
+    {
+      type: 'open-ended',
       text: 'Ce tip de LSA este generat de ASBR?',
       acceptedAnswers: ['5'],
+    },
+    {
+      type: 'open-ended',
+      text: 'Ce tip de LSA este specific pentru ariile NSSA?',
+      acceptedAnswers: ['7'],
     },
     {
       type: 'multiple-choice',
@@ -133,7 +295,7 @@ ACADOBRE_QUESTIONS.push({
     },
     {
       type: 'multiple-choice',
-      text: 'Cum se numesc interfetele pe care ruterele nu mai trimit doar mesaje specifice de rutare?',
+      text: 'Cum se numesc interfetele pe care ruterele nu mai trimit doar mesaje specifice de rutare OSPF?',
       options: ['Interfete pasive', 'Interfete auto', 'Interfete down', 'Interfete trunk', 'Interfete acces'],
       correctIndex: 0, 
     },
