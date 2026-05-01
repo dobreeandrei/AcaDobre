@@ -52,9 +52,9 @@ ACADOBRE_QUESTIONS.push({
     },
     {
       type: 'multiple-choice-multi',
-      text: 'Care dintre urmatoarele pot fi considerate dispozitive de nivel 2?\nAlegeti 2 variante.',
+      text: 'Care dintre urmatoarele pot fi considerate dispozitive de nivel 2?\nAlegeti 3 variante.',
       options: ['Switch', 'Router', 'Hub', 'MultiLayer Switch', 'Access Point', 'Wireless Router', 'Firewall'],
-      correctIndices: [0, 3], 
+      correctIndices: [0, 3, 4], 
     },
     {
       type: 'multiple-choice',
@@ -78,7 +78,7 @@ ACADOBRE_QUESTIONS.push({
       type: 'multiple-choice-multi',
       text: 'Care dintre urmatoarele pot fi considerate dispozitive de nivel 3?\nAlegeti 4 variante.',
       options: ['Switch', 'Router', 'Hub', 'MultiLayer Switch', 'Access Point', 'Wireless Router', 'Firewall'],
-      correctIndices: [1, 3, 4, 6], 
+      correctIndices: [1, 3, 5, 6], 
     },
     {
       type: 'matching',
