@@ -230,7 +230,7 @@ window.ACADOBRE_ALT_QUESTIONS.push({
     {
       type: 'multiple-choice',
       text: 'Ce este greșit în configurarea de mai sus a unui SVI al unui Switch de Layer 3?',
-      image: 'subiecte_acad/images/judeteana_2026_1112/q21.png',
+      image: 'subiecte_acad/images/judeteana_2026_1112/q11.png',
       options: [
         'Comanda „end" nu duce în nivelul corect de configurare.',
         'Comanda „vlan 10" duce în modul greșit de configurare.',
