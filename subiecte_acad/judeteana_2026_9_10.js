@@ -282,7 +282,7 @@ window.ACADOBRE_ALT_QUESTIONS.push({
     },
     {
       type: 'multiple-choice-multi',
-      text: 'Alegeți din variantele de mai jos afirmațiile care sunt adevărate despre stările porturilor. (Alegeți 2 variante)',
+      text: 'Alegeți din variantele de mai jos afirmațiile care sunt adevărate despre stările porturilor. (Alegeți 3 variante)',
       options: [
         'Starea „Disable" – când un port este în această stare, acesta nu participă la STP și nici nu transmite cadre. În plus, portul poate ajunge în această stare doar dacă portul este setat administrativ în acest fel.',
         'Starea „Forwarding" – este starea în care portul este considerat o parte activă a topologiei. El redirecționează traficul utilizatorului, însă nu primește pachete BPDU.',
@@ -291,7 +291,7 @@ window.ACADOBRE_ALT_QUESTIONS.push({
         'Starea „Blocking" – când portul este în această stare, el nu participă la trimiterea de date, în schimb primește pachete BPDU pentru a ști mereu informațiile necesare despre root bridge.',
         'Starea „Available" – este starea în care portul este gata să ia parte la procesul STP.'
       ],
-      correctIndices: [0, 4]
+      correctIndices: [0, 3, 4]
     },
     {
       type: 'multiple-choice-multi',
