@@ -28,7 +28,7 @@ ACADOBRE_QUESTIONS.push({
       },
       {
         type: 'open-ended',
-        text: 'Care este portul si protocolul de nivel 4 pentru SMTP?',
+        text: 'Care este portul vechi si protocolul de nivel 4 pentru SMTP?',
         acceptedAnswers: ['25 TCP', '25 tcp'],
         hint: 'Exemplu de raspuns: "12 DBR".',
       },
@@ -118,6 +118,12 @@ ACADOBRE_QUESTIONS.push({
       },
       {
         type: 'open-ended',
+        text: 'Care este portul si protocolul de nivel 4 pentru Real-Time Straming Protocol (RSTP)?',
+        acceptedAnswers: ['554 UDP', '554 udp'],
+        hint: 'Exemplu de raspuns: "12 DBR".',
+      },
+      {
+        type: 'open-ended',
         text: 'Care este portul si protocolul de nivel 4 pentru DHCPv6 Client?',
         acceptedAnswers: ['546 UDP', '546 udp'],
         hint: 'Exemplu de raspuns: "12 DBR".',
@@ -130,13 +136,31 @@ ACADOBRE_QUESTIONS.push({
       },
       {
         type: 'open-ended',
-        text: 'Care este portul si protocolul de nivel 4 pentru RADIUS Authentication & Authorization?',
+        text: 'Care este portul nou si protocolul de nivel 4 pentru SMTP?',
+        acceptedAnswers: ['587 TCP', '587 tcp'],
+        hint: 'Exemplu de raspuns: "12 DBR".',
+      },
+      {
+        type: 'open-ended',
+        text: 'Care este portul si protocolul de nivel 4 pentru RADIUS Authentication & Authorization? (portul mai mic)',
+        acceptedAnswers: ['1645 UDP', '1645 udp'],
+        hint: 'Exemplu de raspuns: "12 DBR".',
+      },
+      {
+        type: 'open-ended',
+        text: 'Care este portul si protocolul de nivel 4 pentru RADIUS Accounting? (portul mai mic)',
+        acceptedAnswers: ['1646 UDP', '1646 udp'],
+        hint: 'Exemplu de raspuns: "12 DBR".',
+      },
+      {
+        type: 'open-ended',
+        text: 'Care este portul si protocolul de nivel 4 pentru RADIUS Authentication & Authorization? (portul mai mare)',
         acceptedAnswers: ['1812 UDP', '1812 udp'],
         hint: 'Exemplu de raspuns: "12 DBR".',
       },
       {
         type: 'open-ended',
-        text: 'Care este portul si protocolul de nivel 4 pentru RADIUS Accounting?',
+        text: 'Care este portul si protocolul de nivel 4 pentru RADIUS Accounting? (portul mai mare)',
         acceptedAnswers: ['1813 UDP', '1813 udp'],
         hint: 'Exemplu de raspuns: "12 DBR".',
       },
