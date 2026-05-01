@@ -34,8 +34,18 @@ ACADOBRE_QUESTIONS.push({
       },
       {
       type: 'open-ended',
-      text: 'Care este codul pentru standardul IEEE LACP?',
-      acceptedAnswers: ['802.3AD', '802.1ad'],
+      text: 'Care este codul vechi pentru standardul IEEE LACP?',
+      acceptedAnswers: ['802.3AD', '802.3ad'],
+      },
+      {
+      type: 'open-ended',
+      text: 'Care este codul nou pentru standardul IEEE LACP?',
+      acceptedAnswers: ['802.1AX', '802.1ax'],
+      },
+      {
+      type: 'open-ended',
+      text: 'Care este codul pentru standardul IEEE care ofera QoS pentru VLAN?',
+      acceptedAnswers: ['802.1p', '802.1p'],
       },
       {
       type: 'open-ended',
