@@ -72,19 +72,19 @@ ACADOBRE_QUESTIONS.push({
       },
       {
       type: 'multiple-choice-multi',
-      text: 'Ce informatii pot schimba doi vecini CDP/LLDP?\nAlegeti 6 variante.',
+      text: 'Ce informatii pot schimba doi vecini CDP/LLDP?\nAlegeti 5 variante.',
       options: ['Hostname',
                 'Adresa IP',
                 'Nivelul OSI la care opereaza',
                 'Tipul de dispozitiv',
                 'Versiune IOS',
-                'Numarul de interfata prin care este conectat dispozitivului vecin',
+                'Numarul local al interfetei prin care este conectat dispozitivul vecin',
                 'Adresa MAC',
                 'Informatie VLAN',
                 'Status de trunking',
                 'Port Layer 4'
                ],
-      correctIndices: [0, 1, 2, 3, 4, 5],
+      correctIndices: [0, 1, 3, 4, 5],
       },
     ]
 });
