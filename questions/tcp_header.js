@@ -23,8 +23,8 @@ ACADOBRE_QUESTIONS.push({
         fields: [
                   { names: ['Source Port','Src port'],              bits: 16 },
                   { names: ['Destination Port','Dest Port'],        bits: 16 },
-                  { names: ['Sequence Number', 'Seq Number'],       bits: 32 },
-                  { names: ['Acknowledgement Number','Ack Number'], bits: 32 },
+                  { names: ['Sequence Number', 'Seq Number', 'seq'],       bits: 32 },
+                  { names: ['Acknowledgement Number','Ack Number', 'ack'], bits: 32 },
                   { names: ['Header Length','HL'],                  bits: 4  },
                   { names: ['Reserved','Res'],                      bits: 6  },
                   { names: ['Control Bits','Ctrl Bits'],            bits: 6  },
