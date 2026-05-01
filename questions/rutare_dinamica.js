@@ -72,7 +72,7 @@ ACADOBRE_QUESTIONS.push({
     },
     {
       type: 'multiple-choice',
-      text: 'Care protocol de rutare dinamica folosesc algoritm de tip Path Vector?',
+      text: 'Care protocol de rutare dinamica foloseste un algoritm de tip Path Vector?',
       options: ['IS-IS', 'BGP', 'OSPF', 'RIP', 'EIGRP'],
       correctIndex: 1, 
     },
@@ -81,6 +81,32 @@ ACADOBRE_QUESTIONS.push({
       text: 'Cum se numesc interfetele pe care ruterele nu mai trimit doar mesaje specifice de rutare?',
       options: ['Interfete pasive', 'Interfete auto', 'Interfete down', 'Interfete trunk', 'Interfete acces'],
       correctIndex: 0, 
+    },
+    {
+      type: 'multiple-choice',
+      text: 'Care este algoritmul de rutare folosit de protocolul EIGRP?',
+      options: ['Diffusing Update Algorithm (DUAL)', 'Djikstra', 'Bellman-Ford', 'Diffie-Hellman', 'Message-Digest5 ', 'Distance Vector', 'Link-State'],
+      correctIndex: 0, 
+    },
+    {
+      type: 'multiple-choice',
+      text: 'Care este algoritmul de rutare folosit de protocolul OSPF?',
+      options: ['Djikstra', 'Bellman-Ford', 'Diffie-Hellman', 'Message-Digest5 ', 'Distance Vector', 'Link-State'],
+      correctIndex: 0, 
+    },
+    {
+      type: 'multiple-choice-multi',
+      text: 'Care sunt toti parametri folositi de EIGRP in calcularea metricii?\nAlegeti 4 variante.',
+      options: ['Bandwidth',
+                'K values',
+                'Delay',
+                'Incarcare (Load)',
+                'Fiabilitate',
+                'Throughput',
+                'Goodput',
+                'Speed'
+              ],
+      correctIndices: [0, 2, 3, 4]
     },
     {
       type: 'open-ended',
@@ -94,10 +120,10 @@ ACADOBRE_QUESTIONS.push({
       subQuestions: [
         { text: 'Care este metrica pentru protocolul OSPF?', answer: 'Cost' },
         { text: 'Care este metrica pentru protocolul IS-IS?', answer: 'Cost' },
-        { text: 'Care este metrica pentru protocolul EIGRP?', answer: 'Bandwidth & Delay' },
+        { text: 'Care este metrica pentru protocolul EIGRP?', answer: 'K Values' },
         { text: 'Care este metrica pentru protocolul RIP?', answer: 'Hop Count' },
       ],
-      options: ['Bandwidth', 'Cost', 'Bandwidth & Delay', 'Hop Count'],
+      options: ['Bandwidth', 'Cost', 'Bandwidth & Delay', 'Hop Count', `K Values`],
       explanation: 'RIP masoara doar prin cate routere traverseaza measjele. OSPF calculeaza 10^8/bandwithul interfetei. IS-IS are un cost de 10 pentru toate interfetele.'
     },
     {
