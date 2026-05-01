@@ -112,7 +112,7 @@ ACADOBRE_QUESTIONS.push({
     {
       type: 'multiple-choice-multi',
       text: 'Ce informatii sunt necesare pentru ca DHCP sa poata oferi IP-uri dintr-o retea?\nAlegeti 2 variante.',
-      options: ['Adresa retelei pool de IP', 'Default Gateway', 'Adresa unui server DNS', 'MTU', 'Adresa IPv6', 'Adresa MAC', 'Nume de domeniu'],
+      options: ['Adresa de retea a pool-ului', 'Default Gateway', 'Adresa unui server DNS', 'MTU', 'Adresa IPv6', 'Adresa MAC', 'Nume de domeniu'],
       correctIndices: [0, 1]
     },
     {
@@ -152,10 +152,10 @@ ACADOBRE_QUESTIONS.push({
         { text: 'Discover',        answer: 'Broadcast' },
         { text: 'Offer',           answer: 'Unicast/Broadcast' },
         { text: 'Request',         answer: 'Broadcast' },
-        { text: 'Acknowledgement', answer: 'Unicast/Broadcast' },
+        { text: 'Acknowledgement', answer: 'Unicast' },
         { text: 'Release',         answer: 'Unicast' },
         { text: 'Decline',         answer: 'Broadcast' },
-        { text: 'NAK',             answer: 'Unicast/Broadcast' },
+        { text: 'NAK',             answer: 'Unicast' },
       ],
       options: ['Unicast', 'Broadcast', 'Unicast/Broadcast', 'Multicast', 'Vasicast'],
     },
