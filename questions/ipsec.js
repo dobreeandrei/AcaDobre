@@ -70,12 +70,12 @@ ACADOBRE_QUESTIONS.push({
       },
       {
       type: 'multiple-choice',
-      text: 'Este adevarat ca IPsec adauga un nou header TCP dupa ce cripteaza pachetul original?',
+      text: 'Este adevarat ca IPsec adauga un nou header dupa ce cripteaza pachetul original?',
       options: [
         'Adevarat',
         'Fals',
       ],
-      correctIndex: 1,
+      correctIndex: 0,
       },
       {
       type: 'multiple-choice',
