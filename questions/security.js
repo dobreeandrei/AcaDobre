@@ -380,7 +380,7 @@ ACADOBRE_QUESTIONS.push({
       type: 'multiple-choice-multi',
       text: 'Selectati 2 algoritmi de hashing:',
       options: ['AES', '3DES', 'ChaCha20', 'RC4', 'Diffie-Hellman', 'RSA', 'DSA', 'ECC', 'El Gamal', 'SEAL', 'MD5', 'SHA'],
-      correctIndices: [9, 10], 
+      correctIndices: [10, 11], 
       },
       {
       type: 'matching',
