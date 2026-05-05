@@ -5,67 +5,67 @@ ACADOBRE_QUESTIONS.push({
       {
         type: 'open-ended',
         text: 'Afisati adresele IPv4 de pe interfete detaliat:',
-        acceptedAnswers: ['sh ip int'],
+        acceptedAnswers: ['sh ip int','show ip interface'],
       },
       {
         type: 'open-ended',
         text: 'Afisati adresele IPv4 de pe interfete, sumarizat:',
-        acceptedAnswers: ['sh ip int br'],
+        acceptedAnswers: ['sh ip int br','show ip interface brief'],
       },
       {
         type: 'open-ended',
         text: 'Afisati adresele IPv4 de pe interfete detaliat, filtrat:',
-        acceptedAnswers: ['sh ip int | incl /'],
+        acceptedAnswers: ['sh ip int | incl /','show ip interface | include /'],
       },
       {
         type: 'open-ended',
         text: 'Afisati tabela de rutare IPv4:',
-        acceptedAnswers: ['sh ip ro'],
+        acceptedAnswers: ['sh ip ro','show ip route'],
       },
       {
         type: 'open-ended',
         text: 'Afisati adresele IPv6 de pe interfete detaliat:',
-        acceptedAnswers: ['sh ipv int'],
+        acceptedAnswers: ['sh ipv int','show ipv6 route'],
       },
       {
         type: 'open-ended',
         text: 'Afisati adresele IPv6 de pe interfete, sumarizat:',
-        acceptedAnswers: ['sh ipv int br'],
+        acceptedAnswers: ['sh ipv int br','show ipv6 interface brief'],
       },
       {
         type: 'open-ended',
         text: 'Afisati tabela de rutare IPv6:',
-        acceptedAnswers: ['sh ipv ro'],
+        acceptedAnswers: ['sh ipv ro','show ipv6 route'],
       },
       {
         type: 'open-ended',
         text: 'Aratati sectiunea pentru IPv6 din configuratia curenta:',
-        acceptedAnswers: ['sh run | sect ipv'],
+        acceptedAnswers: ['sh run | sect ipv','show running-config | section ipv6'],
       },
       {
         type: 'open-ended',
         text: 'Afisati retelele direct conectate IPv4:',
-        acceptedAnswers: ['sh ip ro c'],
+        acceptedAnswers: ['sh ip ro c','show ip route connected'],
       },
       {
         type: 'open-ended',
         text: 'Afisati configuratia curenta:',
-        acceptedAnswers: ['sh run'],
+        acceptedAnswers: ['sh run','show running-config'],
       },
       {
         type: 'open-ended',
         text: 'Afisati configuratia de pornire:',
-        acceptedAnswers: ['sh start'],
+        acceptedAnswers: ['sh start','show startup-config'],
       },
       {
         type: 'open-ended',
         text: 'Afisati continutul memoriei flash:',
-        acceptedAnswers: ['sh flash'],
+        acceptedAnswers: ['sh flash','show flash'],
       }, 
       {
         type: 'open-ended',
         text: 'Afisati ultimele comenzi introduse:',
-        acceptedAnswers: ['sh hist'],
+        acceptedAnswers: ['sh hist','show history'],
       },
       {
         type: 'open-ended',
@@ -75,17 +75,17 @@ ACADOBRE_QUESTIONS.push({
       {
         type: 'open-ended',
         text: 'Testati conectivitatea cu toate dispozitivele dintre dispozitivul local si adresa 10.0.0.1:',
-        acceptedAnswers: ['trace 10.0.0.1'],
+        acceptedAnswers: ['trace 10.0.0.1','tracert 10.0.0.1'],
       },
       {
         type: 'open-ended',
         text: 'Testati conectivitatea strict la dispozitivul IPv6 cu adresa fe80::1 :',
-        acceptedAnswers: ['ping ipv fe80::1'],
+        acceptedAnswers: ['ping ipv fe80::1','ping ipv6 fe80::1'],
       },
       {
         type: 'open-ended',
         text: 'Testati conectivitatea cu toate dispozitivele dintre dispozitivul local si adresa 2001::1 :',
-        acceptedAnswers: ['trace ipv 2001::1'],
+        acceptedAnswers: ['trace ipv 2001::1','tracert ipv6 2001::1'],
       },
       {
         type: 'open-ended',
@@ -100,287 +100,267 @@ ACADOBRE_QUESTIONS.push({
       {
         type: 'open-ended',
         text: 'Aratati tabela ARP:',
-        acceptedAnswers: ['sh arp'],
+        acceptedAnswers: ['sh arp','show arp'],
       },
       {
         type: 'open-ended',
         text: 'Aratati tabela MAC:',
-        acceptedAnswers: ['sh mac'],
+        acceptedAnswers: ['sh mac','show mac address-table'],
       },
       {
         type: 'open-ended',
         text: 'Aratati tabela MAC pentru VLAN-ul 1:',
-        acceptedAnswers: ['sh mac v 1'],
+        acceptedAnswers: ['sh mac v 1','show mac vlan 1'],
       },
       {
         type: 'open-ended',
         text: 'Aratati numele VLAN-urilor configurate si porturile pe care acestea sunt asociate, sumarizat:',
-        acceptedAnswers: ['sh vl br'],
+        acceptedAnswers: ['sh vl br','show vlan brief'],
       },
       {
         type: 'open-ended',
         text: 'Aratati interfetele trunk, VLAN-ul lor nativ si VLAN-urile pe care acestea le permit:',
-        acceptedAnswers: ['sh int tr'],
+        acceptedAnswers: ['sh int tr','show interfaces trunk'],
       },
       {
         type: 'open-ended',
         text: 'Aratati capacitatile de switchport ale interfetei f0/1:',
-        acceptedAnswers: ['sh int f0/1 sw'],
+        acceptedAnswers: ['sh int f0/1 sw','show interfaces f0/1 switchport'],
       },
       {
         type: 'open-ended',
         text: 'Aratati pool-urile de DHCPv4:',
-        acceptedAnswers: ['sh ip dhcp pool'],
+        acceptedAnswers: ['sh ip dhcp pool','show ip dhcp pool'],
       },
       {
         type: 'open-ended',
         text: 'Aratati adresele MAC asociate adreselor obtinute prin DHCPv4:',
-        acceptedAnswers: ['sh ip dhcp bind'],
+        acceptedAnswers: ['sh ip dhcp bind','show ip dhcp binding'],
       },
       {
         type: 'open-ended',
         text: 'Aratati pool-urile de DHCPv6:',
-        acceptedAnswers: ['sh ipv dhcp pool'],
+        acceptedAnswers: ['sh ipv dhcp pool','show ipv6 dhcp pool'],
       },
       {
         type: 'open-ended',
         text: 'Aratati adresele MAC asociate adreselor obtinute prin DHCPv6:',
-        acceptedAnswers: ['sh ipv dhcp bind'],
+        acceptedAnswers: ['sh ipv dhcp bind','show ipv6 dhcp binding'],
       },
       {
         type: 'open-ended',
         text: 'Aratati sectiunea pentru DHCPv4 din configuratia curenta:',
-        acceptedAnswers: ['sh run | sect dhcp'],
+        acceptedAnswers: ['sh run | sect dhcp','show running-config | section dhcp'],
       },
       {
         type: 'open-ended',
         text: 'Aratati detaliat informatii despre Etherchannel:',
-        acceptedAnswers: ['sh eth'],
+        acceptedAnswers: ['sh eth','show etherchannel'],
       },
       {
         type: 'open-ended',
         text: 'Aratati sumarizat informatii despre Etherchannel:',
-        acceptedAnswers: ['sh eth sum'],
+        acceptedAnswers: ['sh eth sum','show etherchannel summary'],
       },
       {
         type: 'open-ended',
         text: 'Aratati informatiile despre Port-Channel-uri:',
-        acceptedAnswers: ['sh eth por'],
+        acceptedAnswers: ['sh eth por','show etherchannel port-channel'],
       },
       {
         type: 'open-ended',
         text: 'Aratati detaliat informatii despre HSRP:',
-        acceptedAnswers: ['sh st'],
+        acceptedAnswers: ['sh st','show standby'],
       },
       {
         type: 'open-ended',
         text: 'Aratati sumarizat informatii despre HSRP:',
-        acceptedAnswers: ['sh st br'],
+        acceptedAnswers: ['sh st br','show standby brief'],
       },
       {
         type: 'open-ended',
         text: 'Aratati informatiile despre HSRP de pe interfata f0/1:',
-        acceptedAnswers: ['sh st int f0/1'],
+        acceptedAnswers: ['sh st int f0/1','show standby interface f0/1'],
       },
       {
         type: 'open-ended',
         text: 'Aratati informatii despre SSH:',
-        acceptedAnswers: ['sh ip ssh'],
+        acceptedAnswers: ['sh ip ssh','show ip ssh'],
       },
       {
         type: 'open-ended',
         text: 'Aratati informatii despre SSH din configuratia curenta:',
-        acceptedAnswers: ['sh run | sect ssh'],
+        acceptedAnswers: ['sh run | sect ssh','show running-config | section ssh'],
       },
       {
         type: 'open-ended',
         text: 'Aratati cheia publica RSA:',
-        acceptedAnswers: ['sh cry key my rsa'],
+        acceptedAnswers: ['sh cry key my rsa','show crypto key mypubkey rsa'],
       },
       {
         type: 'open-ended',
         text: 'Aratati informatii generale despre Port Security:',
-        acceptedAnswers: ['sh po'],
+        acceptedAnswers: ['sh po','show port-security'],
       },
       {
         type: 'open-ended',
         text: 'Aratati informatiile despre Port Security de pe interfata f0/1:',
-        acceptedAnswers: ['sh po int f0/1'],
+        acceptedAnswers: ['sh po int f0/1','show port-security interface f0/1'],
       },
       {
         type: 'open-ended',
         text: 'Afisati translatarile NAT:',
-        acceptedAnswers: ['sh ip nat tran'],
+        acceptedAnswers: ['sh ip nat tran','show ip nat translations'],
       },
       {
         type: 'open-ended',
         text: 'Afisati statisticile NAT:',
-        acceptedAnswers: ['sh ip nat stat'],
+        acceptedAnswers: ['sh ip nat stat','show ip nat statistics'],
       },
       {
         type: 'open-ended',
         text: 'Afisati ACL-urile configurate:',
-        acceptedAnswers: ['sh ac'],
+        acceptedAnswers: ['sh ac','show access-list'],
       },
       {
         type: 'open-ended',
         text: 'Afisati ACL-urile IPv6 configurate:',
-        acceptedAnswers: ['sh ipv ac', 'sh ac ipv'],
+        acceptedAnswers: ['sh ipv ac', 'sh ac ipv','show ipv6 access-list','show access-list ipv6'],
       },
       {
         type: 'open-ended',
         text: 'Afisati continutul ACL-ului 10:',
-        acceptedAnswers: ['sh ac 10'],
+        acceptedAnswers: ['sh ac 10','show access-list 10'],
       },
       {
         type: 'open-ended',
         text: 'Afisati informatii generale despre STP:',
-        acceptedAnswers: ['sh spa'],
+        acceptedAnswers: ['sh spa','show spanning-tree'],
       },
       {
         type: 'open-ended',
         text: 'Afisati informatii despre STP pentru VLAN-ul 1:',
-        acceptedAnswers: ['sh spa v 1'],
+        acceptedAnswers: ['sh spa v 1','show spanning-tree vlan 1'],
       },
       {
         type: 'open-ended',
         text: 'Afisati informatii sumarizate despre STP:',
-        acceptedAnswers: ['sh spa sum'],
+        acceptedAnswers: ['sh spa sum','show spanning-tree summary'],
       },
       {
         type: 'open-ended',
         text: 'Aratati informatii despre DHCP snooping:',
-        acceptedAnswers: ['sh ip dhcp snoop'],
+        acceptedAnswers: ['sh ip dhcp snoop','show ip dhcp snooping'],
       },
       {
         type: 'open-ended',
         text: 'Afisati informatii despre asocierile pe care le realizeaza DHCP snooping:',
-        acceptedAnswers: ['sh ip dhcp snoop bind'],
+        acceptedAnswers: ['sh ip dhcp snoop bind','show ip dhcp snooping binding'],
       },
       {
         type: 'open-ended',
         text: 'Aratati informatii sumarizate despre vecinii CDP:',
-        acceptedAnswers: ['sh cdp neigh'],
+        acceptedAnswers: ['sh cdp neigh','show cdp neighbors'],
       },
       {
         type: 'open-ended',
         text: 'Aratati informatii detaliate despre vecinii CDP:',
-        acceptedAnswers: ['sh cdp neigh det'],
+        acceptedAnswers: ['sh cdp neigh det','show cdp neighbors detail'],
       },
       {
         type: 'open-ended',
         text: 'Aratati informatii sumarizate despre vecinii LLDP:',
-        acceptedAnswers: ['sh lldp neigh'],
+        acceptedAnswers: ['sh lldp neigh','show lldp neighbors'],
       },
       {
         type: 'open-ended',
         text: 'Aratati informatii detaliate despre vecinii LLDP:',
-        acceptedAnswers: ['sh lldp neigh det'],
+        acceptedAnswers: ['sh lldp neigh det','show lldp neighbors detail'],
       },
       {
         type: 'open-ended',
         text: 'Aratati ora de pe dispozitiv:',
-        acceptedAnswers: ['sh clock'],
+        acceptedAnswers: ['sh clock','show clock'],
       },
       {
         type: 'open-ended',
         text: 'Aratati asocierile serverul NTP:',
-        acceptedAnswers: ['sh ntp ass'],
+        acceptedAnswers: ['sh ntp ass','show ntp associations'],
       },
       {
         type: 'open-ended',
         text: 'Afisati informatii despre protocoalele de rutare IPv4:',
-        acceptedAnswers: ['sh ip prot'],
+        acceptedAnswers: ['sh ip prot','show ip protocols'],
       },  
       {
         type: 'open-ended',
         text: 'Afisati rutele OSPF IPv4:',
-        acceptedAnswers: ['sh ip ro o'],
+        acceptedAnswers: ['sh ip ro o','show ip route ospf'],
       },
       {
         type: 'open-ended',
         text: 'Afisati vecinii OSPF IPv4:',
-        acceptedAnswers: ['sh ip ospf neigh'],
+        acceptedAnswers: ['sh ip ospf neigh','show ip ospf neighbor'],
       },
       {
         type: 'open-ended',
         text: 'Afisati LSDB-ul pentru OSPF IPv4:',
-        acceptedAnswers: ['sh ip ospf data'],
+        acceptedAnswers: ['sh ip ospf data','show ip ospf database'],
       },
       {
         type: 'open-ended',
         text: 'Aratati informatii despre OSPF din configuratia curenta:',
-        acceptedAnswers: ['sh run | sect ospf'],
+        acceptedAnswers: ['sh run | sect ospf','show running-config | section ospf'],
       },
       {
         type: 'open-ended',
         text: 'Afisati informatii despre protocoalele de rutare IPv6:',
-        acceptedAnswers: ['sh ipv prot'],
+        acceptedAnswers: ['sh ipv prot','show ipv6 protocols'],
       },  
       {
         type: 'open-ended',
         text: 'Afisati rutele OSPF IPv6:',
-        acceptedAnswers: ['sh ipv ro o'],
+        acceptedAnswers: ['sh ipv ro o','show ipv6 route ospf'],
       },
       {
         type: 'open-ended',
         text: 'Afisati vecinii OSPF IPv6:',
-        acceptedAnswers: ['sh ipv ospf neigh'],
+        acceptedAnswers: ['sh ipv ospf neigh','show ipv6 ospf neighbor'],
       },
       {
         type: 'open-ended',
         text: 'Afisati LSDB-ul pentru OSPF IPv6:',
-        acceptedAnswers: ['sh ipv ospf data'],
+        acceptedAnswers: ['sh ipv ospf data','show ipv6 ospf database'],
       },
       {
         type: 'open-ended',
         text: 'Afisati rutele EIGRP IPv4:',
-        acceptedAnswers: ['sh ip ro e'],
+        acceptedAnswers: ['sh ip ro e','show ip route eigrp'],
       },
       {
         type: 'open-ended',
         text: 'Afisati vecinii EIGRP IPv4:',
-        acceptedAnswers: ['sh ip eig neigh'],
+        acceptedAnswers: ['sh ip eig neigh','show ip eigrp neighbors'],
       },
       {
         type: 'open-ended',
         text: 'Afisati tabela de topologie pentru EIGRP IPv4:',
-        acceptedAnswers: ['sh ip eig top'],
+        acceptedAnswers: ['sh ip eig top','show ip eigrp topology'],
       },
       {
         type: 'open-ended',
         text: 'Afisati vecinii EIGRP IPv6:',
-        acceptedAnswers: ['sh ipv eig neigh'],
+        acceptedAnswers: ['sh ipv eig neigh','show ipv6 eigrp neighbors'],
       },
       {
         type: 'open-ended',
         text: 'Afisati tabela de topologie pentru EIGRP IPv6:',
-        acceptedAnswers: ['sh ipv eig top'],
+        acceptedAnswers: ['sh ipv eig top','show ipv6 eigrp topology'],
       },
       {
         type: 'open-ended',
         text: 'Aratati informatii despre EIGRP din configuratia curenta:',
-        acceptedAnswers: ['sh run | sect eig'],
+        acceptedAnswers: ['sh run | sect eig','show running-config | section eigrp'],
       },
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-      
     ]
 });
