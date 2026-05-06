@@ -1,6 +1,6 @@
 window.ACADOBRE_ALT_QUESTIONS.push({
   id: 'nationala_2026_generated',
-  topic: 'Lot Național - Set Generat 2026',
+  topic: 'Nationala 11-12 Setul 1',
   questions: [
   {
     type: 'open-ended',
