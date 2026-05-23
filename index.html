@@ -30,7 +30,12 @@
         </div>
       </header>
 
-      <section class="card">
+      <section class="card hidden" id="last-session-card">
+        <span class="section-label">Ultima sesiune</span>
+        <button id="last-session-btn" class="btn btn-secondary btn-full" type="button">Vezi ultima sesiune</button>
+      </section>
+
+      <section class="card" id="topics-card">
         <span class="section-label">Ce servim azi?</span>
         <!-- Sort controls -->
         <div id="topic-sort-bar" class="topic-sort-bar">
@@ -39,14 +44,13 @@
           <button class="sort-btn" data-sort="recent" type="button">Data Adaugare</button>
           <button class="sort-btn" data-sort="count" type="button">Numar Intrebari</button>
           <button id="sort-dir-btn" class="sort-dir-btn" type="button" title="Inversare ordine">↑</button>
+          <button id="topic-select-all-btn" class="topic-select-all-btn" type="button">Selecteaza toate</button>
         </div>
         <div id="topic-list" class="topic-grid"></div>
         <p id="topic-error" class="field-error hidden">Alege pustiule macar una.</p>
       </section>
 
-      <button id="alt-mode-btn" class="btn btn-ghost btn-alt-mode" type="button">📂 Subiecte Teoretica AcadNet</button>
-
-      <section class="card">
+      <section class="card" id="options-card">
         <span class="section-label">Optiuni</span>
         <!-- Header-fill-only toggle — visible only when a topic with header-fill is selected -->
         <div id="hf-only-row" class="options-row hidden">
@@ -66,7 +70,7 @@
               class="stepper-input"
               value="10"
               min="1"
-              max="999"
+              max="100000"
               aria-label="Number of questions"
             />
             <button class="stepper-btn" id="q-inc" type="button">+</button>
@@ -78,6 +82,13 @@
           <span class="option-label">Shuffle</span>
           <label class="toggle">
             <input type="checkbox" id="shuffle-toggle" checked />
+            <span class="toggle-slider"></span>
+          </label>
+        </div>
+        <div class="options-row">
+          <span class="option-label">Afiseaza toate intrebarile pe o pagina</span>
+          <label class="toggle">
+            <input type="checkbox" id="single-page-mode-toggle" />
             <span class="toggle-slider"></span>
           </label>
         </div>
@@ -205,18 +216,19 @@
         </div>
       </div>
 
-      <div id="topic-breakdown" class="card hidden">
-        <span class="section-label">Sectiuni alese</span>
-        <div id="breakdown-list"></div>
-      </div>
-
       <div class="results-actions">
-        <button id="review-btn"  class="btn btn-secondary" type="button">Statistici Raspuns</button>
         <button id="export-btn"  class="btn btn-ghost"     type="button">Export JSON</button>
         <button id="restart-btn" class="btn btn-primary"   type="button">Quiz Nou</button>
       </div>
 
-      <div id="review-panel" class="review-panel hidden">
+      <div id="review-panel" class="review-panel">
+        <div class="review-mode-bar">
+          <label class="review-mode-toggle">
+            <input type="checkbox" id="review-single-page-toggle" />
+            <span class="toggle-slider"></span>
+            <span class="review-mode-label">Afiseaza toate intrebarile pe o pagina</span>
+          </label>
+        </div>
         <div class="review-layout">
           <div class="review-list-col">
             <span class="section-label">Vreau sa vad statisticile</span>
@@ -230,9 +242,15 @@
               <span class="legend-dot rn-dot-incorrect"></span><span class="legend-text">Gresit</span>
               <span class="legend-dot rn-dot-partial"></span><span class="legend-text">Partial</span>
               <span class="legend-dot rn-dot-skipped"></span><span class="legend-text">Sarit</span>
+              <span class="legend-dot dot-marked"></span><span class="legend-text">Marcat</span>
             </div>
           </aside>
         </div>
+      </div>
+
+      <div id="topic-breakdown" class="card hidden">
+        <span class="section-label">Sectiuni alese</span>
+        <div id="breakdown-list"></div>
       </div>
 
     </div>
@@ -251,7 +269,6 @@
 
   <script>
     window.ACADOBRE_QUESTIONS = [];
-    window.ACADOBRE_ALT_QUESTIONS = [];
   </script>
 
   <script src="questions/rutare_dinamica.js"></script>
