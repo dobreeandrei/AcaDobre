@@ -1806,7 +1806,7 @@ const UIController = (() => {
 const App = (() => {
 
   const SESSIONS_KEY = 'acadobre.recentSessions';
-  const MAX_RECENT_SESSIONS = 5;
+  const MAX_RECENT_SESSIONS = 20;
 
   let _results = null;
   let _singlePage = false;
@@ -1875,22 +1875,15 @@ const App = (() => {
           <span>${r.total || 0} intrebari</span>
           <span>${timeLabel}</span>
         </div>
-        ${i === 0 ? `<button type="button" class="last-session-review-btn">Vezi ultima sesiune</button>` : ''}
+        <button type="button" class="last-session-review-btn">${i === 0 ? 'Vezi ultima sesiune' : 'Vezi sesiunea'}</button>
       `;
-      if (i === 0) {
-        li.querySelector('.last-session-review-btn').addEventListener('click', () => {
-          _results = r;
-          UIController.renderResults(_results);
-          UIController.showScreen('results');
-        });
-      }
+      li.querySelector('.last-session-review-btn').addEventListener('click', () => {
+        _results = r;
+        UIController.renderResults(_results);
+        UIController.showScreen('results');
+      });
       list.appendChild(li);
     });
-  }
-
-  function _clearRecentSessions() {
-    try { localStorage.removeItem(SESSIONS_KEY); } catch (e) {}
-    _refreshLastSessionCard();
   }
 
   function _formatRelative(date) {
@@ -2033,11 +2026,6 @@ const App = (() => {
       _refreshLastSessionCard();
       UIController.showScreen('setup');
     });
-
-    const refreshBtn = document.getElementById('refresh-sessions-btn');
-    if (refreshBtn) {
-      refreshBtn.addEventListener('click', _clearRecentSessions);
-    }
   }
 
   function _startQuiz() {
