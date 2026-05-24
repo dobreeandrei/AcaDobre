@@ -51,20 +51,32 @@ body {
 /* ── Containers ─────────────────────────────────────────────── */
 .container { width: 100%; margin: 0 auto; }
 
-/* Setup & Results: narrow centered */
+/* Setup container — DESKTOP/LANDSCAPE layout.
+   Grid layout positions elements: header full width, main-row + last-sessions side by side, start-btn full width.
+   Source order of last-session-card (after start-btn) doesn't matter — grid-area places it explicitly. */
 .setup-container {
   max-width: 1280px;
   margin: 0 auto;
   position: relative;
-  /* Pin to viewport so options card + start button stay at bottom; topics card scrolls in the middle */
   height: 100vh;
   height: 100dvh;
   padding: 1.25rem 1rem 1rem;
-  display: flex;
-  flex-direction: column;
-  gap: .65rem;
+  display: grid;
+  grid-template-columns: 1fr 16rem;
+  grid-template-rows: auto 1fr auto;
+  grid-template-areas:
+    "header   header"
+    "main     sessions"
+    "start    start";
+  column-gap: 1rem;
+  row-gap: .75rem;
   animation: fadeUp .3s ease both;
 }
+
+.setup-container > .app-header { grid-area: header; }
+.setup-container > .setup-main-row { grid-area: main; min-height: 0; }
+.setup-container > #start-btn { grid-area: start; }
+.setup-container > #last-session-card { grid-area: sessions; min-height: 0; align-self: center; max-height: calc(100% - 6rem); }
 
 /* Setup screen overrides the default .screen padding so .setup-container can own the viewport */
 #screen-setup {
@@ -107,11 +119,9 @@ body {
   #setup-logo { left: 1rem; }
 }
 
-/* Setup main row: left column (topics + options) + right column (last sessions) */
+/* Setup main row holds the left column (topics + options). Last-sessions is now a grid sibling. */
 .setup-main-row {
   display: flex;
-  gap: 1rem;
-  flex: 1 1 0;
   min-height: 0;
   align-items: stretch;
 }
@@ -149,16 +159,11 @@ body {
 }
 .topics-card-header .section-label { margin: 0; }
 
-/* Last sessions: right-column panel, fixed length next to topics+options.
-   Shorter than the full row height — vertically centered with empty space top and bottom. */
+/* Last sessions panel: visual style only — placement is handled by grid-area on desktop
+   and by flex order on mobile. */
 #last-session-card {
-  flex: 0 0 16rem;
-  width: 16rem;
   display: flex;
   flex-direction: column;
-  min-height: 0;
-  align-self: center;
-  height: calc(100% - 6rem);
   background: var(--bg-sidebar);
   border: 1px solid var(--border);
   border-radius: var(--radius-lg);
@@ -251,11 +256,21 @@ body {
   border-color: var(--accent);
 }
 
-/* Mid-narrow landscape viewports stack the main row but keep desktop logo + larger sizing */
+/* Mid-narrow landscape viewports collapse the grid: single column, sessions appears after start */
 @media (orientation: landscape) and (max-width: 1100px) {
-  .setup-main-row { flex-direction: column; }
-  .setup-left-col { flex: 1 1 auto; }
-  #last-session-card { width: auto; flex: 0 0 auto; max-height: 14rem; align-self: stretch; }
+  .setup-container {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto auto auto auto;
+    grid-template-areas:
+      "header"
+      "main"
+      "start"
+      "sessions";
+  }
+  .setup-container > #last-session-card {
+    max-height: 14rem;
+    align-self: stretch;
+  }
 }
 
 /* Options card and start button stay at their natural height, never shrink */
@@ -893,9 +908,9 @@ body {
 /* ── Utility ────────────────────────────────────────────────── */
 .hidden { display: none !important; }
 /* ╔══════════════════════════════════════════════════════════════
-   ║  MOBILE  (portrait orientation)
+   ║  MOBILE  (portrait OR short landscape — phones, tablets, vertical monitors)
    ╚══════════════════════════════════════════════════════════════ */
-@media (orientation: portrait) {
+@media (orientation: portrait), (max-height: 600px) {
 
   /* ── Base spacing ──
      Extra bottom padding clears the fixed navigation bar (≈70px)
@@ -1667,53 +1682,62 @@ body {
   margin-bottom: .75rem;
 }
 
-/* PORTRAIT orientation (any device held vertically) gets the mobile layout.
-   LANDSCAPE gets the desktop layout regardless of device. */
-@media (orientation: portrait) {
-  /* Release the 100vh fixed height — let content flow naturally so cards don't overlap */
+/* MOBILE LAYOUT — fires on portrait orientation OR short landscape (phones rotated, etc) */
+@media (orientation: portrait), (max-height: 600px) {
+  /* Override desktop grid: flex column. Container is 100vh on portrait so topics fills remaining space,
+     but auto-height on short-landscape (≤600px tall) so content can scroll naturally. */
   .setup-container {
-    height: auto;
-    min-height: 100vh;
-    padding: .85rem .75rem 1rem;
-    gap: .65rem;
+    display: flex;
+    flex-direction: column;
+    padding: .75rem .75rem 1rem;
+    gap: .6rem;
+    grid-template-columns: none;
+    grid-template-rows: none;
+    grid-template-areas: none;
   }
 
   /* Search bar drops below title block */
-  .app-header { flex-wrap: wrap; gap: .75rem; }
+  .app-header { flex-wrap: wrap; gap: .75rem; align-items: center; flex-shrink: 0; }
   .app-header-search { width: 100%; min-width: 0; margin-left: 0; order: 99; }
 
   /* Mobile: hide the absolute desktop logo, show the inline mobile one inside the header */
   #setup-logo { display: none !important; }
   #setup-logo-mobile {
     display: flex !important;
-    width: 64px; height: 64px;
-    border-radius: 14px;
-    font-size: 2rem;
+    width: 56px; height: 56px;
+    border-radius: 12px;
+    font-size: 1.8rem;
     box-shadow: 0 0 16px var(--accent-glow);
     flex-shrink: 0;
   }
   #setup-titles { display: none; }
   .app-header-titles-fallback { display: block; flex: 1 1 auto; min-width: 0; }
-  /* Title sizes match the target mockup */
-  .app-header-titles-fallback .app-title { font-size: 1.7rem; }
-  .app-header-titles-fallback .app-sub   { font-size: .85rem; }
+  .app-header-titles-fallback .app-title { font-size: 1.55rem; }
+  .app-header-titles-fallback .app-sub   { font-size: .8rem; }
 
-  /* Header: logo + title in one row, search wraps below */
-  .app-header { align-items: center; flex-wrap: wrap; gap: .75rem; }
-
-  /* Setup main row stacks: topics on top, last-sessions below */
+  /* Setup main row holds the left col (topics + options); flex-grows to fill remaining space */
   .setup-main-row {
-    flex-direction: column;
-    flex: 0 0 auto;
+    display: flex;
+    flex: 1 1 0;
     min-height: 0;
+  }
+  .setup-left-col {
+    flex: 1 1 auto;
+    display: flex;
+    flex-direction: column;
     gap: .65rem;
+    min-height: 0;
+    min-width: 0;
   }
 
-  /* Topics card: natural height (page scrolls as a whole, no nested scroll on mobile) */
+  /* Topics card: scrolls internally so options + start stay visible without page scroll */
   #topics-card {
-    flex: 0 0 auto;
-    min-height: 0;
-    overflow-y: visible;
+    flex: 1 1 0;
+    min-height: 8rem;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: .6rem;
   }
   .topic-grid {
     grid-template-columns: repeat(3, 1fr);
@@ -1723,13 +1747,22 @@ body {
   .topic-chip-name { font-size: .75rem; line-height: 1.2; }
   .topic-chip-count { font-size: .65rem; }
 
-  /* Last-sessions: auto-height, sits below topics+options in the stack with clear gap */
+  /* Options card: natural height, never shrinks */
+  #options-card {
+    flex: 0 0 auto;
+    padding: .65rem .9rem;
+  }
+
+  /* Start button: stays at its natural height at the bottom of the viewport-pinned column */
+  #start-btn { flex: 0 0 auto; }
+
+  /* Last-sessions: appears AFTER start button in the flex column.
+     Pinned to natural height with internal scroll if many entries. */
   #last-session-card {
     flex: 0 0 auto;
     width: auto;
     height: auto;
-    max-height: 18rem;
-    align-self: stretch;
+    max-height: 14rem;
     box-shadow: none;
     margin-top: 0;
   }
@@ -1737,7 +1770,7 @@ body {
     overflow-y: auto;
   }
 
-  /* Start button: version subtitle hidden on mobile (would overlap "Hai sa ii dam") */
+  /* Version subtitle smaller on mobile */
   #start-btn .start-btn-version {
     font-size: .58rem;
     right: .65rem;
@@ -1745,7 +1778,23 @@ body {
   }
 }
 
-/* Very narrow portrait phones: drop version subtitle entirely */
-@media (orientation: portrait) and (max-width: 480px) {
+/* Portrait only — pin to viewport so options + start + last-sessions stay visible without page scroll.
+   Topics card flex-grows and scrolls internally. */
+@media (orientation: portrait) {
+  .setup-container {
+    height: 100vh;
+    height: 100dvh;
+  }
+  .setup-main-row { flex: 1 1 0; }
+  #topics-card {
+    flex: 1 1 0;
+    min-height: 8rem;
+    overflow-y: auto;
+  }
+}
+
+/* Very narrow phones / short landscape: drop version subtitle entirely */
+@media (orientation: portrait) and (max-width: 480px),
+       (max-height: 600px) and (max-width: 900px) {
   #start-btn .start-btn-version { display: none; }
 }
