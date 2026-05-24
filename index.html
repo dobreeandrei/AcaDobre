@@ -21,20 +21,13 @@
 <body>
 
   <div id="screen-setup" class="screen active">
-
-    <div class="logo-mark" id="setup-logo">
-      <img src="icons/logo.png" alt="AcaDobre" style="width:100%;height:100%;object-fit:cover;" />
-    </div>
-
-    <div id="setup-titles">
-      <h1 class="app-title">AcaDobre</h1>
-      <p class="app-sub">Bravo pustiule! Ne pregatim la retele.</p>
-    </div>
-
     <div class="container setup-container">
 
       <header class="app-header">
-        <div class="app-header-titles app-header-titles-fallback">
+        <div class="logo-mark">
+           <img src="icons/logo.png" alt="AcaDobre" style="width:100%;height:100%;object-fit:cover;" />
+        </div>
+        <div>
           <h1 class="app-title">AcaDobre</h1>
           <p class="app-sub">Bravo pustiule! Ne pregatim la retele.</p>
         </div>
@@ -60,56 +53,48 @@
             <p id="topic-error" class="field-error hidden">Alege pustiule macar una.</p>
           </section>
 
-          <section class="card" id="options-card">
-            <span class="section-label">Optiuni</span>
-            <!-- Header-fill-only toggle — visible only when a topic with header-fill is selected -->
-            <div id="hf-only-row" class="options-row hidden">
-              <span class="option-label">Afiseaza doar intrebari de tip header</span>
-              <label class="toggle">
-                <input type="checkbox" id="hf-only-toggle" />
-                <span class="toggle-slider"></span>
-              </label>
-            </div>
-            <div class="options-row">
-              <span class="option-label">Cate intrebari sa fie maxim?</span>
-              <div class="stepper">
-                <button class="stepper-btn" id="q-dec" type="button">−</button>
-                <input
-                  type="number"
-                  id="q-count-input"
-                  class="stepper-input"
-                  value="10"
-                  min="1"
-                  max="100000"
-                  aria-label="Number of questions"
-                />
-                <button class="stepper-btn" id="q-inc" type="button">+</button>
-              </div>
-              <button id="q-max-btn" class="btn-max-fill" type="button">MAX</button>
-              <span id="q-max-hint" class="hint-text"></span>
-            </div>
-            <div class="options-row">
-              <span class="option-label">Shuffle</span>
-              <label class="toggle">
-                <input type="checkbox" id="shuffle-toggle" checked />
-                <span class="toggle-slider"></span>
-              </label>
-            </div>
-          </section>
+      <button id="alt-mode-btn" class="btn btn-ghost btn-alt-mode" type="button">📂 Subiecte Teoretica AcadNet</button>
+
+      <section class="card">
+        <span class="section-label">Optiuni</span>
+        <!-- Header-fill-only toggle — visible only when a topic with header-fill is selected -->
+        <div id="hf-only-row" class="options-row hidden">
+          <span class="option-label">Afiseaza doar intrebari de tip header</span>
+          <label class="toggle">
+            <input type="checkbox" id="hf-only-toggle" />
+            <span class="toggle-slider"></span>
+          </label>
         </div>
-
-        <aside class="card" id="last-session-card">
-          <div class="last-session-header">
-            <span class="section-label">Ultimele sesiuni</span>
+        <div class="options-row">
+          <span class="option-label">Cate intrebari sa fie maxim?</span>
+          <div class="stepper">
+            <button class="stepper-btn" id="q-dec" type="button">−</button>
+            <input
+              type="number"
+              id="q-count-input"
+              class="stepper-input"
+              value="10"
+              min="1"
+              max="999"
+              aria-label="Number of questions"
+            />
+            <button class="stepper-btn" id="q-inc" type="button">+</button>
           </div>
-          <ul id="last-sessions-list" class="last-sessions-list"></ul>
-        </aside>
-      </div>
+          <button id="q-max-btn" class="btn-max-fill" type="button">MAX</button>
+          <span id="q-max-hint" class="hint-text"></span>
+        </div>
+        <div class="options-row">
+          <span class="option-label">Shuffle</span>
+          <label class="toggle">
+            <input type="checkbox" id="shuffle-toggle" checked />
+            <span class="toggle-slider"></span>
+          </label>
+        </div>
+      </section>
 
-      <button id="start-btn" class="btn btn-primary btn-large" type="button">
-        <span class="start-btn-label">Hai sa ii dam</span>
-        <span class="start-btn-version">Versiunea 5.0</span>
-      </button>
+      <button id="start-btn" class="btn btn-primary btn-large" type="button">Hai sa ii dam</button>
+
+        <div class="version-tag">v4.2.8 Bogus Edition</div>
     </div>
   </div>
 
@@ -181,16 +166,10 @@
             <span class="section-label">Intrebari</span>
             <div id="q-nav-grid" class="q-nav-grid"></div>
             <div class="sidebar-legend">
-              <span class="legend-row"><span class="legend-dot dot-answered"></span><span class="legend-text">Raspuns</span></span>
-              <span class="legend-row"><span class="legend-dot dot-current"></span><span class="legend-text">Curenta</span></span>
-              <span class="legend-row"><span class="legend-dot dot-marked"></span><span class="legend-text">Marcata</span></span>
-            </div>
-            <div class="quiz-mode-row">
-              <span class="quiz-mode-label">Pe o pagina</span>
-              <label class="toggle">
-                <input type="checkbox" id="single-page-mode-toggle" />
-                <span class="toggle-slider"></span>
-              </label>
+              <span class="legend-dot dot-answered"></span><span class="legend-text">Intrebari raspunse</span>
+              <span class="legend-dot dot-current"></span><span class="legend-text">Intrebarea curenta</span>
+              <span class="legend-dot dot-empty"></span><span class="legend-text">Intrebari fara raspuns</span>
+              <span class="legend-dot dot-marked"></span><span class="legend-text">Intrebari Marcate</span>
             </div>
             <button id="submit-quiz-btn" class="btn btn-primary btn-full" type="button">Vedem ce o fi</button>
             <button id="abandon-btn" class="btn btn-ghost btn-full" type="button">← Inapoi la meniu</button>
@@ -239,14 +218,7 @@
         <button id="restart-btn" class="btn btn-primary"   type="button">Quiz Nou</button>
       </div>
 
-      <div id="review-panel" class="review-panel">
-        <div class="review-mode-bar">
-          <span class="review-mode-label">Pe o pagina</span>
-          <label class="toggle">
-            <input type="checkbox" id="review-single-page-toggle" />
-            <span class="toggle-slider"></span>
-          </label>
-        </div>
+      <div id="review-panel" class="review-panel hidden">
         <div class="review-layout">
           <div class="review-list-col">
             <span class="section-label">Vreau sa vad statisticile</span>
@@ -256,10 +228,10 @@
             <span class="section-label">Raspunsuri</span>
             <div id="review-nav-grid" class="review-nav-grid"></div>
             <div class="review-nav-legend">
-              <span class="legend-row"><span class="legend-dot rn-dot-correct"></span><span class="legend-text">Corect</span></span>
-              <span class="legend-row"><span class="legend-dot rn-dot-incorrect"></span><span class="legend-text">Gresit</span></span>
-              <span class="legend-row"><span class="legend-dot rn-dot-partial"></span><span class="legend-text">Partial</span></span>
-              <span class="legend-row"><span class="legend-dot dot-marked"></span><span class="legend-text">Marcat</span></span>
+              <span class="legend-dot rn-dot-correct"></span><span class="legend-text">Corect</span>
+              <span class="legend-dot rn-dot-incorrect"></span><span class="legend-text">Gresit</span>
+              <span class="legend-dot rn-dot-partial"></span><span class="legend-text">Partial</span>
+              <span class="legend-dot rn-dot-skipped"></span><span class="legend-text">Sarit</span>
             </div>
           </aside>
         </div>

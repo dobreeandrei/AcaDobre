@@ -1805,9 +1805,6 @@ const UIController = (() => {
    ============================================================ */
 const App = (() => {
 
-  const SESSIONS_KEY = 'acadobre.recentSessions';
-  const MAX_RECENT_SESSIONS = 20;
-
   let _results = null;
   let _singlePage = false;
   let _sessionQuestions = null;
@@ -1822,82 +1819,22 @@ const App = (() => {
     _bindEvents();
   }
 
-  // localStorage = persists across refresh and tab close.
-  // Stores an array of up to MAX_RECENT_SESSIONS results, newest first.
-  function _loadRecentSessions() {
-    try {
-      const raw = localStorage.getItem(SESSIONS_KEY);
-      if (!raw) return [];
-      const parsed = JSON.parse(raw);
-      return Array.isArray(parsed) ? parsed : [];
-    } catch (e) {
-      return [];
-    }
-  }
-
-  function _saveRecentSession(results) {
-    try {
-      const existing = _loadRecentSessions();
-      const entry = {
-        savedAt: new Date().toISOString(),
-        results: results
-      };
-      const updated = [entry, ...existing].slice(0, MAX_RECENT_SESSIONS);
-      localStorage.setItem(SESSIONS_KEY, JSON.stringify(updated));
-    } catch (e) {
-      // Quota / private mode / disabled storage — silent fail
-    }
-  }
-
-  function _refreshLastSessionCard() {
-    const card = document.getElementById('last-session-card');
-    const list = document.getElementById('last-sessions-list');
-    if (!card || !list) return;
-    // Card is always visible — never hidden. Empty list = no entries yet.
-    card.classList.remove('hidden');
-    const sessions = _loadRecentSessions();
-    list.innerHTML = '';
-    sessions.forEach((entry, i) => {
-      const r = entry.results || {};
-      const date = entry.savedAt ? new Date(entry.savedAt) : null;
-      const dateLabel = date ? _formatRelative(date) : '';
-      const m = Math.floor((r.elapsed || 0) / 60);
-      const s = (r.elapsed || 0) % 60;
-      const timeLabel = m > 0 ? `${m}m ${s}s` : `${s}s`;
-      const li = document.createElement('li');
-      li.className = 'last-session-item' + (i === 0 ? ' is-latest' : '');
-      li.innerHTML = `
-        <div class="last-session-top">
-          <span class="last-session-score">${r.pct || 0}%</span>
-          <span class="last-session-date">${dateLabel}</span>
-        </div>
-        <div class="last-session-meta">
-          <span>${r.total || 0} intrebari</span>
-          <span>${timeLabel}</span>
-        </div>
-        <button type="button" class="last-session-review-btn">${i === 0 ? 'Vezi ultima sesiune' : 'Vezi sesiunea'}</button>
-      `;
-      li.querySelector('.last-session-review-btn').addEventListener('click', () => {
-        _results = r;
-        UIController.renderResults(_results);
-        UIController.showScreen('results');
-      });
-      list.appendChild(li);
-    });
-  }
-
-  function _formatRelative(date) {
-    const now = Date.now();
-    const diff = Math.round((now - date.getTime()) / 1000);
-    if (diff < 60)    return 'acum';
-    if (diff < 3600)  return Math.floor(diff / 60) + 'm';
-    if (diff < 86400) return Math.floor(diff / 3600) + 'h';
-    if (diff < 86400 * 7) return Math.floor(diff / 86400) + 'z';
-    return date.toLocaleDateString('ro-RO');
-  }
-
   function _bindEvents() {
     UIController.startBtn.addEventListener('click', _startQuiz);
+
+    // Alt mode: toggle between main and alt question sets
+    const _altBtn = document.getElementById('alt-mode-btn');
+    _altBtn.addEventListener('click', () => {
+      const nowAlt = _altBtn.classList.toggle('alt-active');
+      QuestionManager.setAltMode(nowAlt);
+      _altBtn.textContent = nowAlt ? '← Intrebari Principale' : '📂 Teste';
+      const topics = QuestionManager.getTopics();
+      UIController.renderTopics(topics);
+      UIController.initSortControls(topics);
+      // Clear any topic selection from the other set
+      UIController.clearTopicSelection();
+    });
+
 
     UIController.prevBtn.addEventListener('click', () => _go(-1));
     UIController.nextBtn.addEventListener('click', () => {
@@ -2022,10 +1959,9 @@ const App = (() => {
 
     UIController.submitQuizBtn.addEventListener('click', _trySubmit);
 
-    UIController.restartBtn.addEventListener('click', () => {
-      _refreshLastSessionCard();
-      UIController.showScreen('setup');
-    });
+    UIController.reviewBtn.addEventListener('click',  () => UIController.toggleReview(_results.graded));
+    UIController.exportBtn.addEventListener('click',  _exportResults);
+    UIController.restartBtn.addEventListener('click', () => UIController.showScreen('setup'));
   }
 
   function _startQuiz() {
