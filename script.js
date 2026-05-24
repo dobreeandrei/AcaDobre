@@ -38,13 +38,8 @@ const QuestionManager = (() => {
     }
   }
 
-  let _useAlt = false;
-  function setAltMode(on) { _useAlt = on; }
-
   function getTopics() {
-    const source = _useAlt
-      ? (window.ACADOBRE_ALT_QUESTIONS || [])
-      : (window.ACADOBRE_QUESTIONS || []);
+    const source = window.ACADOBRE_QUESTIONS || [];
     return source
       .filter(t => t && t.id && t.topic && Array.isArray(t.questions))
       .map(t => ({
@@ -138,7 +133,7 @@ const QuestionManager = (() => {
     return acceptedAnswers.some(a => String(a).trim().toLowerCase() === clean);
   }
 
-  return { getTopics, setAltMode, buildSession, shuffleMCOptions, checkOpenEnded, _shuffle };
+  return { getTopics, buildSession, shuffleMCOptions, checkOpenEnded, _shuffle };
 })();
 
 
@@ -177,10 +172,8 @@ const QuizSession = (() => {
   }
 
   function getCurrentQuestion() { return _questions[_current] || null; }
-  function getQuestion(i)        { return _questions[i] || null; }
   function getCurrentIndex()     { return _current; }
   function getTotalCount()       { return _questions.length; }
-  function getElapsed()          { return _elapsed; }
 
   function navigateTo(index) {
     if (index < 0 || index >= _questions.length) return false;
@@ -361,7 +354,8 @@ const QuizSession = (() => {
         userAnswer: stored ? stored.value : null,
         skipped:   !stored,
         topicId:   q._topicId,
-        topicName: q._topicName
+        topicName: q._topicName,
+        marked:    _marked.has(i)
       };
     });
 
@@ -396,7 +390,7 @@ const QuizSession = (() => {
 
   return {
     start, stop,
-    getCurrentQuestion, getQuestion, getCurrentIndex, getTotalCount, getElapsed,
+    getCurrentQuestion, getCurrentIndex, getTotalCount,
     navigateTo, saveCurrentAnswer, clearCurrentAnswer, getAnswer, getAnsweredCount,
     toggleMark, isMarked,
     submitAll
@@ -428,21 +422,38 @@ const UIController = (() => {
   const qTopicLabel    = document.getElementById('q-topic-label');
   const timerDisplay   = document.getElementById('timer-display');
   const progressBar    = document.getElementById('progress-bar');
-  const questionText   = document.getElementById('question-text');
-  const questionHint   = document.getElementById('question-hint');
-  const mcOptions      = document.getElementById('mc-options');
-  const mcMultiOptions = document.getElementById('mc-multi-options');
-  const matchingWrap   = document.getElementById('matching-wrap');
-  const imageOrderWrap = document.getElementById('image-order-wrap');
-  const labelOrderWrap = document.getElementById('label-order-wrap');
-  const headerFillWrap = document.getElementById('header-fill-wrap');
-  const oeInputWrap    = document.getElementById('oe-input-wrap');
-  const oeInput        = document.getElementById('oe-input');
-  const questionImageWrap = document.getElementById('question-image-wrap');
-  const questionImageEl   = document.getElementById('question-image');
+  // These refs point at the default per-question card slots, but get swapped to per-card clones during stacked render
+  let questionText   = document.getElementById('question-text');
+  let questionHint   = document.getElementById('question-hint');
+  let mcOptions      = document.getElementById('mc-options');
+  let mcMultiOptions = document.getElementById('mc-multi-options');
+  let matchingWrap   = document.getElementById('matching-wrap');
+  let imageOrderWrap = document.getElementById('image-order-wrap');
+  let labelOrderWrap = document.getElementById('label-order-wrap');
+  let headerFillWrap = document.getElementById('header-fill-wrap');
+  let oeInputWrap    = document.getElementById('oe-input-wrap');
+  let oeInput        = document.getElementById('oe-input');
+  let questionImageWrap = document.getElementById('question-image-wrap');
+  let questionImageEl   = document.getElementById('question-image');
   const qNavGrid       = document.getElementById('q-nav-grid');
   const prevBtn        = document.getElementById('prev-btn');
   const nextBtn        = document.getElementById('next-btn');
+  const questionArea   = document.querySelector('#screen-quiz .question-area');
+  // Cached default refs so stacked render can restore the originals when needed
+  const _defaultAnswerRefs = {
+    questionText: questionText,
+    questionHint: questionHint,
+    mcOptions: mcOptions,
+    mcMultiOptions: mcMultiOptions,
+    matchingWrap: matchingWrap,
+    imageOrderWrap: imageOrderWrap,
+    labelOrderWrap: labelOrderWrap,
+    headerFillWrap: headerFillWrap,
+    oeInputWrap: oeInputWrap,
+    oeInput: oeInput,
+    questionImageWrap: questionImageWrap,
+    questionImageEl: questionImageEl
+  };
 
   // ── Results
   const ringProgress   = document.getElementById('ring-progress');
@@ -460,14 +471,13 @@ const UIController = (() => {
   const confirmModal   = document.getElementById('confirm-modal');
   const modalBody      = document.getElementById('modal-body');
 
-  let _availableMax    = 999;
+  let _availableMax    = 100000;
   let _navClickHandler = null;
 
-  // All answer-area containers — used to hide all before showing the active one
-  const _allAnswerWraps = [mcOptions, mcMultiOptions, matchingWrap, imageOrderWrap, labelOrderWrap, headerFillWrap, oeInputWrap];
-
+  // Read refs dynamically since they get swapped during stacked render
   function _hideAllAnswerWraps() {
-    _allAnswerWraps.forEach(el => el.classList.add('hidden'));
+    [mcOptions, mcMultiOptions, matchingWrap, imageOrderWrap, labelOrderWrap, headerFillWrap, oeInputWrap]
+      .forEach(el => el && el.classList.add('hidden'));
   }
 
   // ── Screens
@@ -506,11 +516,48 @@ const UIController = (() => {
         _updateMax(topics);
         topicError.classList.add('hidden');
         _updateHFOnlyVisibility();
+        _updateSelectAllLabel();
       };
       chip.addEventListener('click', toggle);
       chip.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toggle(); } });
       topicList.appendChild(chip);
     });
+    _updateSelectAllLabel();
+  }
+
+  // Reflects what the next click does: shows "Deselecteaza toate" iff every cached topic is selected
+  function _updateSelectAllLabel() {
+    const btn = document.getElementById('topic-select-all-btn');
+    if (!btn) return;
+    const allSelected = _topicsCache.length > 0 && _selectedIds.size === _topicsCache.length;
+    btn.textContent = allSelected ? 'Deselecteaza toate' : 'Selecteaza toate';
+  }
+
+  function initSelectAllBtn() {
+    const btn = document.getElementById('topic-select-all-btn');
+    if (!btn) return;
+    btn.addEventListener('click', () => {
+      if (_topicsCache.length === 0) return;
+      const allSelected = _selectedIds.size === _topicsCache.length;
+      if (allSelected) {
+        _selectedIds.clear();
+        topicList.querySelectorAll('.topic-chip.selected').forEach(c => {
+          c.classList.remove('selected');
+          c.setAttribute('aria-checked', 'false');
+        });
+      } else {
+        _topicsCache.forEach(t => _selectedIds.add(t.id));
+        topicList.querySelectorAll('.topic-chip').forEach(c => {
+          c.classList.add('selected');
+          c.setAttribute('aria-checked', 'true');
+        });
+      }
+      _updateMax(_topicsCache);
+      topicError.classList.add('hidden');
+      _updateHFOnlyVisibility();
+      _updateSelectAllLabel();
+    });
+    _updateSelectAllLabel();
   }
 
   // Show/hide header-fill-only toggle based on whether selected topics contain header-fill
@@ -527,44 +574,33 @@ const UIController = (() => {
     }
   }
 
-  // Sort topics array by given key/direction
-  function _sortTopics(topics, key, dir) {
-    const sorted = [...topics];
-    if (key === 'alpha') {
-      sorted.sort((a, b) => a.topic.localeCompare(b.topic));
-    } else if (key === 'count') {
-      sorted.sort((a, b) => a.questions.length - b.questions.length);
-    }
-    // 'recent' = original order (no sort)
-    if (dir === 'desc') sorted.reverse();
-    return sorted;
+  // Sort topics alphabetically ascending (only sort option now)
+  function _sortTopics(topics) {
+    return [...topics].sort((a, b) => a.topic.localeCompare(b.topic));
   }
 
-  // Initialise sort controls
-  function initSortControls(allTopics) {
-    let sortKey = 'alpha';
-    let sortDir = 'asc';
+  // Live filter topics by name match (case-insensitive substring)
+  let _allTopics = [];
+  let _searchQuery = '';
 
-    const sortBar  = document.getElementById('topic-sort-bar');
-    const dirBtn   = document.getElementById('sort-dir-btn');
-    if (!sortBar) return;
+  function _applyFilter() {
+    const q = _searchQuery.trim().toLowerCase();
+    const filtered = q
+      ? _allTopics.filter(t => t.topic.toLowerCase().includes(q))
+      : _allTopics;
+    renderTopics(filtered);
+  }
 
-    sortBar.querySelectorAll('.sort-btn').forEach(btn => {
-      btn.addEventListener('click', () => {
-        sortKey = btn.dataset.sort;
-        sortBar.querySelectorAll('.sort-btn').forEach(b => b.classList.remove('sort-btn-active'));
-        btn.classList.add('sort-btn-active');
-        renderTopics(_sortTopics(allTopics, sortKey, sortDir));
+  function initTopicSearch(allTopics) {
+    _allTopics = _sortTopics(allTopics);
+    const input = document.getElementById('topic-search-input');
+    if (input) {
+      input.addEventListener('input', () => {
+        _searchQuery = input.value;
+        _applyFilter();
       });
-    });
-
-    dirBtn.addEventListener('click', () => {
-      sortDir = sortDir === 'asc' ? 'desc' : 'asc';
-      dirBtn.textContent = sortDir === 'asc' ? '↑' : '↓';
-      renderTopics(_sortTopics(allTopics, sortKey, sortDir));
-    });
-
-    renderTopics(_sortTopics(allTopics, sortKey, sortDir));
+    }
+    renderTopics(_allTopics);
   }
 
   function _getSelectedTopicIds() {
@@ -575,7 +611,7 @@ const UIController = (() => {
     const ids = _getSelectedTopicIds();
     let max = 0;
     topics.forEach(t => { if (ids.includes(t.id)) max += t.questions.length; });
-    _availableMax = max || 999;
+    _availableMax = max || 100000;
     qMaxHint.textContent = max ? `(max ${max})` : '';
     if (max > 0) {
       const cur = parseInt(qCountInput.value, 10) || 10;
@@ -637,7 +673,7 @@ const UIController = (() => {
       qCountInput.value = Math.max(1, (parseInt(qCountInput.value, 10) || 1) - 1);
     });
     _addHoldRepeat(incBtn, () => {
-      const max = _availableMax || 999;
+      const max = _availableMax || 100000;
       qCountInput.value = Math.min(max, (parseInt(qCountInput.value, 10) || 1) + 1);
     });
 
@@ -646,7 +682,7 @@ const UIController = (() => {
     if (maxBtn) {
       maxBtn.addEventListener('click', () => {
         const max = _availableMax;
-        if (max > 0 && max < 999) qCountInput.value = max;
+        if (max > 0 && max < 100000) qCountInput.value = max;
       });
     }
 
@@ -668,18 +704,6 @@ const UIController = (() => {
     const hfToggle = document.getElementById('hf-only-toggle');
     const headerFillOnly = hfToggle ? hfToggle.checked : false;
     return { topicIds: _getSelectedTopicIds(), qCount: count, shuffle: shuffleToggle.checked, headerFillOnly };
-  }
-
-  function clearTopicSelection() {
-    // Deselect all chips and reset the selected-ids tracker
-    _selectedIds.clear();
-    topicList.querySelectorAll('.topic-chip.selected').forEach(c => {
-      c.classList.remove('selected');
-      c.setAttribute('aria-checked', 'false');
-    });
-    _updateMax([]);
-    topicError.classList.add('hidden');
-    _updateHFOnlyVisibility();
   }
 
   function showTopicError() { topicError.classList.remove('hidden'); }
@@ -869,7 +893,6 @@ const UIController = (() => {
       select.className = 'matching-select';
       select.setAttribute('aria-label', sub.text);
 
-      // Blank option
       const blank = document.createElement('option');
       blank.value = '';
       blank.textContent = 'Alege...';
@@ -962,7 +985,6 @@ const UIController = (() => {
       e.preventDefault();
 
       const touch = e.touches[0];
-      // Move ghost to finger position
       ghost.style.left = (touch.clientX - ghost.offsetWidth  / 2) + 'px';
       ghost.style.top  = (touch.clientY - ghost.offsetHeight / 2) + 'px';
 
@@ -1312,7 +1334,6 @@ const UIController = (() => {
 
       const currentField = question.fields[completed];
       if (_checkHeaderField(val, currentField)) {
-        // ✓ Correct
         completed++;
         _setImage(completed);
         _setProgress(completed);
@@ -1333,7 +1354,6 @@ const UIController = (() => {
           }
         }, 600);
       } else {
-        // ✗ Wron
         input.classList.add('hf-input-wrong');
         input.select();
         _setStatus(completed, 'wrong');
@@ -1421,25 +1441,21 @@ const UIController = (() => {
       topicBreakdown.classList.remove('hidden');
       breakdownList.innerHTML = results.topics.map(t => {
         const pct = t.total ? Math.round((t.score / t.total) * 100) : 0;
-        const sc  = Number.isInteger(t.score) ? t.score : Math.round(t.score * 10) / 10;
-        return `<div class="breakdown-item">
-          <div class="breakdown-name">${_esc(t.name)}</div>
-          <div class="breakdown-bar-track">
-            <div class="breakdown-bar-fill" style="width:0%" data-pct="${pct}"></div>
-          </div>
-          <div class="breakdown-score">${sc}/${t.total} — ${pct}%</div>
+        return `<div class="breakdown-chip" title="${_esc(t.name)}">
+          <span class="breakdown-chip-name">${_esc(t.name)}</span>
+          <span class="breakdown-chip-pct">${pct}%</span>
         </div>`;
       }).join('');
-      setTimeout(() => {
-        breakdownList.querySelectorAll('.breakdown-bar-fill').forEach(b => { b.style.width = b.dataset.pct + '%'; });
-      }, 120);
     } else {
       topicBreakdown.classList.add('hidden');
     }
 
-    reviewPanel.classList.add('hidden');
     reviewList.innerHTML = '';
-    document.getElementById('review-btn').textContent = 'Statistici Raspuns';
+    // Review pane is now rendered immediately (no toggle gate)
+    _reviewCurrent = 0;
+    renderReview(results.graded);
+    _buildReviewNavGrid(results.graded);
+    reviewPanel.classList.remove('hidden');
   }
 
   function renderReview(graded) {
@@ -1448,6 +1464,7 @@ const UIController = (() => {
       const div = document.createElement('div');
       const stateClass = g.skipped ? 'review-skipped' : g.correct ? 'review-correct' : (g.score > 0 ? 'review-partial' : 'review-incorrect');
       div.className = `review-item ${stateClass}`;
+      div.dataset.idx = String(i);
       const numClass  = g.skipped ? 'r-skipped' : g.correct ? 'r-correct' : (g.score > 0 ? 'r-partial' : 'r-incorrect');
       const pctLabel  = g.score > 0 && !g.correct ? ` (${Math.round(g.score * 100)}%)` : '';
       const numLabel  = g.skipped ? '— Ai sarit' : g.correct ? '✓ Buna treaba' : `✗ O ratasi${pctLabel}`;
@@ -1484,7 +1501,14 @@ const UIController = (() => {
               </div>`).join('') +
             '</div>';
         } else if (g.question.type === 'header-fill') {
-          detailHTML = '<div class="review-sub-list">' +
+          // Final-state image (last in the sequence) shows the fully-completed header
+          let finalImageHTML = '';
+          if (Array.isArray(g.question.images) && g.question.images.length > 0) {
+            const finalSrc = g.question.images[g.question.images.length - 1];
+            finalImageHTML = `<img class="review-hf-image" src="${_esc(finalSrc)}" alt="Protocol header (rezultat)" />`;
+          }
+          detailHTML = finalImageHTML +
+            '<div class="review-sub-list">' +
             g.subResults.map(sr => `
               <div class="review-sub-row ${sr.ok ? 'sub-ok' : 'sub-bad'}">
                 <span class="sub-q-text">Camp ${sr.pos + 1}:</span>
@@ -1507,6 +1531,91 @@ const UIController = (() => {
       `;
       reviewList.appendChild(div);
     });
+    _applyReviewMode();
+  }
+
+  // Default OFF = paged (one item visible at a time, nav-grid clicks change it)
+  // ON = stacked (all items visible at once)
+  let _reviewPaged = true;
+  let _reviewCurrent = 0;
+
+  function _applyReviewMode() {
+    const items = reviewList.querySelectorAll('.review-item');
+    if (_reviewPaged) {
+      reviewList.classList.add('review-list-paged');
+      items.forEach((el, i) => {
+        el.classList.toggle('hidden', i !== _reviewCurrent);
+      });
+      _ensureReviewStepperPaged(items.length);
+    } else {
+      reviewList.classList.remove('review-list-paged');
+      items.forEach(el => el.classList.remove('hidden'));
+      _removeReviewStepperPaged();
+    }
+    _refreshReviewNavCurrent();
+  }
+
+  function _ensureReviewStepperPaged(total) {
+    let stepper = document.getElementById('review-paged-stepper');
+    if (!stepper) {
+      stepper = document.createElement('div');
+      stepper.id = 'review-paged-stepper';
+      stepper.className = 'review-paged-stepper';
+      stepper.innerHTML = `
+        <button type="button" class="btn btn-secondary" id="review-paged-prev">← Inapoi</button>
+        <span class="review-paged-pos" id="review-paged-pos">1 / 1</span>
+        <button type="button" class="btn btn-secondary" id="review-paged-next">Inainte →</button>
+      `;
+      reviewList.parentNode.insertBefore(stepper, reviewList);
+      stepper.querySelector('#review-paged-prev').addEventListener('click', () => _gotoReviewItem(_reviewCurrent - 1));
+      stepper.querySelector('#review-paged-next').addEventListener('click', () => _gotoReviewItem(_reviewCurrent + 1));
+    }
+    _updateReviewStepperLabel(total);
+  }
+
+  function _updateReviewStepperLabel(total) {
+    const pos = document.getElementById('review-paged-pos');
+    if (pos) pos.textContent = `${_reviewCurrent + 1} / ${total}`;
+    const prev = document.getElementById('review-paged-prev');
+    const next = document.getElementById('review-paged-next');
+    if (prev) prev.disabled = _reviewCurrent <= 0;
+    if (next) next.disabled = _reviewCurrent >= total - 1;
+  }
+
+  function _removeReviewStepperPaged() {
+    const stepper = document.getElementById('review-paged-stepper');
+    if (stepper) stepper.remove();
+  }
+
+  function _gotoReviewItem(idx) {
+    const items = reviewList.querySelectorAll('.review-item');
+    if (idx < 0 || idx >= items.length) return;
+    _reviewCurrent = idx;
+    if (_reviewPaged) {
+      items.forEach((el, i) => el.classList.toggle('hidden', i !== _reviewCurrent));
+      _updateReviewStepperLabel(items.length);
+      reviewList.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    } else {
+      items[idx].scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
+    _refreshReviewNavCurrent();
+  }
+
+  function _refreshReviewNavCurrent() {
+    const cells = document.querySelectorAll('#review-nav-grid .review-nav-btn');
+    cells.forEach((cell, i) => cell.classList.toggle('rn-current', _reviewPaged && i === _reviewCurrent));
+  }
+
+  function initReviewModeToggle() {
+    const t = document.getElementById('review-single-page-toggle');
+    if (!t) return;
+    // OFF = paged (default); ON = stacked
+    _reviewPaged = !t.checked;
+    t.addEventListener('change', () => {
+      _reviewPaged = !t.checked;
+      _reviewCurrent = 0;
+      _applyReviewMode();
+    });
   }
 
   function _buildReviewNavGrid(graded) {
@@ -1523,25 +1632,145 @@ const UIController = (() => {
       else if (g.correct)  btn.classList.add('rn-correct');
       else if (g.score > 0) btn.classList.add('rn-partial');
       else                 btn.classList.add('rn-incorrect');
-      // Click scrolls to corresponding review item
-      btn.addEventListener('click', () => {
-        const items = document.querySelectorAll('#review-list .review-item');
-        if (items[i]) items[i].scrollIntoView({ behavior: 'smooth', block: 'center' });
-      });
+      // Marked indicator (amber outline layered on top of result colour)
+      if (g.marked) btn.classList.add('rn-marked');
+      btn.addEventListener('click', () => _gotoReviewItem(i));
       grid.appendChild(btn);
     });
   }
 
-  function toggleReview(graded) {
-    const hidden = reviewPanel.classList.contains('hidden');
-    if (hidden) {
-      renderReview(graded);
-      _buildReviewNavGrid(graded);
-      reviewPanel.classList.remove('hidden');
-      document.getElementById('review-btn').textContent = 'Ascunde Statistici';
-    } else {
-      reviewPanel.classList.add('hidden');
-      document.getElementById('review-btn').textContent = 'Statistici Raspuns';
+  // ── Single-page stacked render ────────────────────────────
+  // Restores answer DOM refs to the static markup ones so subsequent single-question renders work
+  function _restoreDefaultAnswerRefs() {
+    questionText      = _defaultAnswerRefs.questionText;
+    questionHint      = _defaultAnswerRefs.questionHint;
+    mcOptions         = _defaultAnswerRefs.mcOptions;
+    mcMultiOptions    = _defaultAnswerRefs.mcMultiOptions;
+    matchingWrap      = _defaultAnswerRefs.matchingWrap;
+    imageOrderWrap    = _defaultAnswerRefs.imageOrderWrap;
+    labelOrderWrap    = _defaultAnswerRefs.labelOrderWrap;
+    headerFillWrap    = _defaultAnswerRefs.headerFillWrap;
+    oeInputWrap       = _defaultAnswerRefs.oeInputWrap;
+    oeInput           = _defaultAnswerRefs.oeInput;
+    questionImageWrap = _defaultAnswerRefs.questionImageWrap;
+    questionImageEl   = _defaultAnswerRefs.questionImageEl;
+  }
+
+  // Builds a per-question card and swaps refs to its children, so calling renderQuestion writes into THIS card
+  function _swapRefsToCard(cardRoot) {
+    questionText      = cardRoot.querySelector('.sp-question-text');
+    questionHint      = cardRoot.querySelector('.sp-question-hint');
+    questionImageWrap = cardRoot.querySelector('.sp-question-image-wrap');
+    questionImageEl   = cardRoot.querySelector('.sp-question-image');
+    mcOptions         = cardRoot.querySelector('.sp-mc-options');
+    mcMultiOptions    = cardRoot.querySelector('.sp-mc-multi-options');
+    matchingWrap      = cardRoot.querySelector('.sp-matching-wrap');
+    imageOrderWrap    = cardRoot.querySelector('.sp-image-order-wrap');
+    labelOrderWrap    = cardRoot.querySelector('.sp-label-order-wrap');
+    headerFillWrap    = cardRoot.querySelector('.sp-header-fill-wrap');
+    oeInputWrap       = cardRoot.querySelector('.sp-oe-input-wrap');
+    oeInput           = cardRoot.querySelector('.sp-oe-input');
+  }
+
+  // Renders ALL questions stacked in question-area. Each card is independent and writes back to its own session index.
+  // callbacks: { onAnswer(idx, value, label), onClear(idx), onMarkToggle(idx), getAnswer(idx), isMarked(idx) }
+  function renderAllStacked(questions, callbacks) {
+    if (!questionArea) return;
+    // Hide the default question-card and nav-btns; we render our own stack
+    const defaultCard = questionArea.querySelector('.question-card');
+    if (defaultCard) defaultCard.classList.add('hidden');
+    const defaultNavBtns = questionArea.querySelector('.question-nav-btns');
+    if (defaultNavBtns) defaultNavBtns.classList.add('hidden');
+
+    // Clear any previous stacked wrapper
+    let stackWrap = questionArea.querySelector('.sp-stack');
+    if (stackWrap) stackWrap.remove();
+    stackWrap = document.createElement('div');
+    stackWrap.className = 'sp-stack';
+    questionArea.appendChild(stackWrap);
+
+    questions.forEach((q, idx) => {
+      const card = document.createElement('div');
+      card.className = 'card question-card sp-question-card';
+      card.dataset.spIndex = String(idx);
+      card.id = `sp-card-${idx}`;
+      card.innerHTML = `
+        <div class="sp-question-header">
+          <span class="sp-question-num">Q${idx + 1} / ${questions.length}</span>
+          <span class="sp-question-topic">${_esc(q._topicName || '')}</span>
+          <button class="sp-mark-btn" type="button" aria-pressed="${callbacks.isMarked(idx) ? 'true' : 'false'}">
+            <svg class="mark-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M4 4h16v10l-8 3-8-3V4z"/>
+            </svg>
+            <span class="sp-mark-label">${callbacks.isMarked(idx) ? 'Marked' : 'Marcheaza'}</span>
+          </button>
+        </div>
+        <h2 class="question-text sp-question-text"></h2>
+        <p class="question-hint sp-question-hint hidden"></p>
+        <div class="question-image-wrap sp-question-image-wrap hidden">
+          <img class="question-image sp-question-image" alt="" />
+        </div>
+        <div class="mc-options sp-mc-options hidden"></div>
+        <div class="mc-options sp-mc-multi-options hidden">
+          <p class="mc-multi-badge">Selecteaza toate variantele corecte</p>
+        </div>
+        <div class="matching-wrap sp-matching-wrap hidden"></div>
+        <div class="image-order-wrap sp-image-order-wrap hidden"></div>
+        <div class="label-order-wrap sp-label-order-wrap hidden"></div>
+        <div class="header-fill-wrap sp-header-fill-wrap hidden"></div>
+        <div class="oe-input-wrap sp-oe-input-wrap hidden">
+          <input type="text" class="oe-input sp-oe-input" autocomplete="off" />
+        </div>
+      `;
+      stackWrap.appendChild(card);
+
+      // Mark button per-card
+      const markBtnEl = card.querySelector('.sp-mark-btn');
+      const markLabelEl = card.querySelector('.sp-mark-label');
+      if (callbacks.isMarked(idx)) markBtnEl.classList.add('is-marked');
+      markBtnEl.addEventListener('click', () => {
+        callbacks.onMarkToggle(idx);
+        const nowMarked = callbacks.isMarked(idx);
+        markBtnEl.classList.toggle('is-marked', nowMarked);
+        markBtnEl.setAttribute('aria-pressed', nowMarked ? 'true' : 'false');
+        markLabelEl.textContent = nowMarked ? 'Marked' : 'Marcheaza';
+      });
+
+      // Swap refs to this card's children, then call renderQuestion as if it were the only question
+      _swapRefsToCard(card);
+      const saved = callbacks.getAnswer(idx);
+      renderQuestion(
+        q,
+        saved,
+        (value, label) => callbacks.onAnswer(idx, value, label),
+        ()             => callbacks.onClear(idx),
+        /* onEnterNavigate */ null
+      );
+    });
+
+    // Restore defaults so any later single-question render works
+    _restoreDefaultAnswerRefs();
+  }
+
+  // Removes the stacked DOM and restores the default question-card visibility (used when leaving the quiz screen)
+  function teardownStacked() {
+    if (!questionArea) return;
+    const stackWrap = questionArea.querySelector('.sp-stack');
+    if (stackWrap) stackWrap.remove();
+    const defaultCard = questionArea.querySelector('.question-card');
+    if (defaultCard) defaultCard.classList.remove('hidden');
+    const defaultNavBtns = questionArea.querySelector('.question-nav-btns');
+    if (defaultNavBtns) defaultNavBtns.classList.remove('hidden');
+    _restoreDefaultAnswerRefs();
+  }
+
+  // Highlights the currently-focused stacked card (used when a nav-grid cell is clicked)
+  function highlightStackedCard(idx) {
+    document.querySelectorAll('.sp-question-card.sp-focused').forEach(c => c.classList.remove('sp-focused'));
+    const target = document.getElementById('sp-card-' + idx);
+    if (target) {
+      target.classList.add('sp-focused');
+      target.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }
   }
 
@@ -1554,19 +1783,17 @@ const UIController = (() => {
 
   return {
     showScreen,
-    renderTopics, clearTopicSelection, initStepper, initSortControls, getSetupOptions, showTopicError,
+    renderTopics, initStepper, initTopicSearch, initSelectAllBtn, getSetupOptions, showTopicError,
     updateTopBar, updateTimer,
-    renderQuestion, buildNavGrid, refreshNavGrid,
-    showModal, hideModal,
-    renderResults, toggleReview,
+    renderQuestion, renderAllStacked, teardownStacked, highlightStackedCard, buildNavGrid, refreshNavGrid,
+    showModal,
+    renderResults, initReviewModeToggle,
     prevBtn, nextBtn,
     imageOrderWrap, labelOrderWrap,
     markBtn:       document.getElementById('mark-btn'),
     markLabel:     document.getElementById('mark-label'),
     submitQuizBtn: document.getElementById('submit-quiz-btn'),
     startBtn:      document.getElementById('start-btn'),
-    reviewBtn:     document.getElementById('review-btn'),
-    exportBtn:     document.getElementById('export-btn'),
     restartBtn:    document.getElementById('restart-btn')
   };
 })();
@@ -1578,38 +1805,132 @@ const UIController = (() => {
    ============================================================ */
 const App = (() => {
 
+  const SESSIONS_KEY = 'acadobre.recentSessions';
+  const MAX_RECENT_SESSIONS = 20;
+
   let _results = null;
+  let _singlePage = false;
+  let _sessionQuestions = null;
 
   function init() {
     const topics = QuestionManager.getTopics();
-    UIController.renderTopics(topics);
     UIController.initStepper();
-    UIController.initSortControls(topics);
+    UIController.initTopicSearch(topics);
+    UIController.initSelectAllBtn();
+    UIController.initReviewModeToggle();
+    _refreshLastSessionCard();
     _bindEvents();
+  }
+
+  // localStorage = persists across refresh and tab close.
+  // Stores an array of up to MAX_RECENT_SESSIONS results, newest first.
+  function _loadRecentSessions() {
+    try {
+      const raw = localStorage.getItem(SESSIONS_KEY);
+      if (!raw) return [];
+      const parsed = JSON.parse(raw);
+      return Array.isArray(parsed) ? parsed : [];
+    } catch (e) {
+      return [];
+    }
+  }
+
+  function _saveRecentSession(results) {
+    try {
+      const existing = _loadRecentSessions();
+      const entry = {
+        savedAt: new Date().toISOString(),
+        results: results
+      };
+      const updated = [entry, ...existing].slice(0, MAX_RECENT_SESSIONS);
+      localStorage.setItem(SESSIONS_KEY, JSON.stringify(updated));
+    } catch (e) {
+      // Quota / private mode / disabled storage — silent fail
+    }
+  }
+
+  function _refreshLastSessionCard() {
+    const card = document.getElementById('last-session-card');
+    const list = document.getElementById('last-sessions-list');
+    if (!card || !list) return;
+    // Card is always visible — never hidden. Empty list = no entries yet.
+    card.classList.remove('hidden');
+    const sessions = _loadRecentSessions();
+    list.innerHTML = '';
+    sessions.forEach((entry, i) => {
+      const r = entry.results || {};
+      const date = entry.savedAt ? new Date(entry.savedAt) : null;
+      const dateLabel = date ? _formatRelative(date) : '';
+      const m = Math.floor((r.elapsed || 0) / 60);
+      const s = (r.elapsed || 0) % 60;
+      const timeLabel = m > 0 ? `${m}m ${s}s` : `${s}s`;
+      const li = document.createElement('li');
+      li.className = 'last-session-item' + (i === 0 ? ' is-latest' : '');
+      li.innerHTML = `
+        <div class="last-session-top">
+          <span class="last-session-score">${r.pct || 0}%</span>
+          <span class="last-session-date">${dateLabel}</span>
+        </div>
+        <div class="last-session-meta">
+          <span>${r.total || 0} intrebari</span>
+          <span>${timeLabel}</span>
+        </div>
+        <button type="button" class="last-session-review-btn">${i === 0 ? 'Vezi ultima sesiune' : 'Vezi sesiunea'}</button>
+      `;
+      li.querySelector('.last-session-review-btn').addEventListener('click', () => {
+        _results = r;
+        UIController.renderResults(_results);
+        UIController.showScreen('results');
+      });
+      list.appendChild(li);
+    });
+  }
+
+  function _formatRelative(date) {
+    const now = Date.now();
+    const diff = Math.round((now - date.getTime()) / 1000);
+    if (diff < 60)    return 'acum';
+    if (diff < 3600)  return Math.floor(diff / 60) + 'm';
+    if (diff < 86400) return Math.floor(diff / 3600) + 'h';
+    if (diff < 86400 * 7) return Math.floor(diff / 86400) + 'z';
+    return date.toLocaleDateString('ro-RO');
   }
 
   function _bindEvents() {
     UIController.startBtn.addEventListener('click', _startQuiz);
-
-    // Alt mode: toggle between main and alt question sets
-    const _altBtn = document.getElementById('alt-mode-btn');
-    _altBtn.addEventListener('click', () => {
-      const nowAlt = _altBtn.classList.toggle('alt-active');
-      QuestionManager.setAltMode(nowAlt);
-      _altBtn.textContent = nowAlt ? '← Intrebari Principale' : '📂 Teste';
-      const topics = QuestionManager.getTopics();
-      UIController.renderTopics(topics);
-      UIController.initSortControls(topics);
-      // Clear any topic selection from the other set
-      UIController.clearTopicSelection();
-    });
-
 
     UIController.prevBtn.addEventListener('click', () => _go(-1));
     UIController.nextBtn.addEventListener('click', () => {
       const isLast = QuizSession.getCurrentIndex() === QuizSession.getTotalCount() - 1;
       if (isLast) _trySubmit(); else _go(+1);
     });
+
+    // In-quiz single-page toggle: runtime mode switch
+    const spToggle = document.getElementById('single-page-mode-toggle');
+    if (spToggle) {
+      spToggle.addEventListener('change', () => {
+        if (!_sessionQuestions) return;
+        const enable = spToggle.checked;
+        if (enable === _singlePage) return;
+        // Save the current single-question answer before swapping render
+        if (!_singlePage) _saveCurrentIfNeeded();
+        _singlePage = enable;
+        if (_singlePage) {
+          _renderAllStacked(_sessionQuestions);
+          UIController.updateTopBar(_sessionQuestions.length - 1, _sessionQuestions.length, '');
+          if (UIController.prevBtn && UIController.prevBtn.parentElement) {
+            UIController.prevBtn.parentElement.classList.add('hidden');
+          }
+        } else {
+          UIController.teardownStacked();
+          if (UIController.prevBtn && UIController.prevBtn.parentElement) {
+            UIController.prevBtn.parentElement.classList.remove('hidden');
+          }
+          _renderCurrent();
+        }
+        _refreshNav();
+      });
+    }
 
     UIController.markBtn.addEventListener('click', () => {
       const idx    = QuizSession.getCurrentIndex();
@@ -1622,7 +1943,19 @@ const App = (() => {
     document.getElementById('abandon-btn').addEventListener('click', () => {
       UIController.showModal(
         'Progresul curent se va pierde. Esti sigur ca vrei sa te intorci la meniu?',
-        () => { QuizSession.stop(); UIController.showScreen('setup'); },
+        () => {
+          QuizSession.stop();
+          if (_singlePage) {
+            UIController.teardownStacked();
+            _singlePage = false;
+            if (UIController.prevBtn && UIController.prevBtn.parentElement) {
+              UIController.prevBtn.parentElement.classList.remove('hidden');
+            }
+          }
+          _sessionQuestions = null;
+          _refreshLastSessionCard();
+          UIController.showScreen('setup');
+        },
         null,
         'Inapoi la meniu?',
         'Da, inapoi'
@@ -1635,6 +1968,8 @@ const App = (() => {
       if (!screen || screen.id !== 'screen-quiz') return;
       // Don't intercept while a modal is open
       if (!document.getElementById('confirm-modal').classList.contains('hidden')) return;
+      // In single-page mode, all questions are visible at once — prev/next/enter-submit don't apply
+      if (_singlePage) return;
 
       const activeEl  = document.activeElement;
       const isOEFocused = activeEl && activeEl.id === 'oe-input';
@@ -1687,9 +2022,10 @@ const App = (() => {
 
     UIController.submitQuizBtn.addEventListener('click', _trySubmit);
 
-    UIController.reviewBtn.addEventListener('click',  () => UIController.toggleReview(_results.graded));
-    UIController.exportBtn.addEventListener('click',  _exportResults);
-    UIController.restartBtn.addEventListener('click', () => UIController.showScreen('setup'));
+    UIController.restartBtn.addEventListener('click', () => {
+      _refreshLastSessionCard();
+      UIController.showScreen('setup');
+    });
   }
 
   function _startQuiz() {
@@ -1701,16 +2037,53 @@ const App = (() => {
 
     if (opts.shuffle) questions = questions.map(q => QuestionManager.shuffleMCOptions(q));
 
+    _singlePage = false;
+    _sessionQuestions = questions;
+    // Reset the in-quiz toggle to its OFF state
+    const spToggle = document.getElementById('single-page-mode-toggle');
+    if (spToggle) spToggle.checked = false;
+
     QuizSession.start(questions, elapsed => UIController.updateTimer(elapsed));
 
     UIController.buildNavGrid(questions.length, index => {
-      _saveCurrentIfNeeded();
-      QuizSession.navigateTo(index);
-      _renderCurrent();
+      if (_singlePage) {
+        UIController.highlightStackedCard(index);
+      } else {
+        _saveCurrentIfNeeded();
+        QuizSession.navigateTo(index);
+        _renderCurrent();
+      }
     });
 
     UIController.showScreen('quiz');
+
+    if (UIController.prevBtn && UIController.prevBtn.parentElement) {
+      UIController.prevBtn.parentElement.classList.remove('hidden');
+    }
+
     _renderCurrent();
+  }
+
+  function _renderAllStacked(questions) {
+    UIController.renderAllStacked(questions, {
+      onAnswer: (idx, value, label) => {
+        QuizSession.navigateTo(idx);
+        QuizSession.saveCurrentAnswer(value, label);
+        _refreshNav();
+      },
+      onClear: (idx) => {
+        QuizSession.navigateTo(idx);
+        QuizSession.clearCurrentAnswer();
+        _refreshNav();
+      },
+      onMarkToggle: (idx) => {
+        QuizSession.navigateTo(idx);
+        QuizSession.toggleMark(idx);
+        _refreshNav();
+      },
+      getAnswer: (idx) => QuizSession.getAnswer(idx),
+      isMarked:  (idx) => QuizSession.isMarked(idx)
+    });
   }
 
   function _renderCurrent() {
@@ -1794,36 +2167,19 @@ const App = (() => {
 
   function _doSubmit() {
     _results = QuizSession.submitAll();
+    if (_singlePage) {
+      UIController.teardownStacked();
+      _singlePage = false;
+      if (UIController.prevBtn && UIController.prevBtn.parentElement) {
+        UIController.prevBtn.parentElement.classList.remove('hidden');
+      }
+    }
+    _sessionQuestions = null;
+    _saveRecentSession(_results);
     UIController.renderResults(_results);
     UIController.showScreen('results');
   }
 
-  function _exportResults() {
-    if (!_results) return;
-    const payload = {
-      exportedAt:     new Date().toISOString(),
-      score:          `${_results.correct}/${_results.total} (${_results.pct}%)`,
-      elapsedSeconds: _results.elapsed,
-      topics:         _results.topics,
-      answers:        _results.graded.map((g, i) => ({
-        number:        i + 1,
-        question:      g.question.text,
-        topic:         g.topicName,
-        type:          g.question.type,
-        yourAnswer:    g.userDisplay,
-        score:         g.score,
-        correct:       g.correct,
-        skipped:       g.skipped,
-        correctAnswer: g.correctLabel
-      }))
-    };
-    const blob = new Blob([JSON.stringify(payload, null, 2)], { type: 'application/json' });
-    const url  = URL.createObjectURL(blob);
-    const a    = document.createElement('a');
-    a.href = url; a.download = `acadobre-${Date.now()}.json`;
-    document.body.appendChild(a); a.click();
-    document.body.removeChild(a); URL.revokeObjectURL(url);
-  }
 
   return { init };
 })();
