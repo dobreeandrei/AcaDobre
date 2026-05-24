@@ -80,6 +80,9 @@ body {
   z-index: 50;
 }
 
+/* Mobile-only inline logo lives inside .app-header. Hidden by default. */
+#setup-logo-mobile { display: none; }
+
 #setup-titles {
   position: absolute;
   top: 1.5rem;
@@ -936,9 +939,19 @@ body {
   }
   .q-sidebar-card { padding: .85rem; gap: .65rem; max-height: 40vh; }
 
-  /* Nav grid: auto-fill picks col count; tighten gap + cell size for mobile */
-  .q-nav-grid { gap: .3rem; }
-  .q-nav-btn  { font-size: .65rem; border-radius: 6px; }
+  /* Nav grid: compact 5x N grid on mobile to keep cells square and tap-friendly */
+  .q-nav-grid {
+    grid-template-columns: repeat(5, 1fr);
+    grid-auto-rows: 2.25rem;
+    gap: .3rem;
+  }
+  .q-nav-btn {
+    aspect-ratio: 1;
+    font-size: .75rem;
+    border-radius: 6px;
+    min-height: 0;
+    height: auto;
+  }
 
   /* Question card: grow freely, never clip content */
   .question-card { max-height: none; overflow-y: visible; min-height: unset; padding: .9rem; gap: .85rem; }
@@ -1005,6 +1018,17 @@ body {
   /* Review layout: stacked */
   .review-layout      { grid-template-columns: 1fr; }
   .review-nav-sidebar { position: static; max-height: 40vh; }
+  .review-nav-grid {
+    grid-template-columns: repeat(5, 1fr);
+    grid-auto-rows: 2.25rem;
+    gap: .3rem;
+  }
+  .review-nav-btn {
+    aspect-ratio: 1;
+    font-size: .75rem;
+    border-radius: 6px;
+    height: auto;
+  }
   .review-item        { padding: .85rem .9rem; }
 
   /* Modal */
@@ -1428,12 +1452,12 @@ body {
   font-size: .65rem;
   font-weight: 700;
   cursor: pointer;
-  transition: opacity var(--transition), transform var(--transition);
+  transition: opacity var(--transition);
   font-family: 'Inter', system-ui, sans-serif;
   font-variant-numeric: tabular-nums;
   position: relative;
 }
-.review-nav-btn:hover { opacity: .8; transform: scale(1.08); }
+.review-nav-btn:hover { opacity: .85; }
 .review-nav-btn.rn-correct   { background: var(--green);  color: #0d0d12; }
 .review-nav-btn.rn-incorrect { background: var(--red);    color: #fff; }
 .review-nav-btn.rn-partial   { background: #f97316;       color: #0d0d12; }
@@ -1644,6 +1668,78 @@ body {
 
 /* Narrow screen / mobile: stack search below title; shrink logo; fit-to-content sessions; 3-col topics */
 @media (max-width: 800px) {
-  .app-header { flex-wrap: wrap; }
-  .app-header-search { width: 100%; min-width: 0; margin-left: 0; }
+  /* Container: no extra left padding on mobile (small logo doesn't need clearance) */
+  .setup-container {
+    padding: .85rem .75rem .75rem;
+    gap: .65rem;
+  }
+
+  /* Search bar drops below title block */
+  .app-header { flex-wrap: wrap; gap: .65rem; }
+  .app-header-search { width: 100%; min-width: 0; margin-left: 0; order: 99; }
+
+  /* Mobile: hide the absolute desktop logo, show the inline mobile one inside the header */
+  #setup-logo { display: none; }
+  #setup-logo-mobile {
+    display: flex;
+    width: 44px; height: 44px;
+    border-radius: 11px;
+    font-size: 1.5rem;
+    box-shadow: 0 0 16px var(--accent-glow);
+    flex-shrink: 0;
+  }
+  #setup-titles { display: none; }
+  .app-header-titles-fallback { display: block; flex: 1 1 auto; min-width: 0; }
+  /* Title sits inline next to the small logo */
+  .app-header-titles-fallback .app-title { font-size: 1.4rem; }
+  .app-header-titles-fallback .app-sub   { font-size: .78rem; }
+
+  /* Header layout: logo + title inline (row), search wraps below */
+  .app-header { align-items: center; flex-wrap: wrap; gap: .65rem; }
+
+  /* Setup main row stacks: topics on top, last-sessions below */
+  .setup-main-row {
+    flex-direction: column;
+    flex: 1 1 auto;
+    min-height: 0;
+  }
+
+  /* Topics card scrolls independently — 3 columns of chips */
+  #topics-card {
+    flex: 1 1 auto;
+    min-height: 12rem;
+    overflow-y: auto;
+  }
+  .topic-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: .45rem;
+  }
+  .topic-chip { padding: .55rem .55rem; }
+  .topic-chip-name { font-size: .75rem; line-height: 1.2; }
+  .topic-chip-count { font-size: .65rem; }
+
+  /* Last-sessions: auto-height (sizes to content) */
+  #last-session-card {
+    flex: 0 0 auto;
+    width: auto;
+    height: auto;
+    max-height: 14rem;
+    align-self: stretch;
+    box-shadow: none;
+  }
+  #last-session-card #last-sessions-list {
+    overflow-y: auto;
+  }
+
+  /* Start button: version subtitle hidden on mobile (would overlap "Hai sa ii dam") */
+  #start-btn .start-btn-version {
+    font-size: .58rem;
+    right: .65rem;
+    opacity: .45;
+  }
+}
+
+/* Very narrow phones: drop version subtitle entirely */
+@media (max-width: 480px) {
+  #start-btn .start-btn-version { display: none; }
 }
