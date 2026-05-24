@@ -98,9 +98,9 @@ body {
 /* Hide the in-header fallback title block on wide viewports (where #setup-titles handles it) */
 .app-header-titles-fallback { display: none; }
 
-/* Below 1700px viewport, the logo+title group runs into the centered column area.
+/* Below 1700px landscape viewport, the logo+title group runs into the centered column area.
    Hide the gutter title and show the fallback inside the header instead. */
-@media (max-width: 1700px) {
+@media (orientation: landscape) and (max-width: 1700px) {
   #setup-titles { display: none; }
   .app-header-titles-fallback { display: block; }
   /* Logo falls back tighter to corner */
@@ -251,8 +251,8 @@ body {
   border-color: var(--accent);
 }
 
-/* Mid-narrow viewports stack the main row but keep desktop logo + larger sizing */
-@media (min-width: 801px) and (max-width: 1100px) {
+/* Mid-narrow landscape viewports stack the main row but keep desktop logo + larger sizing */
+@media (orientation: landscape) and (max-width: 1100px) {
   .setup-main-row { flex-direction: column; }
   .setup-left-col { flex: 1 1 auto; }
   #last-session-card { width: auto; flex: 0 0 auto; max-height: 14rem; align-self: stretch; }
@@ -322,10 +322,10 @@ body {
 .app-title  { font-family: 'Inter', system-ui, sans-serif; font-size: 2.4rem; font-weight: 700; line-height: 1.05; letter-spacing: -0.02em; }
 .app-sub    { color: var(--text-mid); font-size: 1rem; font-weight: 300; margin-top: .15rem; }
 
-/* On medium screens where the centered container touches the viewport edges
+/* On medium landscape screens where the centered container touches the viewport edges
    but the desktop logo is still positioned absolute, reserve left padding
    so the corner logo doesn't overlap the title */
-@media (min-width: 801px) and (max-width: 1280px) {
+@media (orientation: landscape) and (max-width: 1280px) {
   .setup-container { padding-left: 5.5rem; }
 }
 
@@ -893,9 +893,9 @@ body {
 /* ── Utility ────────────────────────────────────────────────── */
 .hidden { display: none !important; }
 /* ╔══════════════════════════════════════════════════════════════
-   ║  MOBILE  (≤ 680px)
+   ║  MOBILE  (portrait orientation)
    ╚══════════════════════════════════════════════════════════════ */
-@media (max-width: 680px) {
+@media (orientation: portrait) {
 
   /* ── Base spacing ──
      Extra bottom padding clears the fixed navigation bar (≈70px)
@@ -1037,9 +1037,9 @@ body {
 }
 
 /* ╔══════════════════════════════════════════════════════════════
-   ║  SMALL MOBILE  (≤ 400px)
+   ║  SMALL MOBILE  (portrait + narrow width)
    ╚══════════════════════════════════════════════════════════════ */
-@media (max-width: 400px) {
+@media (orientation: portrait) and (max-width: 400px) {
   .app-title   { font-size: 1.3rem; }
 }
 
@@ -1667,16 +1667,19 @@ body {
   margin-bottom: .75rem;
 }
 
-/* Narrow screen / mobile: stack search below title; shrink logo; fit-to-content sessions; 3-col topics */
-@media (max-width: 800px) {
-  /* Container: no extra left padding on mobile (small logo doesn't need clearance) */
+/* PORTRAIT orientation (any device held vertically) gets the mobile layout.
+   LANDSCAPE gets the desktop layout regardless of device. */
+@media (orientation: portrait) {
+  /* Release the 100vh fixed height — let content flow naturally so cards don't overlap */
   .setup-container {
-    padding: .85rem .75rem .75rem;
+    height: auto;
+    min-height: 100vh;
+    padding: .85rem .75rem 1rem;
     gap: .65rem;
   }
 
   /* Search bar drops below title block */
-  .app-header { flex-wrap: wrap; gap: .65rem; }
+  .app-header { flex-wrap: wrap; gap: .75rem; }
   .app-header-search { width: 100%; min-width: 0; margin-left: 0; order: 99; }
 
   /* Mobile: hide the absolute desktop logo, show the inline mobile one inside the header */
@@ -1701,15 +1704,16 @@ body {
   /* Setup main row stacks: topics on top, last-sessions below */
   .setup-main-row {
     flex-direction: column;
-    flex: 1 1 auto;
+    flex: 0 0 auto;
     min-height: 0;
+    gap: .65rem;
   }
 
-  /* Topics card scrolls independently — 3 columns of chips */
+  /* Topics card: natural height (page scrolls as a whole, no nested scroll on mobile) */
   #topics-card {
-    flex: 1 1 auto;
-    min-height: 12rem;
-    overflow-y: auto;
+    flex: 0 0 auto;
+    min-height: 0;
+    overflow-y: visible;
   }
   .topic-grid {
     grid-template-columns: repeat(3, 1fr);
@@ -1719,14 +1723,15 @@ body {
   .topic-chip-name { font-size: .75rem; line-height: 1.2; }
   .topic-chip-count { font-size: .65rem; }
 
-  /* Last-sessions: auto-height (sizes to content) */
+  /* Last-sessions: auto-height, sits below topics+options in the stack with clear gap */
   #last-session-card {
     flex: 0 0 auto;
     width: auto;
     height: auto;
-    max-height: 14rem;
+    max-height: 18rem;
     align-self: stretch;
     box-shadow: none;
+    margin-top: 0;
   }
   #last-session-card #last-sessions-list {
     overflow-y: auto;
@@ -1740,7 +1745,7 @@ body {
   }
 }
 
-/* Very narrow phones: drop version subtitle entirely */
-@media (max-width: 480px) {
+/* Very narrow portrait phones: drop version subtitle entirely */
+@media (orientation: portrait) and (max-width: 480px) {
   #start-btn .start-btn-version { display: none; }
 }
