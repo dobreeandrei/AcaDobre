@@ -2,7 +2,7 @@
    AcaDobre — Dark Theme with Purple Accents
    ============================================================ */
 
-@import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600&family=Inter:wght@500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
 
 /* ── Variables ─────────────────────────────────────────────── */
 :root {
@@ -36,7 +36,7 @@
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 html { scroll-behavior: smooth; }
 body {
-  font-family: 'DM Sans', system-ui, sans-serif;
+  font-family: 'Inter', system-ui, sans-serif;
   background: var(--bg);
   color: var(--text);
   min-height: 100vh;
@@ -53,14 +53,225 @@ body {
 
 /* Setup & Results: narrow centered */
 .setup-container {
-  max-width: 900px;
+  max-width: 1280px;
+  margin: 0 auto;
+  position: relative;
+  /* Pin to viewport so options card + start button stay at bottom; topics card scrolls in the middle */
+  height: 100vh;
+  height: 100dvh;
+  padding: .75rem 1rem 1rem;
   display: flex;
   flex-direction: column;
-  gap: 1.25rem;
+  gap: .75rem;
   animation: fadeUp .3s ease both;
 }
 
-/* Quiz: wider to fit sidebar */
+/* Setup screen overrides the default .screen padding so .setup-container can own the viewport */
+#screen-setup { padding: 0; position: relative; }
+
+/* Logo: anchored to the left gutter (the empty space between viewport left edge and the
+   centered .setup-container). Its CENTER aligns horizontally to the gutter midpoint and
+   vertically to the topics-card top edge. Falls back to top-left corner on narrow viewports. */
+#setup-logo {
+  position: absolute;
+  /* Vertical: center of logo at ~setup-container padding-top + header height + gap.
+     Logo top = (target center) - (logo height / 2) */
+  top: calc(.75rem + 4rem - 70px + .75rem);
+  /* Horizontal: midpoint of left gutter, then back off half the logo width to centre */
+  left: calc((100vw - 1280px) / 4 - 70px);
+  z-index: 50;
+}
+
+/* On viewports where the gutter is too narrow to fit the 140px logo,
+   fall back to the corner anchor */
+@media (max-width: 1620px) {
+  #setup-logo { top: 1rem; left: 1rem; }
+}
+
+/* Setup main row: left column (topics + options) + right column (last sessions) */
+.setup-main-row {
+  display: flex;
+  gap: 1rem;
+  flex: 1 1 0;
+  min-height: 0;
+  align-items: stretch;
+}
+
+/* Left column stacks topics + options. Topics flex-grows, options stays its natural height */
+.setup-left-col {
+  flex: 1 1 auto;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  min-height: 0;
+}
+
+/* Topics card grows to fill remaining left-col space, scrolls internally */
+#topics-card {
+  flex: 1 1 auto;
+  min-width: 0;
+  min-height: 0;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: .65rem;
+}
+
+/* Options card stays its natural height inside the left column */
+#options-card { flex: 0 0 auto; padding: .85rem 1.1rem; }
+
+/* Header row inside topics card: label on left, select-all on right */
+.topics-card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: .5rem;
+}
+.topics-card-header .section-label { margin: 0; }
+
+/* Last sessions: right-column panel, fixed length next to topics+options.
+   Height matches the row, slightly shorter top and bottom — content does NOT determine height. */
+#last-session-card {
+  flex: 0 0 16rem;
+  width: 16rem;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  align-self: center;
+  height: calc(100% - 2rem);
+  background: var(--bg-sidebar);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: .85rem;
+  overflow: hidden;
+}
+.last-session-header {
+  display: flex;
+  flex-direction: column;
+  gap: .5rem;
+  margin-bottom: .6rem;
+  flex-shrink: 0;
+}
+#last-session-card #last-sessions-list {
+  overflow-y: auto;
+  min-height: 0;
+  flex: 1 1 auto;
+}
+#last-session-card #refresh-sessions-btn {
+  margin-top: .75rem;
+  flex-shrink: 0;
+  align-self: stretch;
+}
+
+.refresh-sessions-btn {
+  padding: .35rem .55rem;
+  font-size: .72rem;
+  font-weight: 600;
+  font-family: 'Inter', system-ui, sans-serif;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  color: var(--text-dim);
+  cursor: pointer;
+  transition: border-color var(--transition), color var(--transition);
+}
+.refresh-sessions-btn:hover {
+  border-color: var(--accent-dim);
+  color: var(--accent);
+}
+
+.last-sessions-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: .5rem;
+}
+.last-session-item {
+  display: flex;
+  flex-direction: column;
+  gap: .25rem;
+  padding: .6rem .7rem;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  font-size: .8rem;
+  cursor: default;
+  transition: border-color var(--transition);
+}
+.last-session-item:hover { border-color: var(--border-mid); }
+.last-session-item.is-latest { border-color: var(--accent-dim); background: var(--accent-faint); }
+.last-session-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: .5rem;
+}
+.last-session-score {
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  color: var(--accent);
+}
+.last-session-date { color: var(--text-dim); font-size: .7rem; }
+.last-session-meta {
+  font-size: .72rem;
+  color: var(--text-dim);
+  display: flex;
+  justify-content: space-between;
+  gap: .5rem;
+}
+.last-session-review-btn {
+  margin-top: .35rem;
+  padding: .35rem .55rem;
+  font-size: .72rem;
+  font-weight: 600;
+  font-family: 'Inter', system-ui, sans-serif;
+  background: var(--bg-card);
+  border: 1px solid var(--accent-dim);
+  border-radius: 6px;
+  color: var(--accent);
+  cursor: pointer;
+  transition: background var(--transition), border-color var(--transition);
+}
+.last-session-review-btn:hover {
+  background: var(--accent-glow);
+  border-color: var(--accent);
+}
+
+/* Stack everything vertically on narrow viewports */
+@media (max-width: 1100px) {
+  .setup-main-row { flex-direction: column; }
+  .setup-left-col { flex: 1 1 auto; }
+  #last-session-card { width: auto; flex: 0 0 auto; max-height: 14rem; align-self: stretch; }
+}
+
+/* Options card and start button stay at their natural height, never shrink */
+#options-card,
+#start-btn {
+  flex-shrink: 0;
+}
+
+/* Start button: label centered, version subtitle aligned right */
+#start-btn {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+#start-btn .start-btn-label {
+  font-weight: 700;
+}
+#start-btn .start-btn-version {
+  position: absolute;
+  right: 1rem;
+  font-size: .68rem;
+  font-weight: 500;
+  letter-spacing: .08em;
+  opacity: .55;
+  pointer-events: none;
+}
 .quiz-container {
   max-width: 1020px;
   display: flex;
@@ -76,22 +287,73 @@ body {
 
 /* ── Logo ───────────────────────────────────────────────────── */
 .logo-mark {
-  width: 72px; height: 72px;
+  width: 140px; height: 140px;
   background: var(--accent);
   color: #0d0d12;
-  font-family: 'DM Serif Display', serif;
-  font-size: 2.4rem;
+  font-family: 'Inter', system-ui, sans-serif;
+  font-size: 4.6rem;
   display: flex; align-items: center; justify-content: center;
-  border-radius: 18px;
+  border-radius: 32px;
   flex-shrink: 0;
   box-shadow: 0 0 32px var(--accent-glow);
   overflow: hidden;
 }
 
 /* ── App Header ─────────────────────────────────────────────── */
-.app-header { display: flex; align-items: center; gap: 1rem; padding: .25rem 0; }
-.app-title  { font-family: 'DM Serif Display', serif; font-size: 2rem; line-height: 1.1; }
-.app-sub    { color: var(--text-mid); font-size: .88rem; font-weight: 300; }
+.app-header {
+  display: flex;
+  align-items: center;
+  gap: .85rem;
+  padding: 0;
+  margin-bottom: -.25rem;
+}
+.app-header-titles { flex: 0 1 auto; min-width: 0; }
+.app-title  { font-family: 'Inter', system-ui, sans-serif; font-size: 2.4rem; font-weight: 700; line-height: 1.05; letter-spacing: -0.02em; }
+.app-sub    { color: var(--text-mid); font-size: 1rem; font-weight: 300; margin-top: .15rem; }
+
+/* On narrow screens where the centered container touches the viewport edges,
+   reserve enough left padding so the absolute-positioned logo doesn't overlap the title */
+@media (max-width: 1280px) {
+  .setup-container { padding-left: 5.5rem; }
+}
+
+/* Search bar on the right side of the header */
+.app-header-search {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  gap: .5rem;
+  background: var(--bg-card);
+  border: 1.5px solid var(--border);
+  border-radius: 999px;
+  padding: .4rem .9rem;
+  min-width: 16rem;
+  max-width: 24rem;
+  flex: 0 1 auto;
+  transition: border-color var(--transition);
+}
+.app-header-search:focus-within { border-color: var(--accent); }
+.app-header-search .search-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-dim);
+  flex-shrink: 0;
+}
+.app-header-search .search-icon svg { width: 16px; height: 16px; }
+.topic-search-input {
+  flex: 1 1 auto;
+  background: transparent;
+  border: none;
+  outline: none;
+  color: var(--text);
+  font-family: 'Inter', system-ui, sans-serif;
+  font-size: .9rem;
+  min-width: 0;
+}
+.topic-search-input::placeholder { color: var(--text-dim); }
+/* Hide the browser's built-in search clear button (we don't need it) */
+.topic-search-input::-webkit-search-cancel-button { display: none; }
 
 /* ── Cards ──────────────────────────────────────────────────── */
 .card {
@@ -115,8 +377,8 @@ body {
 /* ── Topic Grid ─────────────────────────────────────────────── */
 .topic-grid {
   display: grid;
-  grid-template-columns: repeat(5, 1fr);
-  gap: .75rem;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: .55rem;
 }
 
 .topic-chip {
@@ -156,11 +418,11 @@ body {
 /* ── Options Rows ───────────────────────────────────────────── */
 .options-row {
   display: flex; align-items: center; gap: 1rem;
-  padding: .65rem 0;
+  padding: .35rem 0;
 }
 .options-row + .options-row { border-top: 1px solid var(--border); }
-.option-label { flex: 1; font-size: .9rem; color: var(--text-mid); }
-.hint-text    { font-size: .76rem; color: var(--text-dim); min-width: 4rem; }
+.option-label { flex: 1; font-size: .82rem; color: var(--text-mid); }
+.hint-text    { font-size: .72rem; color: var(--text-dim); min-width: 4rem; }
 
 /* Stepper */
 .stepper {
@@ -188,7 +450,7 @@ body {
   background: transparent;
   border: none;
   color: var(--text);
-  font-family: 'DM Sans', system-ui, sans-serif;
+  font-family: 'Inter', system-ui, sans-serif;
   font-size: .95rem; font-weight: 600;
   font-variant-numeric: tabular-nums;
   width: 3.5ch;
@@ -226,7 +488,7 @@ body {
 /* ── Buttons ────────────────────────────────────────────────── */
 .btn {
   display: inline-flex; align-items: center; justify-content: center;
-  font-family: 'DM Sans', system-ui, sans-serif;
+  font-family: 'Inter', system-ui, sans-serif;
   font-size: .9rem; font-weight: 500;
   border: none; border-radius: var(--radius);
   cursor: pointer;
@@ -297,18 +559,33 @@ body {
   white-space: pre-line;
 }
 
-.question-area { display: flex; flex-direction: column; gap: 1rem; }
+.question-area {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  /* Fill viewport so the sticky nav-btns anchors at a consistent position regardless of content length */
+  min-height: calc(100vh - 10rem);
+}
 
-.question-card { display: flex; flex-direction: column; gap: 1.25rem; min-height: 340px; }
+.question-card { display: flex; flex-direction: column; gap: 1.25rem; min-height: 21.25rem; }
 
 .question-text {
-  font-family: 'Inter', sans-serif;
+  font-family: 'Inter', system-ui, sans-serif;
   font-size: 1.25rem; line-height: 1.5;
   font-weight: 600;
 }
 
-/* Prev / Next buttons row */
-.question-nav-btns { display: flex; gap: .75rem; position: sticky; bottom: 0; z-index: 10; padding: .6rem 0 .4rem; background: var(--bg); }
+/* Prev / Next buttons row — pushed to bottom of .question-area via margin-top:auto, sticks to viewport when content overflows */
+.question-nav-btns {
+  display: flex;
+  gap: .75rem;
+  margin-top: auto;
+  position: sticky;
+  bottom: 0;
+  z-index: 10;
+  padding: .6rem 0 .4rem;
+  background: var(--bg);
+}
 .question-nav-btns .btn { flex: 1; }
 
 /* ── Multiple Choice ────────────────────────────────────────── */
@@ -333,7 +610,7 @@ body {
 .mc-option.show-correct { border-color: var(--green); background: var(--green-faint); }
 
 .mc-opt-letter {
-  width: 28px; height: 28px; border-radius: 7px;
+  width: 1.75rem; height: 1.75rem; border-radius: 7px;
   background: var(--bg); border: 1.5px solid var(--border);
   display: flex; align-items: center; justify-content: center;
   font-size: .72rem; font-weight: 700; color: var(--text-dim);
@@ -352,7 +629,7 @@ body {
   border: 1.5px solid var(--border);
   border-radius: var(--radius);
   color: var(--text);
-  font-family: 'DM Sans', system-ui, sans-serif;
+  font-family: 'Inter', system-ui, sans-serif;
   font-size: .95rem;
   padding: .85rem 1rem;
   outline: none;
@@ -370,28 +647,34 @@ body {
 .q-sidebar-card {
   display: flex; flex-direction: column; gap: 1rem;
   background: var(--bg-sidebar);
+  /* Cap height so the sidebar fits in viewport; nav-grid handles overflow */
+  max-height: calc(100vh - 8rem);
 }
 
-/* Question number grid */
+/* Question number grid: auto-fill so 100+ questions pack compactly; scrolls inside the sidebar card */
 .q-nav-grid {
   display: grid;
-  grid-template-columns: repeat(5, 1fr);
-  gap: .45rem;
+  grid-template-columns: repeat(auto-fill, minmax(28px, 1fr));
+  gap: .25rem;
+  overflow-y: auto;
+  min-height: 0;
+  flex: 1 1 auto;
 }
 
 .q-nav-btn {
   aspect-ratio: 1;
-  border: 1.5px solid var(--border);
-  border-radius: 8px;
+  border: 1px solid var(--border);
+  border-radius: 5px;
   background: var(--bg);
   color: var(--text-dim);
-  font-size: .78rem; font-weight: 600;
+  font-size: .68rem; font-weight: 600;
   cursor: pointer;
   transition: border-color var(--transition), background var(--transition),
               color var(--transition), box-shadow var(--transition);
   display: flex; align-items: center; justify-content: center;
   padding: 0;
-  font-family: 'DM Sans', system-ui, sans-serif;
+  font-family: 'Inter', system-ui, sans-serif;
+  font-variant-numeric: tabular-nums;
 }
 .q-nav-btn:hover:not(.q-nav-current) {
   border-color: var(--border-mid);
@@ -413,21 +696,31 @@ body {
   cursor: default;
 }
 
-/* Legend */
+/* Legend (one row per entry: dot → arrow → label) */
 .sidebar-legend {
-  display: flex; flex-wrap: wrap; gap: .4rem .9rem;
+  display: flex; flex-direction: column; gap: .3rem;
   font-size: .72rem; color: var(--text-dim);
+}
+.legend-row {
+  display: inline-flex;
   align-items: center;
+  gap: .35rem;
+}
+.legend-arrow {
+  color: var(--text-dim);
+  opacity: .5;
+  font-size: .8rem;
+  line-height: 1;
 }
 .legend-dot {
-  width: 9px; height: 9px; border-radius: 50%;
-  display: inline-block; margin-right: .25rem;
+  width: 10px; height: 10px; border-radius: 50%;
+  display: inline-block;
   flex-shrink: 0;
 }
 .dot-answered { background: var(--accent); }
 .dot-current  { background: var(--accent); box-shadow: 0 0 6px rgba(167,139,250,.6); }
 .dot-empty    { background: transparent; border: 1.5px solid var(--border-mid); }
-.legend-text  { vertical-align: middle; }
+.legend-text  { line-height: 1.2; }
 
 /* ── Modal ──────────────────────────────────────────────────── */
 .modal-backdrop {
@@ -451,7 +744,7 @@ body {
 }
 @keyframes scaleIn { from { opacity: 0; transform: scale(.93); } to { opacity: 1; transform: scale(1); } }
 
-.modal-title { font-family: 'DM Serif Display', serif; font-size: 1.3rem; margin-bottom: .6rem; }
+.modal-title { font-family: 'Inter', system-ui, sans-serif; font-size: 1.3rem; font-weight: 700; margin-bottom: .6rem; }
 .modal-body  { font-size: .9rem; color: var(--text-mid); margin-bottom: 1.25rem; line-height: 1.6; }
 .modal-actions { display: flex; gap: .75rem; }
 .modal-actions .btn { flex: 1; }
@@ -471,9 +764,9 @@ body {
   position: absolute; inset: 0;
   display: flex; align-items: center; justify-content: center;
 }
-#score-pct-big { font-family: 'DM Serif Display', serif; font-size: 1.55rem; color: var(--accent); }
+#score-pct-big { font-family: 'Inter', system-ui, sans-serif; font-size: 1.55rem; font-weight: 700; color: var(--accent); font-variant-numeric: tabular-nums; }
 
-.results-title   { font-family: 'DM Serif Display', serif; font-size: 1.55rem; line-height: 1.2; }
+.results-title   { font-family: 'Inter', system-ui, sans-serif; font-size: 1.55rem; font-weight: 700; line-height: 1.2; letter-spacing: -0.01em; }
 .results-summary { color: var(--text-mid); font-size: .88rem; margin-top: .35rem; }
 
 .stats-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: .75rem; }
@@ -482,15 +775,41 @@ body {
   border-radius: var(--radius); padding: 1rem;
   display: flex; flex-direction: column; align-items: center; gap: .2rem;
 }
-.stat-value { font-family: 'DM Serif Display', serif; font-size: 1.8rem; color: var(--accent); line-height: 1; }
+.stat-value { font-family: 'Inter', system-ui, sans-serif; font-size: 1.8rem; font-weight: 700; color: var(--accent); line-height: 1; font-variant-numeric: tabular-nums; }
 .stat-label { font-size: .7rem; color: var(--text-dim); text-transform: uppercase; letter-spacing: .08em; }
 
-.breakdown-item { padding: .65rem 0; border-bottom: 1px solid var(--border); }
-.breakdown-item:last-child { border-bottom: none; }
-.breakdown-name  { font-size: .9rem; font-weight: 500; margin-bottom: .4rem; }
-.breakdown-bar-track { height: 5px; background: var(--border); border-radius: 999px; overflow: hidden; margin-bottom: .3rem; }
-.breakdown-bar-fill  { height: 100%; background: var(--accent); border-radius: 999px; transition: width 1s ease .2s; }
-.breakdown-score { font-size: .78rem; color: var(--text-dim); }
+/* ── Topic breakdown chips (compact, bottom of results screen) ── */
+#topic-breakdown { margin-top: 1.5rem; }
+#breakdown-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: .4rem;
+}
+.breakdown-chip {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: .5rem;
+  padding: .35rem .65rem;
+  font-size: .8rem;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+}
+.breakdown-chip-name {
+  color: var(--text-mid);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  flex: 1 1 auto;
+  min-width: 0;
+}
+.breakdown-chip-pct {
+  font-weight: 700;
+  color: var(--accent);
+  font-variant-numeric: tabular-nums;
+  flex-shrink: 0;
+}
 
 .results-actions { display: flex; gap: .75rem; flex-wrap: wrap; }
 .results-actions .btn { flex: 1; min-width: 120px; }
@@ -546,24 +865,24 @@ body {
   background: var(--bg-hover);
 }
 .btn-mark.is-marked {
-  color: #f59e0b;
-  border-color: rgba(245,158,11,.5);
-  background: rgba(245,158,11,.08);
+  color: #eab308;
+  border-color: rgba(234,179,8,.5);
+  background: rgba(234,179,8,.08);
 }
 .mark-icon { width: 14px; height: 14px; flex-shrink: 0; transition: fill var(--transition); }
-.btn-mark.is-marked .mark-icon { fill: #f59e0b; stroke: #f59e0b; }
+.btn-mark.is-marked .mark-icon { fill: #eab308; stroke: #eab308; }
 
 /* ── Marked nav button ──────────────────────────────────────── */
 .q-nav-btn.q-nav-marked:not(.q-nav-current) {
-  border-color: rgba(245,158,11,.6);
-  color: #f59e0b;
-  background: rgba(245,158,11,.1);
+  border-color: rgba(234,179,8,.6);
+  color: #eab308;
+  background: rgba(234,179,8,.1);
 }
 /* Answered + marked */
 .q-nav-btn.q-nav-answered.q-nav-marked:not(.q-nav-current) {
-  background: rgba(245,158,11,.15);
+  background: rgba(234,179,8,.15);
 }
-.legend-dot.dot-marked { background: #f59e0b; }
+.legend-dot.dot-marked { background: #eab308; }
 
 /* ── Utility ────────────────────────────────────────────────── */
 .hidden { display: none !important; }
@@ -587,14 +906,10 @@ body {
   /* ── Setup ── */
   .setup-container  { gap: .85rem; }
   .card             { padding: 1rem; }
-  .topic-grid       { grid-template-columns: 1fr 1fr; gap: .5rem; }
+  .topic-grid       { gap: .5rem; }
   .topic-chip       { padding: .7rem .75rem; }
   .topic-chip-name  { font-size: .82rem; }
   .topic-chip-count { font-size: .68rem; }
-
-  /* Sort bar wraps tightly */
-  .topic-sort-bar { gap: .3rem; margin-bottom: .6rem; }
-  .sort-btn       { padding: .25rem .55rem; font-size: .72rem; }
 
   /* Options row: stack label above controls on very small screens */
   .options-row { flex-wrap: wrap; gap: .5rem; padding: .55rem 0; }
@@ -616,17 +931,11 @@ body {
     position: static;
     order: -1;
   }
-  .q-sidebar-card { padding: .85rem; gap: .65rem; }
+  .q-sidebar-card { padding: .85rem; gap: .65rem; max-height: 40vh; }
 
-  /* Nav grid: 8 cols so all question numbers fit in one or two rows */
-  .q-nav-grid { grid-template-columns: repeat(8, 1fr); gap: .3rem; }
+  /* Nav grid: auto-fill picks col count; tighten gap + cell size for mobile */
+  .q-nav-grid { gap: .3rem; }
   .q-nav-btn  { font-size: .65rem; border-radius: 6px; }
-
-  /* Legend: horizontal wrap */
-  .sidebar-legend {
-    display: flex; flex-wrap: wrap; gap: .3rem .85rem;
-    padding-top: .25rem;
-  }
 
   /* Question card: grow freely, never clip content */
   .question-card { max-height: none; overflow-y: visible; min-height: unset; padding: .9rem; gap: .85rem; }
@@ -662,7 +971,7 @@ body {
     padding-bottom: .5rem;
   }
   .image-order-item { flex-shrink: 0; }
-  .image-order-img  { max-width: 110px; }
+  .image-order-img  { max-width: 6.875rem; }
 
   /* ── Label order: full width items ── */
   .label-order-item { width: 100%; max-width: 100%; }
@@ -678,7 +987,7 @@ body {
 
   /* ── MC options: ensure they're never clipped ── */
   .mc-options { overflow: visible; }
-  .mc-option { min-height: 52px; }
+  .mc-option { min-height: 3.25rem; }
 
   /* ── Results ── */
   .results-header    { flex-direction: column; align-items: flex-start; gap: .75rem; }
@@ -691,8 +1000,7 @@ body {
 
   /* Review layout: stacked */
   .review-layout      { grid-template-columns: 1fr; }
-  .review-nav-sidebar { position: static; }
-  .review-nav-grid    { grid-template-columns: repeat(8, 1fr); }
+  .review-nav-sidebar { position: static; max-height: 40vh; }
   .review-item        { padding: .85rem .9rem; }
 
   /* Modal */
@@ -703,11 +1011,7 @@ body {
    ║  SMALL MOBILE  (≤ 400px)
    ╚══════════════════════════════════════════════════════════════ */
 @media (max-width: 400px) {
-  .topic-grid  { grid-template-columns: 1fr; }
-  .q-nav-grid  { grid-template-columns: repeat(6, 1fr); }
-  .review-nav-grid { grid-template-columns: repeat(6, 1fr); }
   .app-title   { font-size: 1.3rem; }
-  .sort-btn    { font-size: .68rem; padding: .2rem .45rem; }
 }
 
 /* ============================================================
@@ -761,13 +1065,13 @@ body {
 
 .matching-select {
   flex-shrink: 0;
-  min-width: 160px;
-  max-width: 220px;
+  min-width: 10rem;
+  max-width: 13.75rem;
   background: var(--bg-card);
   border: 1.5px solid var(--border-mid);
   border-radius: 8px;
   color: var(--text);
-  font-family: 'DM Sans', system-ui, sans-serif;
+  font-family: 'Inter', system-ui, sans-serif;
   font-size: .88rem;
   padding: .45rem .7rem;
   outline: none;
@@ -799,7 +1103,7 @@ body {
   background: var(--bg);
   border: 1px solid var(--border);
   border-radius: var(--radius);
-  min-height: 80px;
+  min-height: 5rem;
 }
 
 .image-order-item {
@@ -846,8 +1150,8 @@ body {
 .image-order-img {
   display: block;
   /* Images are kept thin — constrain height; width adapts */
-  max-height: 140px;
-  max-width: 90px;
+  max-height: 8.75rem;
+  max-width: 5.625rem;
   width: auto;
   height: auto;
   border-radius: 5px;
@@ -858,7 +1162,7 @@ body {
   font-size: .7rem;
   color: var(--text-dim);
   text-align: center;
-  max-width: 90px;
+  max-width: 5.625rem;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -903,7 +1207,7 @@ body {
   background: var(--bg);
   border: 1px solid var(--border);
   border-radius: var(--radius);
-  min-height: 56px;
+  min-height: 3.5rem;
   align-items: flex-start;
 }
 
@@ -966,7 +1270,7 @@ body {
 /* The protocol header diagram image */
 .hf-header-img {
   width: 100%;
-  max-width: 680px;
+  max-width: 42.5rem;
   height: auto;
   border-radius: 10px;
   display: block;
@@ -979,7 +1283,7 @@ body {
 /* Thin progress bar below image */
 .hf-progress-wrap {
   width: 100%;
-  max-width: 680px;
+  max-width: 42.5rem;
   height: 5px;
   background: var(--border);
   border-radius: 999px;
@@ -1006,7 +1310,7 @@ body {
 /* Input row */
 .hf-input-wrap {
   width: 100%;
-  max-width: 480px;
+  max-width: 30rem;
   display: flex;
   gap: .6rem;
 }
@@ -1017,7 +1321,7 @@ body {
   border: 2px solid var(--border-mid);
   border-radius: var(--radius);
   color: var(--text);
-  font-family: 'DM Sans', system-ui, sans-serif;
+  font-family: 'Inter', system-ui, sans-serif;
   font-size: 1rem;
   font-weight: 500;
   padding: .75rem 1.1rem;
@@ -1065,54 +1369,25 @@ body {
   animation: fadeUp .3s ease both;
 }
 
-/* ── Topic Sort Bar ──────────────────────────────────────────── */
-.topic-sort-bar {
-  display: flex;
-  align-items: center;
-  gap: .45rem;
-  margin-bottom: .75rem;
-  flex-wrap: wrap;
-}
-.sort-label {
-  font-size: .72rem;
-  font-weight: 600;
-  letter-spacing: .1em;
-  text-transform: uppercase;
-  color: var(--text-dim);
-  margin-right: .25rem;
-}
-.sort-btn {
+/* The topic-select-all-btn lives in .topics-card-header */
+.topic-select-all-btn {
   padding: .3rem .75rem;
-  font-size: .78rem;
-  font-weight: 500;
-  font-family: 'DM Sans', system-ui, sans-serif;
-  background: var(--bg);
-  border: 1.5px solid var(--border);
-  border-radius: 20px;
-  color: var(--text-mid);
-  cursor: pointer;
-  transition: border-color var(--transition), background var(--transition), color var(--transition);
-}
-.sort-btn:hover { border-color: var(--border-mid); color: var(--text); background: var(--bg-hover); }
-.sort-btn.sort-btn-active {
-  border-color: var(--accent);
+  font-size: .76rem;
+  font-weight: 600;
+  letter-spacing: .03em;
+  font-family: 'Inter', system-ui, sans-serif;
   background: var(--accent-faint);
+  border: 1.5px solid var(--accent-dim);
+  border-radius: 20px;
   color: var(--accent);
-}
-.sort-dir-btn {
-  padding: .3rem .6rem;
-  font-size: .85rem;
-  font-weight: 700;
-  font-family: 'DM Sans', system-ui, sans-serif;
-  background: var(--bg);
-  border: 1.5px solid var(--border);
-  border-radius: 8px;
-  color: var(--text-dim);
   cursor: pointer;
-  transition: border-color var(--transition), color var(--transition);
-  margin-left: .15rem;
+  transition: background var(--transition), border-color var(--transition);
+  flex-shrink: 0;
 }
-.sort-dir-btn:hover { border-color: var(--accent); color: var(--accent); }
+.topic-select-all-btn:hover {
+  background: var(--accent-glow);
+  border-color: var(--accent);
+}
 
 /* ── Review Layout (two-column: list + nav sidebar) ──────────── */
 .review-layout {
@@ -1132,33 +1407,41 @@ body {
   display: flex;
   flex-direction: column;
   gap: .85rem;
+  max-height: calc(50vh - 1.5rem);
 }
 .review-nav-grid {
   display: grid;
-  grid-template-columns: repeat(5, 1fr);
-  gap: .35rem;
+  grid-template-columns: repeat(auto-fill, minmax(28px, 1fr));
+  gap: .22rem;
+  overflow-y: auto;
+  min-height: 0;
+  flex: 1 1 auto;
 }
 .review-nav-btn {
   aspect-ratio: 1;
-  border-radius: 7px;
+  border-radius: 5px;
   border: none;
-  font-size: .7rem;
+  font-size: .65rem;
   font-weight: 700;
   cursor: pointer;
   transition: opacity var(--transition), transform var(--transition);
-  font-family: 'DM Sans', system-ui, sans-serif;
+  font-family: 'Inter', system-ui, sans-serif;
+  font-variant-numeric: tabular-nums;
+  position: relative;
 }
 .review-nav-btn:hover { opacity: .8; transform: scale(1.08); }
 .review-nav-btn.rn-correct   { background: var(--green);  color: #0d0d12; }
 .review-nav-btn.rn-incorrect { background: var(--red);    color: #fff; }
-.review-nav-btn.rn-partial   { background: #f59e0b;       color: #0d0d12; }
+.review-nav-btn.rn-partial   { background: #f97316;       color: #0d0d12; }
 .review-nav-btn.rn-skipped   { background: var(--border-mid); color: var(--text-dim); }
+/* Marked overlay matches the in-quiz amber treatment; layered via outline so background colour stays visible */
+.review-nav-btn.rn-marked { outline: 2px solid #eab308; outline-offset: -2px; }
 
 /* Legend dots for review nav */
-.review-nav-legend { display: flex; flex-direction: column; gap: .3rem; margin-top: .1rem; }
+.review-nav-legend { display: flex; flex-direction: column; gap: .3rem; margin-top: .1rem; font-size: .72rem; color: var(--text-dim); }
 .rn-dot-correct   { background: var(--green); }
 .rn-dot-incorrect { background: var(--red); }
-.rn-dot-partial   { background: #f59e0b; }
+.rn-dot-partial   { background: #f97316; }
 .rn-dot-skipped   { background: var(--border-mid); }
 
 /* Responsive: stack review layout on small screens */
@@ -1175,24 +1458,10 @@ body {
 }
 .question-image {
   max-width: 100%;
-  max-height: 340px;
+  height: auto;
   border-radius: var(--radius);
   border: 1px solid var(--border);
   object-fit: contain;
-}
-
-/* ── Alt-mode button ────────────────────────────────────────── */
-.btn-alt-mode {
-  width: 100%;
-  border-style: dashed;
-  color: var(--text-mid);
-  font-size: .88rem;
-}
-.btn-alt-mode.alt-active {
-  border-color: var(--accent);
-  color: var(--accent);
-  background: var(--accent-faint);
-  border-style: solid;
 }
 
 /* ── MAX fill button ────────────────────────────────────────── */
@@ -1201,7 +1470,7 @@ body {
   border: 1.5px solid var(--border);
   border-radius: 7px;
   color: var(--text-dim);
-  font-family: 'DM Sans', system-ui, sans-serif;
+  font-family: 'Inter', system-ui, sans-serif;
   font-size: .7rem;
   font-weight: 700;
   letter-spacing: .06em;
@@ -1216,15 +1485,164 @@ body {
   background: var(--accent-faint);
 }
 
-/* ── Version tag ─────────────────────────────────────────────── */
-.version-tag {
-  position: fixed;
-  bottom: .85rem;
-  right: 1rem;
-  font-size: .7rem;
-  font-weight: 600;
-  letter-spacing: .08em;
+/* ── Single-page (stacked) quiz mode ─────────────────────────── */
+.sp-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+.sp-question-card {
+  /* Override default question-card min-height — stacked cards size to their content */
+  min-height: unset;
+}
+.sp-question-card.sp-focused {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 2px var(--accent-dim);
+}
+.sp-question-header {
+  display: flex;
+  align-items: center;
+  gap: .75rem;
+  flex-wrap: wrap;
+  padding-bottom: .5rem;
+  border-bottom: 1px solid var(--border);
+}
+.sp-question-num {
+  font-size: .8rem;
+  font-weight: 700;
+  color: var(--accent);
+  background: var(--accent-faint);
+  border: 1px solid var(--accent-dim);
+  border-radius: 6px;
+  padding: .2rem .5rem;
+  font-variant-numeric: tabular-nums;
+}
+.sp-question-topic {
+  font-size: .8rem;
   color: var(--text-dim);
-  pointer-events: none;
-  z-index: 50;
+  flex: 1 1 auto;
+  min-width: 0;
+}
+.sp-mark-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: .35rem;
+  padding: .3rem .6rem;
+  font-size: .75rem;
+  font-weight: 600;
+  font-family: 'Inter', system-ui, sans-serif;
+  background: var(--bg);
+  border: 1.5px solid var(--border);
+  border-radius: 8px;
+  color: var(--text-dim);
+  cursor: pointer;
+  transition: border-color var(--transition), color var(--transition), background var(--transition);
+}
+.sp-mark-btn .mark-icon { width: .9rem; height: .9rem; }
+.sp-mark-btn:hover { border-color: var(--border-mid); color: var(--text); }
+.sp-mark-btn.is-marked {
+  background: rgba(234, 179, 8, .12);
+  border-color: rgb(234, 179, 8);
+  color: rgb(234, 179, 8);
+}
+
+/* ── Review pane: mode toggle + paged stepper ───────────────── */
+.review-mode-bar {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: .65rem;
+  padding: 0 0 .75rem;
+  font-size: .85rem;
+  color: var(--text-dim);
+}
+.review-mode-label { line-height: 1.2; }
+
+/* Paged mode: stepper above the (single) visible review-item */
+.review-list-paged { /* hook for paged-only styling if needed */ }
+.review-paged-stepper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  padding: .5rem 0 1rem;
+}
+.review-paged-stepper .btn { flex: 0 0 auto; padding: .5rem 1rem; font-size: .85rem; }
+.review-paged-stepper .btn:disabled { opacity: .4; cursor: not-allowed; }
+.review-paged-pos {
+  font-size: .9rem;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  color: var(--text-dim);
+  min-width: 4rem;
+  text-align: center;
+}
+
+/* Current-item marker in the review nav grid (used in paged mode) */
+.review-nav-btn.rn-current {
+  box-shadow: 0 0 0 2px var(--accent);
+}
+
+/* ── In-quiz single-page toggle row (sidebar) ─────────────── */
+.quiz-mode-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: .5rem;
+  padding: .5rem .6rem;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--bg);
+  font-size: .72rem;
+  color: var(--text-dim);
+  white-space: nowrap;
+}
+.quiz-mode-row .quiz-mode-label {
+  flex: 1 1 auto;
+  line-height: 1.2;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* ── Custom scrollbars (match dark theme) ─────────────────── */
+/* Firefox */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--border-mid) transparent;
+}
+
+/* WebKit / Chromium / Safari */
+*::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+*::-webkit-scrollbar-track {
+  background: transparent;
+}
+*::-webkit-scrollbar-thumb {
+  background: var(--border-mid);
+  border-radius: 4px;
+}
+*::-webkit-scrollbar-thumb:hover {
+  background: var(--accent-dim);
+}
+*::-webkit-scrollbar-corner {
+  background: transparent;
+}
+
+/* Header-fill final image inside review item */
+.review-hf-image {
+  display: block;
+  width: 100%;
+  max-width: 42.5rem;
+  height: auto;
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
+  margin-bottom: .75rem;
+}
+
+/* Narrow screen: stack search below title in header */
+@media (max-width: 800px) {
+  .app-header { flex-wrap: wrap; }
+  .app-header-search { width: 100%; min-width: 0; margin-left: 0; }
 }
