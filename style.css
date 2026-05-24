@@ -80,8 +80,8 @@ body {
   z-index: 50;
 }
 
-/* Mobile-only inline logo lives inside .app-header. Hidden by default. */
-#setup-logo-mobile { display: none; }
+/* Mobile-only inline logo lives inside .app-header. Hidden on desktop. */
+#setup-logo-mobile { display: none !important; }
 
 #setup-titles {
   position: absolute;
@@ -939,17 +939,17 @@ body {
   }
   .q-sidebar-card { padding: .85rem; gap: .65rem; max-height: 40vh; }
 
-  /* Nav grid: compact 5x N grid on mobile to keep cells square and tap-friendly */
+  /* Nav grid: compact 5-col grid on mobile, fixed cell height, doesn't flex-grow */
   .q-nav-grid {
     grid-template-columns: repeat(5, 1fr);
     grid-auto-rows: 2.25rem;
     gap: .3rem;
+    flex: 0 0 auto;
   }
   .q-nav-btn {
-    aspect-ratio: 1;
+    aspect-ratio: auto;
     font-size: .75rem;
     border-radius: 6px;
-    min-height: 0;
     height: auto;
   }
 
@@ -1022,9 +1022,10 @@ body {
     grid-template-columns: repeat(5, 1fr);
     grid-auto-rows: 2.25rem;
     gap: .3rem;
+    flex: 0 0 auto;
   }
   .review-nav-btn {
-    aspect-ratio: 1;
+    aspect-ratio: auto;
     font-size: .75rem;
     border-radius: 6px;
     height: auto;
@@ -1668,6 +1669,78 @@ body {
 
 /* Narrow screen / mobile: stack search below title; shrink logo; fit-to-content sessions; 3-col topics */
 @media (max-width: 800px) {
-  .app-header { flex-wrap: wrap; }
-  .app-header-search { width: 100%; min-width: 0; margin-left: 0; }
+  /* Container: no extra left padding on mobile (small logo doesn't need clearance) */
+  .setup-container {
+    padding: .85rem .75rem .75rem;
+    gap: .65rem;
+  }
+
+  /* Search bar drops below title block */
+  .app-header { flex-wrap: wrap; gap: .65rem; }
+  .app-header-search { width: 100%; min-width: 0; margin-left: 0; order: 99; }
+
+  /* Mobile: hide the absolute desktop logo, show the inline mobile one inside the header */
+  #setup-logo { display: none !important; }
+  #setup-logo-mobile {
+    display: flex !important;
+    width: 64px; height: 64px;
+    border-radius: 14px;
+    font-size: 2rem;
+    box-shadow: 0 0 16px var(--accent-glow);
+    flex-shrink: 0;
+  }
+  #setup-titles { display: none; }
+  .app-header-titles-fallback { display: block; flex: 1 1 auto; min-width: 0; }
+  /* Title sizes match the target mockup */
+  .app-header-titles-fallback .app-title { font-size: 1.7rem; }
+  .app-header-titles-fallback .app-sub   { font-size: .85rem; }
+
+  /* Header: logo + title in one row, search wraps below */
+  .app-header { align-items: center; flex-wrap: wrap; gap: .75rem; }
+
+  /* Setup main row stacks: topics on top, last-sessions below */
+  .setup-main-row {
+    flex-direction: column;
+    flex: 1 1 auto;
+    min-height: 0;
+  }
+
+  /* Topics card scrolls independently — 3 columns of chips */
+  #topics-card {
+    flex: 1 1 auto;
+    min-height: 12rem;
+    overflow-y: auto;
+  }
+  .topic-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: .45rem;
+  }
+  .topic-chip { padding: .55rem .55rem; }
+  .topic-chip-name { font-size: .75rem; line-height: 1.2; }
+  .topic-chip-count { font-size: .65rem; }
+
+  /* Last-sessions: auto-height (sizes to content) */
+  #last-session-card {
+    flex: 0 0 auto;
+    width: auto;
+    height: auto;
+    max-height: 14rem;
+    align-self: stretch;
+    box-shadow: none;
+  }
+  #last-session-card #last-sessions-list {
+    overflow-y: auto;
+  }
+
+  /* Start button: version subtitle hidden on mobile (would overlap "Hai sa ii dam") */
+  #start-btn .start-btn-version {
+    font-size: .58rem;
+    right: .65rem;
+    opacity: .45;
+  }
+}
+
+/* Very narrow phones: drop version subtitle entirely */
+@media (max-width: 480px) {
+  #start-btn .start-btn-version { display: none; }
 }
