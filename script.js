@@ -1865,10 +1865,10 @@ const App = (() => {
       const s = (r.elapsed || 0) % 60;
       const timeLabel = m > 0 ? `${m}m ${s}s` : `${s}s`;
       const li = document.createElement('li');
-      li.className = 'last-session-item' + (i === 0 ? ' is-latest' : '');
+      li.className = 'last-session-item' + (i === 0 ? ' is-latest' : '') + (r.abandoned ? ' is-abandoned' : '');
       li.innerHTML = `
         <div class="last-session-top">
-          <span class="last-session-score">${r.pct || 0}%</span>
+          <span class="last-session-score">${r.pct || 0}%${r.abandoned ? ' <span class="last-session-tag">abandonat</span>' : ''}</span>
           <span class="last-session-date">${dateLabel}</span>
         </div>
         <div class="last-session-meta">
@@ -1944,6 +1944,17 @@ const App = (() => {
       UIController.showModal(
         'Progresul curent se va pierde. Esti sigur ca vrei sa te intorci la meniu?',
         () => {
+          // Snapshot whatever was answered so far before tearing down the session.
+          // submitAll() grades whatever's stored — unanswered questions count as skipped.
+          try {
+            const partial = QuizSession.submitAll();
+            if (partial && partial.total > 0) {
+              partial.abandoned = true;
+              _saveRecentSession(partial);
+            }
+          } catch (e) {
+            // If submitAll fails for any reason, just stop quietly — don't block the user from going back
+          }
           QuizSession.stop();
           if (_singlePage) {
             UIController.teardownStacked();

@@ -208,6 +208,20 @@ body {
   font-variant-numeric: tabular-nums;
   color: var(--accent);
 }
+.last-session-tag {
+  display: inline-block;
+  margin-left: .4rem;
+  padding: 1px 6px;
+  font-size: .62rem;
+  font-weight: 600;
+  letter-spacing: .04em;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  color: var(--text-dim);
+  vertical-align: middle;
+}
+.last-session-item.is-abandoned { border-color: var(--border); opacity: .85; }
 .last-session-date { color: var(--text-dim); font-size: .7rem; }
 .last-session-meta {
   font-size: .72rem;
@@ -234,8 +248,8 @@ body {
   border-color: var(--accent);
 }
 
-/* Stack everything vertically on narrow viewports */
-@media (max-width: 1100px) {
+/* Mid-narrow viewports stack the main row but keep desktop logo + larger sizing */
+@media (min-width: 801px) and (max-width: 1100px) {
   .setup-main-row { flex-direction: column; }
   .setup-left-col { flex: 1 1 auto; }
   #last-session-card { width: auto; flex: 0 0 auto; max-height: 14rem; align-self: stretch; }
@@ -305,9 +319,10 @@ body {
 .app-title  { font-family: 'Inter', system-ui, sans-serif; font-size: 2.4rem; font-weight: 700; line-height: 1.05; letter-spacing: -0.02em; }
 .app-sub    { color: var(--text-mid); font-size: 1rem; font-weight: 300; margin-top: .15rem; }
 
-/* On narrow screens where the centered container touches the viewport edges,
-   reserve enough left padding so the absolute-positioned logo doesn't overlap the title */
-@media (max-width: 1280px) {
+/* On medium screens where the centered container touches the viewport edges
+   but the desktop logo is still positioned absolute, reserve left padding
+   so the corner logo doesn't overlap the title */
+@media (min-width: 801px) and (max-width: 1280px) {
   .setup-container { padding-left: 5.5rem; }
 }
 
@@ -894,10 +909,10 @@ body {
   /* ── Setup ── */
   .setup-container  { gap: .85rem; }
   .card             { padding: 1rem; }
-  .topic-grid       { gap: .5rem; }
-  .topic-chip       { padding: .7rem .75rem; }
-  .topic-chip-name  { font-size: .82rem; }
-  .topic-chip-count { font-size: .68rem; }
+  .topic-grid       { grid-template-columns: repeat(3, 1fr); gap: .4rem; }
+  .topic-chip       { padding: .55rem .55rem; }
+  .topic-chip-name  { font-size: .72rem; }
+  .topic-chip-count { font-size: .62rem; }
 
   /* Options row: stack label above controls on very small screens */
   .options-row { flex-wrap: wrap; gap: .5rem; padding: .55rem 0; }
@@ -927,6 +942,7 @@ body {
 
   /* Question card: grow freely, never clip content */
   .question-card { max-height: none; overflow-y: visible; min-height: unset; padding: .9rem; gap: .85rem; }
+  .question-area { min-height: unset; }
   .question-hint { font-size: .82rem; }
 
   /* ── Nav buttons: sticky bar at bottom ── */
@@ -1626,8 +1642,78 @@ body {
   margin-bottom: .75rem;
 }
 
-/* Narrow screen: stack search below title in header */
+/* Narrow screen / mobile: stack search below title; shrink logo; fit-to-content sessions; 3-col topics */
 @media (max-width: 800px) {
-  .app-header { flex-wrap: wrap; }
-  .app-header-search { width: 100%; min-width: 0; margin-left: 0; }
+  /* Container: no extra left padding on mobile (small logo doesn't need clearance) */
+  .setup-container {
+    padding: .85rem .75rem .75rem;
+    gap: .65rem;
+  }
+
+  /* Search bar drops below title block */
+  .app-header { flex-wrap: wrap; gap: .65rem; }
+  .app-header-search { width: 100%; min-width: 0; margin-left: 0; order: 99; }
+
+  /* Logo: small, inline with title (matches old desktop fallback) */
+  #setup-logo {
+    position: static;
+    width: 40px; height: 40px;
+    border-radius: 10px;
+    font-size: 1.4rem;
+    box-shadow: 0 0 16px var(--accent-glow);
+  }
+  #setup-titles { display: none; }
+  .app-header-titles-fallback { display: block; flex: 1 1 auto; min-width: 0; }
+  /* Title sits inline next to the small logo */
+  .app-header-titles-fallback .app-title { font-size: 1.4rem; }
+  .app-header-titles-fallback .app-sub   { font-size: .78rem; }
+
+  /* Header rearrange: logo and title inline, search wraps below */
+  .app-header { align-items: center; }
+
+  /* Setup main row stacks: topics on top, last-sessions below */
+  .setup-main-row {
+    flex-direction: column;
+    flex: 1 1 auto;
+    min-height: 0;
+  }
+
+  /* Topics card scrolls independently — 3 columns of chips */
+  #topics-card {
+    flex: 1 1 auto;
+    min-height: 12rem;
+    overflow-y: auto;
+  }
+  .topic-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: .45rem;
+  }
+  .topic-chip { padding: .55rem .55rem; }
+  .topic-chip-name { font-size: .75rem; line-height: 1.2; }
+  .topic-chip-count { font-size: .65rem; }
+
+  /* Last-sessions: auto-height (sizes to content) */
+  #last-session-card {
+    flex: 0 0 auto;
+    width: auto;
+    height: auto;
+    max-height: 14rem;
+    align-self: stretch;
+    box-shadow: none;
+  }
+  #last-session-card #last-sessions-list {
+    overflow-y: auto;
+  }
+
+  /* Start button: version subtitle hidden on mobile (would overlap "Hai sa ii dam") */
+  #start-btn .start-btn-version {
+    font-size: .58rem;
+    right: .65rem;
+    opacity: .45;
+  }
+}
+
+/* Very narrow phones: drop version subtitle entirely */
+@media (max-width: 480px) {
+  #start-btn .start-btn-version { display: none; }
 }
