@@ -9,37 +9,46 @@
   <link rel="icon" type="image/x-icon" href="icons/logo.ico" />
   <link rel="icon" type="image/png" href="icons/logo.png" />
   <link rel="shortcut icon" href="icons/logo.ico" />
-  <meta name="theme-color" content="#0d0d12" />
+  <meta name="color-scheme" content="dark light" />
+  <meta name="theme-color" content="#0e1014" id="meta-theme-color" />
   <meta name="mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
   <meta name="apple-mobile-web-app-title" content="AcaDobre" />
   <link rel="apple-touch-icon" href="icons/apple-touch-icon.png" />
 
-  <link rel="stylesheet" href="style.css?v=5.5" />
+  <!-- Theme: apply saved/system preference before first paint to avoid a flash.
+       This is presentation-only plumbing and is intentionally kept out of script.js. -->
+  <script>
+    (function () {
+      try {
+        var saved = localStorage.getItem('acadobre.theme');
+        var theme = (saved === 'light' || saved === 'dark')
+          ? saved
+          : (window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark');
+        document.documentElement.setAttribute('data-theme', theme);
+      } catch (e) {
+        document.documentElement.setAttribute('data-theme', 'dark');
+      }
+    })();
+  </script>
+
+  <link rel="stylesheet" href="style.css?v=5.0" />
 </head>
 <body>
 
   <div id="screen-setup" class="screen active">
-
-    <div class="logo-mark" id="setup-logo">
-      <img src="icons/logo.png" alt="AcaDobre" style="width:100%;height:100%;object-fit:cover;" />
-    </div>
-
-    <div id="setup-titles">
-      <h1 class="app-title">AcaDobre</h1>
-      <p class="app-sub">Bravo pustiule! Ne pregatim la retele.</p>
-    </div>
-
     <div class="container setup-container">
 
       <header class="app-header">
-        <div class="logo-mark" id="setup-logo-mobile">
-          <img src="icons/logo.png" alt="AcaDobre" style="width:100%;height:100%;object-fit:cover;" />
-        </div>
-        <div class="app-header-titles app-header-titles-fallback">
-          <h1 class="app-title">AcaDobre</h1>
-          <p class="app-sub">Bravo pustiule! Ne pregatim la retele.</p>
+        <div class="brand">
+          <div class="brand-logo">
+            <img src="icons/logo.png" alt="AcaDobre logo" />
+          </div>
+          <div class="brand-text">
+            <h1 class="app-title">AcaDobre</h1>
+            <p class="app-sub">Bravo pustiule! Ne pregatim la retele.</p>
+          </div>
         </div>
         <div class="app-header-search">
           <span class="search-icon" aria-hidden="true">
@@ -48,62 +57,71 @@
               <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
             </svg>
           </span>
-          <input type="search" id="topic-search-input" class="topic-search-input" placeholder="Cauta topic" autocomplete="off" />
+          <input type="search" id="topic-search-input" class="topic-search-input" placeholder="Cauta subiect" autocomplete="off" />
         </div>
+        <button id="theme-toggle" class="theme-toggle" type="button" aria-label="Schimba tema (luminos / intunecat)" title="Schimba tema">
+          <span class="ic-sun" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="4"></circle>
+              <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"></path>
+            </svg>
+          </span>
+          <span class="ic-moon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+            </svg>
+          </span>
+        </button>
       </header>
 
-      <div class="setup-main-row">
-        <div class="setup-left-col">
-          <section class="card" id="topics-card">
-            <div class="topics-card-header">
-              <span class="section-label">Ce servim azi?</span>
-              <button id="topic-select-all-btn" class="topic-select-all-btn" type="button">Selecteaza toate</button>
-            </div>
-            <div id="topic-list" class="topic-grid"></div>
-            <p id="topic-error" class="field-error hidden">Alege pustiule macar una.</p>
-          </section>
-
-          <section class="card" id="options-card">
-            <span class="section-label">Optiuni</span>
-            <!-- Header-fill-only toggle — visible only when a topic with header-fill is selected -->
-            <div id="hf-only-row" class="options-row hidden">
-              <span class="option-label">Afiseaza doar intrebari de tip header</span>
-              <label class="toggle">
-                <input type="checkbox" id="hf-only-toggle" />
-                <span class="toggle-slider"></span>
-              </label>
-            </div>
-            <div class="options-row">
-              <span class="option-label">Cate intrebari sa fie maxim?</span>
-              <div class="stepper">
-                <button class="stepper-btn" id="q-dec" type="button">−</button>
-                <input
-                  type="number"
-                  id="q-count-input"
-                  class="stepper-input"
-                  value="10"
-                  min="1"
-                  max="100000"
-                  aria-label="Number of questions"
-                />
-                <button class="stepper-btn" id="q-inc" type="button">+</button>
-              </div>
-              <button id="q-max-btn" class="btn-max-fill" type="button">MAX</button>
-              <span id="q-max-hint" class="hint-text"></span>
-            </div>
-            <div class="options-row">
-              <span class="option-label">Shuffle</span>
-              <label class="toggle">
-                <input type="checkbox" id="shuffle-toggle" checked />
-                <span class="toggle-slider"></span>
-              </label>
-            </div>
-          </section>
+      <section class="card" id="topics-card">
+        <div class="topics-card-header">
+          <span class="section-label">Ce servim azi?</span>
+          <button id="topic-select-all-btn" class="topic-select-all-btn" type="button">Selecteaza toate</button>
         </div>
-      </div>
+        <div id="topic-list" class="topic-grid"></div>
+        <p id="topic-error" class="field-error hidden">Alege cel putin un subiect pentru a putea incepe.</p>
+      </section>
+
+      <section class="card" id="options-card">
+        <span class="section-label">Optiuni</span>
+        <!-- Header-first toggle — visible only when a selected topic contains header-fill questions -->
+        <div id="hf-first-row" class="options-row hidden">
+          <span class="option-label">Afiseaza intrebarile header la inceput</span>
+          <label class="toggle">
+            <input type="checkbox" id="hf-first-toggle" />
+            <span class="toggle-slider"></span>
+          </label>
+        </div>
+        <div class="options-row">
+          <span class="option-label">Selecteaza numarul maxim de intrebari</span>
+          <div class="stepper">
+            <button class="stepper-btn" id="q-dec" type="button">−</button>
+            <input
+              type="number"
+              id="q-count-input"
+              class="stepper-input"
+              value="10"
+              min="1"
+              max="100000"
+              aria-label="Number of questions"
+            />
+            <button class="stepper-btn" id="q-inc" type="button">+</button>
+          </div>
+          <button id="q-max-btn" class="btn-max-fill" type="button">MAX</button>
+          <span id="q-max-hint" class="hint-text"></span>
+        </div>
+        <div class="options-row">
+          <span class="option-label">Shuffle</span>
+          <label class="toggle">
+            <input type="checkbox" id="shuffle-toggle" checked />
+            <span class="toggle-slider"></span>
+          </label>
+        </div>
+      </section>
 
       <button id="start-btn" class="btn btn-primary btn-large" type="button">
-        <span class="start-btn-label">Hai sa ii dam</span>
+        <span class="start-btn-label">Incepe grila</span>
         <span class="start-btn-version">Versiunea 5.0</span>
       </button>
 
@@ -125,11 +143,17 @@
           <span id="q-current-label" class="meta-badge">Q1</span>
           <span id="q-topic-label" class="meta-topic"></span>
         </div>
-        <div class="timer-wrap">
-          <svg class="timer-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/>
-          </svg>
-          <span id="timer-display">0:00</span>
+        <div class="quiz-topbar-right">
+          <div class="timer-wrap">
+            <svg class="timer-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/>
+            </svg>
+            <span id="timer-display">0:00</span>
+          </div>
+          <button id="theme-toggle-quiz" class="theme-toggle" type="button" aria-label="Schimba tema (luminos / intunecat)" title="Schimba tema">
+            <span class="ic-sun" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"></path></svg></span>
+            <span class="ic-moon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg></span>
+          </button>
         </div>
       </div>
 
@@ -168,7 +192,7 @@
           </div>
 
           <div class="question-nav-btns">
-            <button id="prev-btn" class="btn btn-secondary" type="button">← Indarat</button>
+            <button id="prev-btn" class="btn btn-secondary" type="button">← Inapoi</button>
             <button id="mark-btn" class="btn btn-mark" type="button" title="Flag this question for review">
               <svg class="mark-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                 <path d="M4 4h16v10l-8 3-8-3V4z"/>
@@ -183,11 +207,6 @@
           <div class="card q-sidebar-card">
             <span class="section-label">Intrebari</span>
             <div id="q-nav-grid" class="q-nav-grid"></div>
-            <div class="sidebar-legend">
-              <span class="legend-row"><span class="legend-dot dot-answered"></span><span class="legend-text">Raspuns</span></span>
-              <span class="legend-row"><span class="legend-dot dot-current"></span><span class="legend-text">Curenta</span></span>
-              <span class="legend-row"><span class="legend-dot dot-marked"></span><span class="legend-text">Marcata</span></span>
-            </div>
             <div class="quiz-mode-row">
               <span class="quiz-mode-label">Pe o pagina</span>
               <label class="toggle">
@@ -221,6 +240,10 @@
           <h2 id="results-title" class="results-title">Quiz Complete</h2>
           <p id="results-summary" class="results-summary"></p>
         </div>
+        <button id="theme-toggle-results" class="theme-toggle" type="button" aria-label="Schimba tema (luminos / intunecat)" title="Schimba tema">
+          <span class="ic-sun" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"></path></svg></span>
+          <span class="ic-moon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg></span>
+        </button>
       </header>
 
       <div class="stats-row">
@@ -239,7 +262,7 @@
       </div>
 
       <div class="results-actions">
-        <button id="restart-btn" class="btn btn-primary"   type="button">Quiz Nou</button>
+        <button id="restart-btn" class="btn btn-primary"   type="button">Grila noua</button>
       </div>
 
       <div id="review-panel" class="review-panel">
@@ -258,12 +281,6 @@
           <aside class="review-nav-sidebar">
             <span class="section-label">Raspunsuri</span>
             <div id="review-nav-grid" class="review-nav-grid"></div>
-            <div class="review-nav-legend">
-              <span class="legend-row"><span class="legend-dot rn-dot-correct"></span><span class="legend-text">Corect</span></span>
-              <span class="legend-row"><span class="legend-dot rn-dot-incorrect"></span><span class="legend-text">Gresit</span></span>
-              <span class="legend-row"><span class="legend-dot rn-dot-partial"></span><span class="legend-text">Partial</span></span>
-              <span class="legend-row"><span class="legend-dot dot-marked"></span><span class="legend-text">Marcat</span></span>
-            </div>
           </aside>
         </div>
       </div>
@@ -338,7 +355,63 @@
   <script src="questions/virtualization.js"></script>
   <script src="questions/eigrp.js"></script>
 
-  <script src="script.js?v=5.5"></script>
+  <script src="script.js?v=5.0"></script>
+
+  <!-- Theme toggle wiring — presentation-only, kept separate from script.js -->
+  <script>
+    (function () {
+      var btns = document.querySelectorAll('.theme-toggle');
+      var meta = document.getElementById('meta-theme-color');
+      var COLORS = { dark: '#0e1014', light: '#f5f4fb' };
+      function apply(theme, ev) {
+        var root = document.documentElement;
+        var commit = function () {
+          root.setAttribute('data-theme', theme);
+          if (meta) meta.setAttribute('content', COLORS[theme] || COLORS.dark);
+        };
+        try { localStorage.setItem('acadobre.theme', theme); } catch (e) {}
+        if (typeof document.startViewTransition !== 'function') { commit(); return; }
+        // The new theme wipes in as a circle expanding from the toggle that was clicked
+        // (fallback: top-right). GPU-composited clip-path stays smooth on a large DOM.
+        // Runs regardless of prefers-reduced-motion: this is an explicit, user-invoked action.
+        var ox = ev && ev.clientX != null ? ev.clientX : window.innerWidth - 40;
+        var oy = ev && ev.clientY != null ? ev.clientY : 40;
+        var endR = Math.hypot(Math.max(ox, window.innerWidth - ox), Math.max(oy, window.innerHeight - oy));
+        // Freeze the per-element colour transitions while the wipe plays. The live DOM is
+        // hidden behind the VT snapshot, so snapping it instantly is invisible — and it hands
+        // the whole main thread to the composited clip-path reveal. Otherwise the hundreds of
+        // simultaneous 180ms background/color transitions starve it and the wipe drops frames.
+        root.classList.add('theme-switching');
+        var done = function () { root.classList.remove('theme-switching'); };
+        var vt = document.startViewTransition(commit);
+        vt.ready.then(function () {
+          root.animate(
+            { clipPath: ['circle(0px at ' + ox + 'px ' + oy + 'px)',
+                         'circle(' + endR + 'px at ' + ox + 'px ' + oy + 'px)'] },
+            { duration: 480, easing: 'cubic-bezier(.4, 0, .2, 1)', pseudoElement: '::view-transition-new(root)' }
+          );
+        }).catch(function () {});
+        vt.finished.then(done).catch(done);
+      }
+      btns.forEach(function (btn) {
+        btn.addEventListener('click', function (e) {
+          var current = document.documentElement.getAttribute('data-theme') === 'light' ? 'light' : 'dark';
+          apply(current === 'light' ? 'dark' : 'light', e);
+        });
+      });
+      // Keep the status-bar colour in sync with the theme chosen before paint.
+      var initial = document.documentElement.getAttribute('data-theme') === 'light' ? 'light' : 'dark';
+      if (meta) meta.setAttribute('content', COLORS[initial]);
+      // Follow the OS only while the user hasn't made an explicit choice.
+      if (window.matchMedia) {
+        window.matchMedia('(prefers-color-scheme: light)').addEventListener('change', function (e) {
+          var saved;
+          try { saved = localStorage.getItem('acadobre.theme'); } catch (err) {}
+          if (saved !== 'light' && saved !== 'dark') apply(e.matches ? 'light' : 'dark');
+        });
+      }
+    })();
+  </script>
 
   <script>
     if ('serviceWorker' in navigator) {

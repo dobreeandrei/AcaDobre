@@ -687,7 +687,7 @@ ACADOBRE_QUESTIONS.push({
       {
         type: 'label-order',
         text: 'Ordonați, de sus în jos, în funcție de CoS Value (Class of Service Value), tipul de pachete. (Acadnet)',
-        hint: 'pentru Reserved puneti in ordine de la mic la mare, ca sa poata fi deosebite de checker'
+        hint: 'pentru Reserved puneti in ordine de la mic la mare, ca sa poata fi deosebite de checker',
         labels: [
           'Videoconferencing',
           'Best-Effort Data',

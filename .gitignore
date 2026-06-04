@@ -1,0 +1,18 @@
+# Claude Code / AI assistant
+.claude/
+CLAUDE.md
+
+# OS cruft
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Editors
+.vscode/
+.idea/
+*.swp
+
+# Dev / verification artifacts
+_shot_*.png
+*.tmp
+node_modules/

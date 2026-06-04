@@ -51,35 +51,33 @@ const QuestionManager = (() => {
       .filter(t => t.questions.length > 0);
   }
 
-  function buildSession(topicIds, maxCount, shuffle, headerFillOnly) {
+  function buildSession(topicIds, maxCount, shuffle, headerFirst) {
     const topics = getTopics();
     let pool = [];
     topics.forEach(t => {
       if (!topicIds.includes(t.id)) return;
-      if (headerFillOnly) {
-        // Keep only the first header-fill question from this topic (if any)
-        const hf = t.questions.filter(q => q.type === 'header-fill');
-        if (hf.length > 0) pool.push(hf[0]);
-        // Topics with no header-fill are skipped entirely when toggle is on
-      } else {
-        pool = pool.concat(t.questions);
-      }
+      pool = pool.concat(t.questions);
     });
 
-    // Always place header-fill questions first, then shuffle/slice the rest
-    const hfQuestions    = pool.filter(q => q.type === 'header-fill');
-    const otherQuestions = pool.filter(q => q.type !== 'header-fill');
-    const shuffledOthers = shuffle ? _shuffle(otherQuestions) : otherQuestions;
-
-    // Apply maxCount: header-fill questions are never cut by the limit
-    let others = shuffledOthers;
-    if (maxCount > 0 && maxCount > hfQuestions.length) {
-      others = shuffledOthers.slice(0, maxCount - hfQuestions.length);
-    } else if (maxCount > 0 && maxCount <= hfQuestions.length) {
-      others = []; // limit is already met by header-fill questions alone
+    if (headerFirst) {
+      // Opt-in: pull header-fill questions to the front (and exempt them from the
+      // max-count cut), then shuffle/slice the remaining questions after them.
+      const hfQuestions    = pool.filter(q => q.type === 'header-fill');
+      const otherQuestions = pool.filter(q => q.type !== 'header-fill');
+      const shuffledOthers = shuffle ? _shuffle(otherQuestions) : otherQuestions;
+      let others = shuffledOthers;
+      if (maxCount > 0 && maxCount > hfQuestions.length) {
+        others = shuffledOthers.slice(0, maxCount - hfQuestions.length);
+      } else if (maxCount > 0 && maxCount <= hfQuestions.length) {
+        others = []; // limit already met by header-fill questions alone
+      }
+      return [...hfQuestions, ...others];
     }
 
-    return [...hfQuestions, ...others];
+    // Default: header-fill questions are treated like any other — shuffled and
+    // sliced together with the rest, with no special ordering or exemption.
+    const all = shuffle ? _shuffle(pool) : pool;
+    return maxCount > 0 ? all.slice(0, maxCount) : all;
   }
 
   /** Fisher-Yates shuffle — returns a new array */
@@ -515,7 +513,7 @@ const UIController = (() => {
         if (sel) _selectedIds.add(t.id); else _selectedIds.delete(t.id);
         _updateMax(topics);
         topicError.classList.add('hidden');
-        _updateHFOnlyVisibility();
+        _updateHFFirstVisibility();
         _updateSelectAllLabel();
       };
       chip.addEventListener('click', toggle);
@@ -554,22 +552,22 @@ const UIController = (() => {
       }
       _updateMax(_topicsCache);
       topicError.classList.add('hidden');
-      _updateHFOnlyVisibility();
+      _updateHFFirstVisibility();
       _updateSelectAllLabel();
     });
     _updateSelectAllLabel();
   }
 
-  // Show/hide header-fill-only toggle based on whether selected topics contain header-fill
-  function _updateHFOnlyVisibility() {
-    const hfOnlyRow = document.getElementById('hf-only-row');
-    if (!hfOnlyRow) return;
+  // Show/hide the "header questions first" toggle based on whether selected topics contain header-fill
+  function _updateHFFirstVisibility() {
+    const hfRow = document.getElementById('hf-first-row');
+    if (!hfRow) return;
     const hasHF = _topicsCache.some(t =>
       _selectedIds.has(t.id) && t.questions.some(q => q.type === 'header-fill')
     );
-    hfOnlyRow.classList.toggle('hidden', !hasHF);
+    hfRow.classList.toggle('hidden', !hasHF);
     if (!hasHF) {
-      const toggle = document.getElementById('hf-only-toggle');
+      const toggle = document.getElementById('hf-first-toggle');
       if (toggle) toggle.checked = false;
     }
   }
@@ -701,9 +699,9 @@ const UIController = (() => {
   function getSetupOptions() {
     let count = parseInt(qCountInput.value, 10);
     if (isNaN(count) || count < 1) count = 1;
-    const hfToggle = document.getElementById('hf-only-toggle');
-    const headerFillOnly = hfToggle ? hfToggle.checked : false;
-    return { topicIds: _getSelectedTopicIds(), qCount: count, shuffle: shuffleToggle.checked, headerFillOnly };
+    const hfToggle = document.getElementById('hf-first-toggle');
+    const headerFirst = hfToggle ? hfToggle.checked : false;
+    return { topicIds: _getSelectedTopicIds(), qCount: count, shuffle: shuffleToggle.checked, headerFirst };
   }
 
   function showTopicError() { topicError.classList.remove('hidden'); }
@@ -1806,7 +1804,7 @@ const UIController = (() => {
 const App = (() => {
 
   const SESSIONS_KEY = 'acadobre.recentSessions';
-  const MAX_RECENT_SESSIONS = 20;
+  const MAX_RECENT_SESSIONS = 10;
 
   let _results = null;
   let _singlePage = false;
@@ -2043,7 +2041,7 @@ const App = (() => {
     const opts = UIController.getSetupOptions();
     if (opts.topicIds.length === 0) { UIController.showTopicError(); return; }
 
-    let questions = QuestionManager.buildSession(opts.topicIds, opts.qCount, opts.shuffle, opts.headerFillOnly);
+    let questions = QuestionManager.buildSession(opts.topicIds, opts.qCount, opts.shuffle, opts.headerFirst);
     if (!questions.length) { UIController.showTopicError(); return; }
 
     if (opts.shuffle) questions = questions.map(q => QuestionManager.shuffleMCOptions(q));
