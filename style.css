@@ -216,7 +216,7 @@ html.theme-switching *::after {
   border-bottom: 1px solid var(--border);
 }
 
-.brand { display: flex; align-items: center; gap: .7rem; min-width: 0; margin-right: auto; }
+.brand { display: flex; align-items: center; gap: .7rem; min-width: 0; margin-right: auto; flex: 1 1 100%; }
 .brand-logo {
   width: 64px; height: 64px;
   border-radius: var(--r-md);
@@ -233,8 +233,8 @@ html.theme-switching *::after {
 
 /* Search — full-width row on phones, inline from 640px up */
 .app-header-search {
-  order: 3;
-  flex: 1 1 100%;
+  order: 1;
+  flex: 1 1 auto;
   min-width: 0;
   display: flex;
   align-items: center;
@@ -507,6 +507,7 @@ html.theme-switching *::after {
 /* Tablet+ : search goes inline, comfortable container */
 @media (min-width: 640px) {
   .setup-container { max-width: 780px; padding: 0 1.5rem calc(1.5rem + env(safe-area-inset-bottom)); }
+  .brand { flex: 0 1 auto; }
   .app-header-search { order: 0; flex: 0 1 22rem; }
   .theme-toggle { order: 0; }
   .app-title { font-size: 1.7rem; }

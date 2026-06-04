@@ -22,7 +22,7 @@
    index.html. Activating a new version purges all older caches.
    ============================================================ */
 
-const CACHE = 'acadobre-v5.0';
+const CACHE = 'acadobre-v5.1';
 
 // Only verified-present files go here — cache.add on a 404 would
 // reject. Question scripts and images are NOT precached; they are
